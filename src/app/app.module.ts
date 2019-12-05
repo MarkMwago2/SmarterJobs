@@ -3,11 +3,25 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NavComponent } from './components/nav/nav.component';
+import { HomeComponent } from './components/home/home.component';
+import { AboutComponent } from './components/about/about.component';
+import { FeaturesComponent } from './components/features/features.component';
+import { PricingComponent } from './components/pricing/pricing.component';
+import { ContactsComponent } from './components/contacts/contacts.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavComponent,
+    HomeComponent,
+    AboutComponent,
+    FeaturesComponent,
+    PricingComponent,
+    ContactsComponent
   ],
+  
   imports: [
     BrowserModule,
     AppRoutingModule
