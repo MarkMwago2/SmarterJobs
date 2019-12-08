@@ -14,7 +14,7 @@ body{
   }
   
   #main-header{
-    background-color: aqua;;
+    background-color:coral;;
     color:#fff;
   }
 
@@ -27,6 +27,15 @@ body{
 
   }
 
+  .login{
+    float: right;
+      text-decoration: none;
+      padding:1%;
+      /* background-color: white; */
+      font-size: 18px;
+
+  }
+
   .fa {
     padding: 10px;
     font-size: 20px;
@@ -35,7 +44,7 @@ body{
     text-decoration: none;
     margin: 5px 2px;
     border-radius: 50%;
-    float: right;
+    float: left;
   }
   
   .fa:hover {
