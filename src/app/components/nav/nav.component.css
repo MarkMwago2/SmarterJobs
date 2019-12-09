@@ -29,10 +29,13 @@ body{
 
   .login{
     float: right;
-      text-decoration: none;
-      padding:1%;
+    text-decoration: none;
+    padding:1%;
       /* background-color: white; */
-      font-size: 18px;
+    font-size: 18px;
+      /* display: inline; */
+    list-style: none;
+      
 
   }
 

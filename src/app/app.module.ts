@@ -9,6 +9,8 @@ import { AboutComponent } from './components/about/about.component';
 import { FeaturesComponent } from './components/features/features.component';
 import { PricingComponent } from './components/pricing/pricing.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { ContactsComponent } from './components/contacts/contacts.component';
     AboutComponent,
     FeaturesComponent,
     PricingComponent,
-    ContactsComponent
+    ContactsComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   
   imports: [
