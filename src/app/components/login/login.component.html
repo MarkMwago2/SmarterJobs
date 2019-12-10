@@ -1,1 +1,33 @@
-<!-- "<div class=\"container\">\n    <div class=\"row\">\n        <div class=\"col-md-12 min-vh-100 d-flex flex-column justify-content-center\">\n            <div class=\"row\">\n                <div class=\"col-lg-6 col-md-8 mx-auto\">\n\n                    form card login\n                    <div class=\"card rounded shadow shadow-sm\">\n                        <div class=\"card-header\">\n                            <h3 class=\"mb-0\">Login</h3>\n                        </div>\n                        <div class=\"card-body\">\n                            <form class=\"form\" role=\"form\" autocomplete=\"off\" id=\"formLogin\" novalidate=\"\" method=\"POST\">\n                                <div class=\"form-group\">\n                                    <label for=\"uname1\">Username</label>\n                                    <input type=\"text\" class=\"form-control form-control-lg rounded-0\" name=\"uname1\" id=\"uname1\" required=\"\">\n                                    <div class=\"invalid-feedback\">Oops, you missed this one.</div>\n                                </div>\n                                <div class=\"form-group\">\n                                    <label>Password</label>\n                                    <input type=\"password\" class=\"form-control form-control-lg rounded-0\" id=\"pwd1\" required=\"\" autocomplete=\"new-password\">\n                                    <div class=\"invalid-feedback\">Enter your password too!</div>\n                                </div>\n                                <div>\n                                    <label class=\"custom-control custom-checkbox\">\n                                      <input type=\"checkbox\" class=\"custom-control-input\">\n                                      <span class=\"custom-control-indicator\"></span>\n                                      <span class=\"custom-control-description small text-dark\">Remember me on this computer</span>\n                                    </label>\n                                </div>\n                                <button type=\"submit\" class=\"btn btn-success btn-lg float-right\" id=\"btnLogin\">Login</button>\n                            </form>\n                        </div>\n                        /card-block\n                    </div>\n                    /form card login\n\n                </div>\n\n\n            </div>\n            /row\n\n        </div>\n        /col\n    </div>\n    /row\n</div>\n/container" -->
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+    </div>
+
+    <!-- Login Form -->
+    <form>
+      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+      <input type="submit" class="fadeIn fourth" value="Log In">
+    </form>
+
+    <!-- No account-->
+    <div id="formFooter">
+        <a class="underlineHover" href="#">Don't have an account? Register Here</a>
+      </div>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" href="#">Forgot Password?</a>
+    </div>
+
+  </div>
+</div>
