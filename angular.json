@@ -24,20 +24,12 @@
             ],
             "styles": [
               "src/styles.css",
-<<<<<<< HEAD
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/font-awesome/css/font-awesome.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
-=======
-              
-              
-            ],
-            "scripts": [
-              
->>>>>>> 087c0ce81bdb2115040f7895a355f3f0d04cf57b
             ],
             "es5BrowserSupport": true
           },
