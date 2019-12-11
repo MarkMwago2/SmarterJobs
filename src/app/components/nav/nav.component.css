@@ -1,0 +1,99 @@
+body{
+    background-color:#f4f4f4;
+    color:#555;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height:1.6em;
+    margin:0;
+  }
+  
+  .container{
+    width: 100%;
+    margin:auto;
+    overflow:hidden;
+  }
+  
+  #main-header{
+    background-color:coral;;
+    color:#fff;
+  }
+
+  .logo{
+      float: left;
+      text-decoration: none;
+      padding:1%;
+      background-color: white;
+      font-size: 18px;
+
+  }
+
+  .login{
+    float: right;
+    text-decoration: none;
+    padding:1%;
+      /* background-color: white; */
+    font-size: 18px;
+      /* display: inline; */
+    list-style: none;
+      
+
+  }
+
+  .fa {
+    padding: 10px;
+    font-size: 20px;
+    width: 20px;
+    text-align: right;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+    float: left;
+  }
+  
+  .fa:hover {
+      opacity: 0.7;
+  }
+  
+  .fa-facebook {
+    background: #3B5998;
+    color: white;
+  }
+  
+  .fa-twitter {
+    background: #55ACEE;
+    color: white;
+  }
+
+  .fa-linkedin {
+    background: #007bb5;
+    color: white;
+  }
+  
+  #navbar{
+    /* background-color: #333; */
+    color:#fff;
+    text-align: center;
+  }
+  
+  #navbar ul{
+    padding: 0;
+    list-style: none;
+  }
+  
+  #navbar li{
+    display: inline;
+    
+  }
+  
+  #navbar a{
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    padding-right: 15px;
+    font: bold;
+  }
+
+  #nav a:hover {
+    background-color: #2D89E5; 
+    color: #fff; 
+  }
