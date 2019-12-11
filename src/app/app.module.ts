@@ -9,6 +9,12 @@ import { AboutComponent } from './components/about/about.component';
 import { FeaturesComponent } from './components/features/features.component';
 import { PricingComponent } from './components/pricing/pricing.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FooterComponent } from './shared/components/footer/footer.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { LoginComponent } from './smartjobs/components/authentication/login/login.component';
+import { RegistrationComponent } from './smartjobs/components/authentication/registration/registration.component';
+import { PasswordResetComponent } from './smartjobs/components/authentication/password-reset/password-reset.component';
 
 
 @NgModule({
@@ -19,12 +25,18 @@ import { ContactsComponent } from './components/contacts/contacts.component';
     AboutComponent,
     FeaturesComponent,
     PricingComponent,
-    ContactsComponent
+    ContactsComponent,
+    FooterComponent,
+    HeaderComponent,
+    LoginComponent,
+    RegistrationComponent,
+    PasswordResetComponent
   ],
   
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
