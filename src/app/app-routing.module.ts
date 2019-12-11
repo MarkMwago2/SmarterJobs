@@ -9,7 +9,8 @@ import { DashboardComponent } from './smartjobs/components/dashboard/dashboard.c
 import { HrdashboardComponent } from './smartjobs/components/hrdashboard/hrdashboard.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: 'sign-in', component: LoginComponent },
+  { path: 'sign-up', component: RegistrationComponent },
 ];
 
 @NgModule({
