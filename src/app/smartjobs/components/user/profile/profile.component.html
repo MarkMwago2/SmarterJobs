@@ -1,3 +1,202 @@
-<p>
-  profile works!
-</p>
+<div class="container emp-profile">
+  <form method="post">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="profile-img">
+          <img src="assets/profile/blank-profile-picture-973460_1280.png" alt="" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="profile-head">
+          <h5>
+            Jane Doe
+          </h5>
+          <h6>
+            Mechanic
+          </h6>
+          <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                aria-selected="true">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                aria-selected="false">Timeline</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="profile-work">
+          <p>SKILLS</p>
+          <a href="#">Gearbox maintenance</a><br />
+          <a href="#">Welding</a><br />
+          <a href="#">Car Painting</a><br />
+          <a href="#">Electrical Wiring</a><br />
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="tab-content profile-tab" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row">
+              <div class="col-md-6">
+                <label>National Id</label>
+              </div>
+              <div class="col-md-6">
+                <p>12345678</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Name</label>
+              </div>
+              <div class="col-md-6">
+                <p>Jane Doe</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Email</label>
+              </div>
+              <div class="col-md-6">
+                <p>kshitighelani@gmail.com</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Phone</label>
+              </div>
+              <div class="col-md-6">
+                <p>123 456 7890</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Profession</label>
+              </div>
+              <div class="col-md-6">
+                <p>Mechanic</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Work History</label>
+              </div>
+              <div class="col-md-6">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                  View
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Work history</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Company</th>
+                              <th scope="col">contract type</th>
+                              <th scope="col"> contract length</th>
+                              <th scope="col"> rating</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>
+                                Unilever
+                              </td>
+                              <td>Seasonal</td>
+                              <td>6 months</td>
+                              <td>7</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="row">
+              <div class="col-md-6">
+                <label>Cumulative Experience</label>
+              </div>
+              <div class="col-md-6">
+                <p>Expert | 3 years</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Date of Birth</label>
+              </div>
+              <div class="col-md-6">
+                <p>12/12/1980</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Dependence</label>
+              </div>
+              <div class="col-md-6">
+                <p>Annne Doe, Mary Doe, Jean Doe</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Next of Kin</label>
+              </div>
+              <div class="col-md-6">
+                <p>Bill Doe</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Professional Qualification</label>
+              </div>
+              <div class="col-md-6">
+                <p>Certificate from the National Institute for Automotive Service Excellence</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Availability</label>
+              </div>
+              <div class="col-md-6">
+                <p>6 months</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Academic Qualifications</label>
+              </div>
+              <div class="col-md-6">
+                <p> Level 1 IVQ Certificate in Motor Vehicle Systems, Level 2 mechanic courses, Level 3 mechanic
+                  courses</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

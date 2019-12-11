@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-<<<<<<< HEAD
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
@@ -19,22 +19,12 @@ import { ProfileComponent } from './smartjobs/components/user/profile/profile.co
 import { CompanyProfileComponent } from './smartjobs/components/agency/company-profile/company-profile.component';
 import { EditCompanyProfileComponent } from './smartjobs/components/agency/edit-company-profile/edit-company-profile.component';
 import { EditProfileComponent } from './smartjobs/components/user/edit-profile/edit-profile.component';
-=======
-import { NavComponent } from './components/nav/nav.component';
-import { HomeComponent } from './components/home/home.component';
-import { AboutComponent } from './components/about/about.component';
-import { FeaturesComponent } from './components/features/features.component';
-import { PricingComponent } from './components/pricing/pricing.component';
-import { ContactsComponent } from './components/contacts/contacts.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
->>>>>>> 087c0ce81bdb2115040f7895a355f3f0d04cf57b
 
 
 @NgModule({
   declarations: [
     AppComponent,
-<<<<<<< HEAD
+
     FooterComponent,
     HeaderComponent,
     LoginComponent,
@@ -46,16 +36,7 @@ import { RegisterComponent } from './components/register/register.component';
     CompanyProfileComponent,
     EditCompanyProfileComponent,
     EditProfileComponent
-=======
-    NavComponent,
-    HomeComponent,
-    AboutComponent,
-    FeaturesComponent,
-    PricingComponent,
-    ContactsComponent,
-    LoginComponent,
-    RegisterComponent
->>>>>>> 087c0ce81bdb2115040f7895a355f3f0d04cf57b
+
   ],
   imports: [
     BrowserModule,
