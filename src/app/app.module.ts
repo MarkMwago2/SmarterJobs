@@ -21,6 +21,7 @@ import { EditCompanyProfileComponent } from './smartjobs/components/agency/edit-
 import { EditProfileComponent } from './smartjobs/components/user/edit-profile/edit-profile.component';
 import { CreateProfileComponent } from './smartjobs/components/user/create-profile/create-profile.component';
 import { CreateCompanyProfileComponent } from './smartjobs/components/agency/create-company-profile/create-company-profile.component';
+import { HomepageComponent } from './smartjobs/components/homepage/homepage.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { CreateCompanyProfileComponent } from './smartjobs/components/agency/cre
     EditCompanyProfileComponent,
     EditProfileComponent,
     CreateProfileComponent,
-    CreateCompanyProfileComponent
+    CreateCompanyProfileComponent,
+    HomepageComponent
 
   ],
   imports: [

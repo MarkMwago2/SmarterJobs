@@ -6,6 +6,7 @@ import { RegistrationComponent } from './smartjobs/components/authentication/reg
 import { PasswordResetComponent } from './smartjobs/components/authentication/password-reset/password-reset.component';
 
 import { DashboardComponent } from './smartjobs/components/dashboard/dashboard.component';
+import { HomepageComponent } from './smartjobs/components/homepage/homepage.component';
 import { HrdashboardComponent } from './smartjobs/components/hrdashboard/hrdashboard.component';
 
 import { ProfileComponent } from './smartjobs/components/user/profile/profile.component';
@@ -13,12 +14,10 @@ import { CreateProfileComponent } from './smartjobs/components/user/create-profi
 import { EditProfileComponent } from './smartjobs/components/user/edit-profile/edit-profile.component';
 import { CompanyProfileComponent } from './smartjobs/components/agency/company-profile/company-profile.component';
 import { CreateCompanyProfileComponent } from './smartjobs/components/agency/create-company-profile/create-company-profile.component';
-
-
 import { EditCompanyProfileComponent } from './smartjobs/components/agency/edit-company-profile/edit-company-profile.component';
 
 const routes: Routes = [
-
+  { path: 'home', component: HomepageComponent },
   { path: 'sign-in', component: LoginComponent },
   { path: 'sign-up', component: RegistrationComponent },
   { path: 'profile', component: ProfileComponent },
