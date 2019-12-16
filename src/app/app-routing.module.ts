@@ -14,19 +14,20 @@ import { EditProfileComponent } from './smartjobs/components/user/edit-profile/e
 import { CompanyProfileComponent } from './smartjobs/components/agency/company-profile/company-profile.component';
 import { CreateCompanyProfileComponent } from './smartjobs/components/agency/create-company-profile/create-company-profile.component';
 
-
 import { EditCompanyProfileComponent } from './smartjobs/components/agency/edit-company-profile/edit-company-profile.component';
+
+import { AuthGuard } from './smartjobs/services/auth.service';
 
 const routes: Routes = [
 
   { path: 'sign-in', component: LoginComponent },
   { path: 'sign-up', component: RegistrationComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'edit-profile', component: EditProfileComponent },
-  { path: 'create-profile', component: CreateProfileComponent },
-  { path: 'company-profile', component: CompanyProfileComponent },
-  { path: 'create-companyprofile', component: CreateCompanyProfileComponent },
-  { path: 'edit-companyprofile', component: EditCompanyProfileComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]  },
+  { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard]  },
+  { path: 'create-profile', component: CreateProfileComponent, canActivate: [AuthGuard]  },
+  { path: 'company-profile', component: CompanyProfileComponent, canActivate: [AuthGuard]  },
+  { path: 'create-companyprofile', component: CreateCompanyProfileComponent, canActivate: [AuthGuard]  },
+  { path: 'edit-companyprofile', component: EditCompanyProfileComponent, canActivate: [AuthGuard]  },
 
 ];
 
