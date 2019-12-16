@@ -22,6 +22,9 @@ import { EditProfileComponent } from './smartjobs/components/user/edit-profile/e
 import { CreateProfileComponent } from './smartjobs/components/user/create-profile/create-profile.component';
 import { CreateCompanyProfileComponent } from './smartjobs/components/agency/create-company-profile/create-company-profile.component';
 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthService, AuthInterceptor, AuthGuard } from './smartjobs/services/auth.service';
+import { LoaderComponent } from './shared/components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -39,16 +42,26 @@ import { CreateCompanyProfileComponent } from './smartjobs/components/agency/cre
     EditCompanyProfileComponent,
     EditProfileComponent,
     CreateProfileComponent,
-    CreateCompanyProfileComponent
+    CreateCompanyProfileComponent,
+    LoaderComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
