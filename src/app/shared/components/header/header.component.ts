@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../smartjobs/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  error: any;
+  loggedIn: any;
+  loggedOut: any;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) { }
 
   ngOnInit() {
+    this.loggedIn = this.authService.isLoggedIn();
+    this.loggedOut = this.authService.isLoggedOut();
   }
 
+  logout() {
+    this.authService.logout();
+  }
 }

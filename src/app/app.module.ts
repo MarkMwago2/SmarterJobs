@@ -19,7 +19,15 @@ import { ProfileComponent } from './smartjobs/components/user/profile/profile.co
 import { CompanyProfileComponent } from './smartjobs/components/agency/company-profile/company-profile.component';
 import { EditCompanyProfileComponent } from './smartjobs/components/agency/edit-company-profile/edit-company-profile.component';
 import { EditProfileComponent } from './smartjobs/components/user/edit-profile/edit-profile.component';
+import { CreateProfileComponent } from './smartjobs/components/user/create-profile/create-profile.component';
+import { CreateCompanyProfileComponent } from './smartjobs/components/agency/create-company-profile/create-company-profile.component';
 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthService, AuthInterceptor, AuthGuard } from './smartjobs/services/auth.service';
+import { LoaderComponent } from './shared/components/loader/loader.component';
+
+import { LoaderService } from './smartjobs/services/loader.service';
+import { LoaderInterceptor } from './smartjobs/interceptors/loader.interceptor';
 
 @NgModule({
   declarations: [
@@ -35,16 +43,30 @@ import { EditProfileComponent } from './smartjobs/components/user/edit-profile/e
     ProfileComponent,
     CompanyProfileComponent,
     EditCompanyProfileComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    CreateProfileComponent,
+    CreateCompanyProfileComponent,
+    LoaderComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    LoaderService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
