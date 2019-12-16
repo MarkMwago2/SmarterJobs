@@ -13,6 +13,8 @@ import { CompanyProfileComponent } from './smartjobs/components/agency/company-p
 import { EditProfileComponent } from './smartjobs/components/user/edit-profile/edit-profile.component';
 import { EditCompanyProfileComponent } from './smartjobs/components/agency/edit-company-profile/edit-company-profile.component';
 
+
+
 const routes: Routes = [
 
   { path: 'sign-in', component: LoginComponent },
