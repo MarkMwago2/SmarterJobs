@@ -28,6 +28,7 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 
 import { LoaderService } from './smartjobs/services/loader.service';
 import { LoaderInterceptor } from './smartjobs/interceptors/loader.interceptor';
+import { HomepageComponent } from './shared/components/homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { LoaderInterceptor } from './smartjobs/interceptors/loader.interceptor';
     EditProfileComponent,
     CreateProfileComponent,
     CreateCompanyProfileComponent,
-    LoaderComponent
+    LoaderComponent,
+    HomepageComponent
 
   ],
   imports: [
