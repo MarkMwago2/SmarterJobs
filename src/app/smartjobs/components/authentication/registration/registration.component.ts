@@ -19,6 +19,7 @@ export class RegistrationComponent implements OnInit {
   ngOnInit() {
   }
   register(username: string, email: string, password: string) {
+    console.log(username, email, password);
     this.authService.signup(username, email, password).subscribe(
       success => this.router.navigate(['sign-in']),
       error => this.error = error

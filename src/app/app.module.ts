@@ -26,6 +26,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService, AuthInterceptor, AuthGuard } from './smartjobs/services/auth.service';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 
+import { LoaderService } from './smartjobs/services/loader.service';
+import { LoaderInterceptor } from './smartjobs/interceptors/loader.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +63,9 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
-    }
+    },
+    LoaderService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

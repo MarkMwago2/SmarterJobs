@@ -55,7 +55,7 @@ export class AuthService {
   refreshToken() {
     if (moment().isBetween(this.getExpiration().subtract(1, 'days'), this.getExpiration())) {
       return this.http.post(
-        this.apiRoot.concat('refresh-token/'),
+        this.apiRoot.concat('auth/refresh-token/'),
         {token: this.token }
       ).pipe(
         tap(response => this.setSession(response)),

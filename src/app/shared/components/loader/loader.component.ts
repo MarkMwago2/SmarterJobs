@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LoaderService } from '../../../smartjobs/services/loader.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-loader',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoaderComponent implements OnInit {
 
-  constructor() { }
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+
+  constructor(private loaderService: LoaderService) { }
 
   ngOnInit() {
   }
