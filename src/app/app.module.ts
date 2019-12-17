@@ -21,6 +21,7 @@ import { EditCompanyProfileComponent } from './smartjobs/components/agency/edit-
 import { EditProfileComponent } from './smartjobs/components/user/edit-profile/edit-profile.component';
 import { CreateProfileComponent } from './smartjobs/components/user/create-profile/create-profile.component';
 import { CreateCompanyProfileComponent } from './smartjobs/components/agency/create-company-profile/create-company-profile.component';
+import { HomepageComponent } from './smartjobs/components/homepage/homepage.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService, AuthInterceptor, AuthGuard } from './smartjobs/services/auth.service';
@@ -48,9 +49,13 @@ import { IntropageComponent } from './smartjobs/components/intropage/intropage.c
     EditProfileComponent,
     CreateProfileComponent,
     CreateCompanyProfileComponent,
+<<<<<<< HEAD
     LoaderComponent,
     HomepageComponent,
     IntropageComponent
+=======
+    HomepageComponent
+>>>>>>> 889409a23727d5393ee4a35b2485e058fb3e7eee
 
   ],
   imports: [
