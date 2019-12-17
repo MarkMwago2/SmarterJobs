@@ -21,6 +21,7 @@ import { AuthGuard } from './smartjobs/services/auth.service';
 
 const routes: Routes = [
 
+  
   { path: 'sign-in', component: LoginComponent },
   { path: 'sign-up', component: RegistrationComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]  },
