@@ -15,13 +15,13 @@ import { CompanyProfileComponent } from './smartjobs/components/agency/company-p
 import { CreateCompanyProfileComponent } from './smartjobs/components/agency/create-company-profile/create-company-profile.component';
 
 import { EditCompanyProfileComponent } from './smartjobs/components/agency/edit-company-profile/edit-company-profile.component';
-
+import { IntropageComponent } from './smartjobs/components/intropage/intropage.component';
 
 import { AuthGuard } from './smartjobs/services/auth.service';
 
 const routes: Routes = [
 
-  
+  { path: 'home', component: IntropageComponent },
   { path: 'sign-in', component: LoginComponent },
   { path: 'sign-up', component: RegistrationComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]  },
