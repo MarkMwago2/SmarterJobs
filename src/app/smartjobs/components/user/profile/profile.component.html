@@ -1,4 +1,4 @@
-<div class="container emp-profile">
+<div class="container emp-profile" *ngFor="let usr of userprofiles ">
   <form method="post">
     <div class="row">
       <div class="col-md-4">
@@ -9,12 +9,12 @@
       <div class="col-md-6">
         <div class="profile-head">
           <h5>
-            Jane Doe
+            {{usr.name}}
           </h5>
           <h6>
-            Mechanic
+            {{usr.role}}
           </h6>
-          <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+          <p class="proile-rating">RANKINGS : <span>{{usr.Overall_Rating}}</span></p>
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
               <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
@@ -35,10 +35,8 @@
       <div class="col-md-4">
         <div class="profile-work">
           <p>SKILLS</p>
-          <a href="#">Gearbox maintenance</a><br />
-          <a href="#">Welding</a><br />
-          <a href="#">Car Painting</a><br />
-          <a href="#">Electrical Wiring</a><br />
+          <a href="#">{{usr.skills}}</a><br />
+          
         </div>
       </div>
       <div class="col-md-8">
@@ -49,7 +47,15 @@
                 <label>National Id</label>
               </div>
               <div class="col-md-6">
-                <p>12345678</p>
+                <p>{{usr.national_id}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Date of Birth</label>
+              </div>
+              <div class="col-md-6">
+                <p>12/12/1980</p>
               </div>
             </div>
             <div class="row">
@@ -65,7 +71,7 @@
                 <label>Email</label>
               </div>
               <div class="col-md-6">
-                <p>kshitighelani@gmail.com</p>
+                <p>johndoe@gmail.com</p>
               </div>
             </div>
             <div class="row">
@@ -147,10 +153,10 @@
             </div>
             <div class="row">
               <div class="col-md-6">
-                <label>Date of Birth</label>
+                <label>KRA PiN</label>
               </div>
               <div class="col-md-6">
-                <p>12/12/1980</p>
+                <p>A0012345678</p>
               </div>
             </div>
             <div class="row">

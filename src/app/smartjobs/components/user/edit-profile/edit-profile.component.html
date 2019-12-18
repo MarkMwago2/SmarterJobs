@@ -1,7 +1,6 @@
 <div class="container bootstrap snippet">
   <div class="row">
     <div class="col-sm-10">
-      <h1>Username</h1>
     </div>
   </div>
   <div class="row">
@@ -27,15 +26,15 @@
       <div class="tab-content">
         <div class="tab-pane active" id="home">
           <hr>
-          <form class="form" action="##" method="post" id="registrationForm">
+          <form class="form" novalidate (ngSubmit)="onSubmit()">
             <div class="form-group">
 
               <div class="col-xs-6">
                 <label for="name">
                   <h4>Name</h4>
                 </label>
-                <input type="text" class="form-control" name="name" id="name" placeholder="first name"
-                  title="enter your first name if any.">
+                <input type="text" class="form-control" name="name" id="name" [(ngModel)]='profile.name' placeholder="full name"
+                  title="enter your full name.">
               </div>
             </div>
             <div class="form-group">
@@ -44,7 +43,7 @@
                 <label for="last_name">
                   <h4>national ID</h4>
                 </label>
-                <input type="number" class="form-control" name="national_ID" id="last_name" placeholder="national ID"
+                <input type="number" class="form-control"  name="national_id" id="national_id" [(ngModel)]='profile.national_id'  placeholder="national ID"
                   title="national ID">
               </div>
             </div>
@@ -55,38 +54,46 @@
                 <label for="phone">
                   <h4>Phone</h4>
                 </label>
-                <input type="number" class="form-control" name="phone" id="phone" placeholder="phone number"
+                <input type="number" class="form-control"  name="telephone" id="telephone" [(ngModel)]='profile.telephone'  placeholder="phone number"
                   title="phone number ">
               </div>
             </div>
 
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <label for="date_of_birth">
-                  <h4>Date Of Birth</h4>
-                </label>
-                <input type="date" class="form-control" name="dob" id="dob" placeholder="date_of_birth"
-                  title="date_of_birth ">
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <label for="email">
-                  <h4>Email</h4>
-                </label>
-                <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com"
-                  title="email.">
-              </div>
-            </div>
+            
             <div class="form-group">
 
               <div class="col-xs-6">
                 <label for="dependence">
                   <h4>Dependence</h4>
                 </label>
-                <input type="text" class="form-control" id="dependence" placeholder="dependence" title="dependence">
+                <input type="text" class="form-control" id="dependence" name="dependence" [(ngModel)]='profile.dependence'  placeholder="dependence" title="dependence">
+              </div>
+            </div>
+            <div class="form-group">
+
+              <div class="col-xs-6">
+                <label for="profession">
+                  <h4>Profession</h4>
+                </label>
+                <input type="text" class="form-control" id="role" name="role" placeholder="profession" [(ngModel)]='profile.role'  title="profession">
+              </div>
+            </div>
+            <div class="form-group">
+
+              <div class="col-xs-6">
+                <label for="county">
+                  <h4>county</h4>
+                </label>
+                <input type="text" class="form-control" id="county" name="county" [(ngModel)]='profile.county'  placeholder="county" title="county">
+              </div>
+            </div>
+            <div class="form-group">
+
+              <div class="col-xs-6">
+                <label for="Availability_status">
+                  <h4>Availability Status</h4>
+                </label>
+                <input type="text" class="form-control" id="Availability_status" name="Availability_status" [(ngModel)]='profile.Availability_status'  placeholder="Availability_status" title="Availability_status">
               </div>
             </div>
             <div class="form-group">
@@ -95,7 +102,7 @@
                 <label for="next_of_kin">
                   <h4>Next Of Kin</h4>
                 </label>
-                <input type="text" class="form-control" name="next_of_kin" id="next_of_kin" placeholder="next of kin"
+                <input type="text" class="form-control" name="next_of_kin" id="next_of_kin" [(ngModel)]='profile.next_of_kin'  placeholder="next of kin"
                   title="next_of_kin.">
               </div>
             </div>
@@ -105,7 +112,7 @@
                 <label for="academic qualifications">
                   <h4>Academic Qualifications</h4>
                 </label>
-                <input type="text" class="form-control" name="academic qualifications" id="academic_qualifications"
+                <input type="text" class="form-control" name="academic_qualifications" id="academic_qualifications" [(ngModel)]='profile.academic_qualifications' 
                   placeholder="academic qualifications" title="academic qualifications.">
               </div>
             </div>
@@ -114,8 +121,8 @@
                 <label for="professional qualification">
                   <h4>Professional Qualification</h4>
                 </label>
-                <input type="text" class="form-control" name="professional qualification"
-                  id="professional_qualification" placeholder="professional qualification"
+                <input type="text" class="form-control" name="professional_qualification"
+                  id="professional_qualification" [(ngModel)]='profile.professional_qualification'  placeholder="professional qualification"
                   title="professional qualification.">
               </div>
             </div>
@@ -124,13 +131,13 @@
                 <label for="skills">
                   <h4>Skills</h4>
                 </label>
-                <input type="text" class="form-control" name="skills" id="skills" placeholder="skills" title="skills.">
+                <input type="text" class="form-control" name="skills" [(ngModel)]='profile.skills'  id="skills" placeholder="skills" title="skills.">
               </div>
             </div>
             <div class="form-group">
               <div class="col-xs-12">
                 <br>
-                <button class="btn btn-md btn-success mr-2" type="submit"><i class="fas fa-user-edit"></i>Edit
+                <button class="btn btn-md btn-success mr-2" type="submit"><i class="fas fa-user-edit"></i>Update
                   Profile</button>
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i>Delete
                   Profile</button>

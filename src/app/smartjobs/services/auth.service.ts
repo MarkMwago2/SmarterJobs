@@ -33,6 +33,7 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+
   login(email: string, password: string) {
     return this.http.post(this.apiRoot.concat('auth/login/'), {email, password}).pipe(
       tap(response => this.setSession(response)), shareReplay(),

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { FormsModule } from '@angular/forms';
 
 
 import { FooterComponent } from './shared/components/footer/footer.component';
@@ -28,6 +29,7 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 
 import { LoaderService } from './smartjobs/services/loader.service';
 import { LoaderInterceptor } from './smartjobs/interceptors/loader.interceptor';
+import { MergePipe } from './shared/pipes/merge.pipe';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { LoaderInterceptor } from './smartjobs/interceptors/loader.interceptor';
     EditProfileComponent,
     CreateProfileComponent,
     CreateCompanyProfileComponent,
-    LoaderComponent
+    LoaderComponent,
+    MergePipe
 
   ],
   imports: [
@@ -54,7 +57,8 @@ import { LoaderInterceptor } from './smartjobs/interceptors/loader.interceptor';
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularFontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     AuthService,

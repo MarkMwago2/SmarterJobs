@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   login(email: string, password: string) {
     this.authService.login(email, password).subscribe(
-      success => this.router.navigate(['profile']),
+      success => this.router.navigate(['edit-profile']),
       error => this.error = error
     );
   }
