@@ -1,4 +1,4 @@
-<div class="container emp-profile">
+<div class="container emp-profile" *ngFor="let usr of userprofiles ">
   <form method="post">
     <div class="row">
       <div class="col-md-4">
@@ -9,12 +9,20 @@
       <div class="col-md-6">
         <div class="profile-head">
           <h5>
-            Jane Doe
+            {{usr.name}}
           </h5>
           <h6>
-            Mechanic
+            {{usr.profession}}
           </h6>
-          <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+          <h6 style='color: #222;'>
+            Profile Complete
+          </h6>
+          <div class="progress">
+            <div class="progress-bar" [style.width.%]="[ profileComplete ]">
+              {{profileComplete}}%
+            </div>
+          </div>
+          <p class="proile-rating">RANKINGS : <span>{{usr.Overall_Rating}}</span></p>
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
               <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
@@ -28,17 +36,17 @@
         </div>
       </div>
       <div class="col-md-2">
-        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
+        <button class="btn btn-lg profile-edit-btn" [routerLink]="['/edit-profile']" >
+          <i class="fa fa-pencil"></i> Edit Profile
+        </button>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4">
         <div class="profile-work">
           <p>SKILLS</p>
-          <a href="#">Gearbox maintenance</a><br />
-          <a href="#">Welding</a><br />
-          <a href="#">Car Painting</a><br />
-          <a href="#">Electrical Wiring</a><br />
+          <a href="#">{{usr.skills}}</a><br />
+
         </div>
       </div>
       <div class="col-md-8">
@@ -49,7 +57,15 @@
                 <label>National Id</label>
               </div>
               <div class="col-md-6">
-                <p>12345678</p>
+                <p>{{usr.national_id}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Date Joined</label>
+              </div>
+              <div class="col-md-6">
+                <p> {{usr.date_joined | date:'medium'}}</p>
               </div>
             </div>
             <div class="row">
@@ -57,7 +73,7 @@
                 <label>Name</label>
               </div>
               <div class="col-md-6">
-                <p>Jane Doe</p>
+                <p>{{usr.name}}</p>
               </div>
             </div>
             <div class="row">
@@ -65,7 +81,7 @@
                 <label>Email</label>
               </div>
               <div class="col-md-6">
-                <p>kshitighelani@gmail.com</p>
+                <p>{{usr.email}}</p>
               </div>
             </div>
             <div class="row">
@@ -73,7 +89,7 @@
                 <label>Phone</label>
               </div>
               <div class="col-md-6">
-                <p>123 456 7890</p>
+                <p>+254{{usr.telephone}}</p>
               </div>
             </div>
             <div class="row">
@@ -81,7 +97,7 @@
                 <label>Profession</label>
               </div>
               <div class="col-md-6">
-                <p>Mechanic</p>
+                <p>{{usr.profession}}</p>
               </div>
             </div>
             <div class="row">
@@ -142,39 +158,16 @@
                 <label>Cumulative Experience</label>
               </div>
               <div class="col-md-6">
-                <p>Expert | 3 years</p>
+                <p>{{usr.cumulative_experience}} Years</p>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Date of Birth</label>
-              </div>
-              <div class="col-md-6">
-                <p>12/12/1980</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Dependence</label>
-              </div>
-              <div class="col-md-6">
-                <p>Annne Doe, Mary Doe, Jean Doe</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Next of Kin</label>
-              </div>
-              <div class="col-md-6">
-                <p>Bill Doe</p>
-              </div>
-            </div>
+            
             <div class="row">
               <div class="col-md-6">
                 <label>Professional Qualification</label>
               </div>
               <div class="col-md-6">
-                <p>Certificate from the National Institute for Automotive Service Excellence</p>
+                <p>{{usr.professional_qualification}}</p>
               </div>
             </div>
             <div class="row">
@@ -182,7 +175,7 @@
                 <label>Availability</label>
               </div>
               <div class="col-md-6">
-                <p>6 months</p>
+                <p>{{usr.Availability_status}}</p>
               </div>
             </div>
             <div class="row">
@@ -190,8 +183,7 @@
                 <label>Academic Qualifications</label>
               </div>
               <div class="col-md-6">
-                <p> Level 1 IVQ Certificate in Motor Vehicle Systems, Level 2 mechanic courses, Level 3 mechanic
-                  courses</p>
+                <p> {{usr.academic_qualifications}}</p>
               </div>
             </div>
           </div>
