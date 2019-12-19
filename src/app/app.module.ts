@@ -49,6 +49,8 @@ export const cloudinaryLib = {
   Cloudinary
 };
 
+import { IntropageComponent } from './smartjobs/components/intropage/intropage.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,7 +70,8 @@ export const cloudinaryLib = {
     CreateProfileComponent,
     CreateCompanyProfileComponent,
     LoaderComponent,
-    MergePipe
+    HomepageComponent,
+    IntropageComponent
 
   ],
   imports: [

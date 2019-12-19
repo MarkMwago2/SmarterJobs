@@ -1,0 +1,21 @@
+#showcase{
+    /* background-image: url(../images/water.jpg);
+    background-position: center right;
+    min-height: 300px; */
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  #showcase h1{
+    color:blue;
+    font-size: 50px;
+    line-height: 1.6em;
+    padding-top:30px;
+  }
+
+#main{
+    float: left;
+    width:70%;
+    padding: 0 30px;
+    box-sizing: border-box;
+  }
