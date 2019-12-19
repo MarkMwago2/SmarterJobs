@@ -22,6 +22,7 @@ import { EditCompanyProfileComponent } from './smartjobs/components/agency/edit-
 import { EditProfileComponent } from './smartjobs/components/user/edit-profile/edit-profile.component';
 import { CreateProfileComponent } from './smartjobs/components/user/create-profile/create-profile.component';
 import { CreateCompanyProfileComponent } from './smartjobs/components/agency/create-company-profile/create-company-profile.component';
+import { HomepageComponent } from './smartjobs/components/homepage/homepage.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService, AuthInterceptor, AuthGuard } from './smartjobs/services/auth.service';
@@ -42,6 +43,7 @@ import { MergePipe } from './shared/pipes/merge.pipe';
     PasswordResetComponent,
     DashboardComponent,
     HrdashboardComponent,
+    HomepageComponent,
     ProfileComponent,
     CompanyProfileComponent,
     EditCompanyProfileComponent,

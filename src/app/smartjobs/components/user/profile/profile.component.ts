@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit {
   userprofiles: any = [];
   profile: any = {};
   user: any = {};
+  profileComplete = 0;
   profiles: any = {
     telephone: '',
     kra_pin: '',
@@ -58,22 +59,22 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.prof.userprofile().subscribe(profile => {
       profile = profile;
+      const total = Object.keys(profile).length;
+      let completeEntries = 0;
+      for (const key in profile) {
+        if (profile[key] !== '' && profile[key] !== null && profile[key] !== undefined) {
+            completeEntries++;
+            this.profileComplete = Math.round(100 * completeEntries / total );
+        }
+      }
+
       this.prof.user().subscribe(user => {
         user = user;
-        console.log(user);
         const userinfo = Object.assign({}, profile, user);
-        console.log(userinfo);
         this.userprofiles.push(userinfo);
+        console.log(this.userprofiles);
       });
-      console.log(profile);
-      
     });
-    // this.prof.user().subscribe(user => {
-    //   user = user;
-    //   console.log(user);
-    // });
-    // const userinfo = Object.assign({}, profile, user);
-    // console.log(userinfo);
   }
 
 }

@@ -14,6 +14,14 @@
           <h6>
             {{usr.role}}
           </h6>
+          <h6 style='color: #222;'>
+            Profile Complete
+          </h6>
+          <div class="progress"> 
+            <div class="progress-bar" [style.width.%]="[ profileComplete ]"> 
+              {{profileComplete}}% 
+            </div> 
+        </div> 
           <p class="proile-rating">RANKINGS : <span>{{usr.Overall_Rating}}</span></p>
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
@@ -52,10 +60,10 @@
             </div>
             <div class="row">
               <div class="col-md-6">
-                <label>Date of Birth</label>
+                <label>Date Joined</label>
               </div>
               <div class="col-md-6">
-                <p>12/12/1980</p>
+                <p> {{usr.date_joined | date:'medium'}}</p>
               </div>
             </div>
             <div class="row">
@@ -63,7 +71,7 @@
                 <label>Name</label>
               </div>
               <div class="col-md-6">
-                <p>Jane Doe</p>
+                <p>{{usr.name}}</p>
               </div>
             </div>
             <div class="row">
@@ -71,7 +79,7 @@
                 <label>Email</label>
               </div>
               <div class="col-md-6">
-                <p>johndoe@gmail.com</p>
+                <p>{{usr.email}}</p>
               </div>
             </div>
             <div class="row">
@@ -79,7 +87,7 @@
                 <label>Phone</label>
               </div>
               <div class="col-md-6">
-                <p>123 456 7890</p>
+                <p>{{usr.telephone}}</p>
               </div>
             </div>
             <div class="row">
@@ -87,7 +95,7 @@
                 <label>Profession</label>
               </div>
               <div class="col-md-6">
-                <p>Mechanic</p>
+                <p>{{usr.role}}</p>
               </div>
             </div>
             <div class="row">
@@ -148,7 +156,7 @@
                 <label>Cumulative Experience</label>
               </div>
               <div class="col-md-6">
-                <p>Expert | 3 years</p>
+                <p>{{usr.cumulative_experience}}</p>
               </div>
             </div>
             <div class="row">
@@ -156,7 +164,7 @@
                 <label>KRA PiN</label>
               </div>
               <div class="col-md-6">
-                <p>A0012345678</p>
+                <p>{{usr.kra_pin}}</p>
               </div>
             </div>
             <div class="row">
@@ -164,7 +172,7 @@
                 <label>Dependence</label>
               </div>
               <div class="col-md-6">
-                <p>Annne Doe, Mary Doe, Jean Doe</p>
+                <p>{{usr.dependence}}</p>
               </div>
             </div>
             <div class="row">
@@ -172,7 +180,7 @@
                 <label>Next of Kin</label>
               </div>
               <div class="col-md-6">
-                <p>Bill Doe</p>
+                <p>{{usr.next_of_kin}}</p>
               </div>
             </div>
             <div class="row">
@@ -180,7 +188,7 @@
                 <label>Professional Qualification</label>
               </div>
               <div class="col-md-6">
-                <p>Certificate from the National Institute for Automotive Service Excellence</p>
+                <p>{{usr.professional_qualification}}</p>
               </div>
             </div>
             <div class="row">
@@ -188,7 +196,7 @@
                 <label>Availability</label>
               </div>
               <div class="col-md-6">
-                <p>6 months</p>
+                <p>{{usr.Availability_status}}</p>
               </div>
             </div>
             <div class="row">
@@ -196,8 +204,7 @@
                 <label>Academic Qualifications</label>
               </div>
               <div class="col-md-6">
-                <p> Level 1 IVQ Certificate in Motor Vehicle Systems, Level 2 mechanic courses, Level 3 mechanic
-                  courses</p>
+                <p> {{usr.academic_qualifications}}</p>
               </div>
             </div>
           </div>
