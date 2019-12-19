@@ -35,14 +35,16 @@
     color: #0062cc;
 }
 .profile-edit-btn{
-    border: none;
+    border: solid #317DFF 1px;
     border-radius: 1.5rem;
-    width: 70%;
+    width: 100%;
     padding: 2%;
     font-weight: 600;
     color: #6c757d;
     cursor: pointer;
 }
+
+
 .proile-rating{
     font-size: 12px;
     color: #818182;

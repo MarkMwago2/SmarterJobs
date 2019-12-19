@@ -12,11 +12,22 @@
         <img src="assets/profile/blank-profile-picture-973460_1280.png" class="avatar img-circle img-thumbnail"
           alt="avatar">
         <h6>Upload a photo</h6>
-        <div class="custom-file mb-3">
-          <input type="file" class="custom-file-input" id="customFile" name="filename">
-          <label class="custom-file-label" for="customFile">Choose file</label>
-          
-        </div>
+        <ng-container [formGroup]='uploadImageForm'>
+          <mat-list>
+            <mat-list-item class="form-field-item">
+              <div mat-line>
+                <form>
+                  <div class='imageUpload'>
+                    Choose File
+                    <input type="file" class="hide_file" ng2FileSelect accept="image/*;capture=camera">
+                  </div>
+                </form>
+                <button mat-raised-button (click)="upload()" color="primary"
+                  [disabled]="loading">{{ (loading) ? 'Uploading...' : 'Upload now'}}</button>
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </ng-container>
       </div><br>
 
 
@@ -34,8 +45,8 @@
                 <label for="name">
                   <h4>Name</h4>
                 </label>
-                <input type="text" class="form-control" name="name" id="name" [(ngModel)]='profile.name' placeholder="full name"
-                  title="enter your full name.">
+                <input type="text" class="form-control" name="name" id="name" [(ngModel)]='profile.name'
+                  placeholder="full name" title="enter your full name.">
               </div>
             </div>
             <div class="form-group">
@@ -44,8 +55,8 @@
                 <label for="last_name">
                   <h4>national ID</h4>
                 </label>
-                <input type="number" class="form-control"  name="national_id" id="national_id" [(ngModel)]='profile.national_id'  placeholder="national ID"
-                  title="national ID">
+                <input type="number" class="form-control" name="national_id" id="national_id"
+                  [(ngModel)]='profile.national_id' placeholder="national ID" title="national ID">
               </div>
             </div>
 
@@ -55,19 +66,8 @@
                 <label for="phone">
                   <h4>Phone</h4>
                 </label>
-                <input type="number" class="form-control"  name="telephone" id="telephone" [(ngModel)]='profile.telephone'  placeholder="phone number"
-                  title="phone number ">
-              </div>
-            </div>
-
-            
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <label for="dependence">
-                  <h4>Dependence</h4>
-                </label>
-                <input type="text" class="form-control" id="dependence" name="dependence" [(ngModel)]='profile.dependence'  placeholder="dependence" title="dependence">
+                <input type="number" class="form-control" name="telephone" id="telephone"
+                  [(ngModel)]='profile.telephone' placeholder="phone number" title="phone number ">
               </div>
             </div>
             <div class="form-group">
@@ -76,7 +76,8 @@
                 <label for="profession">
                   <h4>Profession</h4>
                 </label>
-                <input type="text" class="form-control" id="role" name="role" placeholder="profession" [(ngModel)]='profile.role'  title="profession">
+                <input type="text" class="form-control" id="role" name="role" placeholder="profession"
+                  [(ngModel)]='profile.role' title="profession">
               </div>
             </div>
             <div class="form-group">
@@ -85,7 +86,8 @@
                 <label for="county">
                   <h4>county</h4>
                 </label>
-                <input type="text" class="form-control" id="county" name="county" [(ngModel)]='profile.county'  placeholder="county" title="county">
+                <input type="text" class="form-control" id="county" name="county" [(ngModel)]='profile.county'
+                  placeholder="county" title="county">
               </div>
             </div>
             <div class="form-group">
@@ -94,17 +96,9 @@
                 <label for="Availability_status">
                   <h4>Availability Status</h4>
                 </label>
-                <input type="text" class="form-control" id="Availability_status" name="Availability_status" [(ngModel)]='profile.Availability_status'  placeholder="Availability_status" title="Availability_status">
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <label for="next_of_kin">
-                  <h4>Next Of Kin</h4>
-                </label>
-                <input type="text" class="form-control" name="next_of_kin" id="next_of_kin" [(ngModel)]='profile.next_of_kin'  placeholder="next of kin"
-                  title="next_of_kin.">
+                <input type="text" class="form-control" id="Availability_status" name="Availability_status"
+                  [(ngModel)]='profile.Availability_status' placeholder="Availability_status"
+                  title="Availability_status">
               </div>
             </div>
             <div class="form-group">
@@ -113,8 +107,9 @@
                 <label for="academic qualifications">
                   <h4>Academic Qualifications</h4>
                 </label>
-                <input type="text" class="form-control" name="academic_qualifications" id="academic_qualifications" [(ngModel)]='profile.academic_qualifications' 
-                  placeholder="academic qualifications" title="academic qualifications.">
+                <input type="text" class="form-control" name="academic_qualifications" id="academic_qualifications"
+                  [(ngModel)]='profile.academic_qualifications' placeholder="academic qualifications"
+                  title="academic qualifications.">
               </div>
             </div>
             <div class="form-group">
@@ -123,8 +118,8 @@
                   <h4>Professional Qualification</h4>
                 </label>
                 <input type="text" class="form-control" name="professional_qualification"
-                  id="professional_qualification" [(ngModel)]='profile.professional_qualification'  placeholder="professional qualification"
-                  title="professional qualification.">
+                  id="professional_qualification" [(ngModel)]='profile.professional_qualification'
+                  placeholder="professional qualification" title="professional qualification.">
               </div>
             </div>
             <div class="form-group">
@@ -132,7 +127,8 @@
                 <label for="skills">
                   <h4>Skills</h4>
                 </label>
-                <input type="text" class="form-control" name="skills" [(ngModel)]='profile.skills'  id="skills" placeholder="skills" title="skills.">
+                <input type="text" class="form-control" name="skills" [(ngModel)]='profile.skills' id="skills"
+                  placeholder="skills" title="skills.">
               </div>
             </div>
             <div class="form-group">
@@ -140,7 +136,8 @@
                 <br>
                 <button class="btn btn-md btn-success mr-2" type="submit"><i class="fas fa-user-edit"></i>Update
                   Profile</button>
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i>Delete
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i
+                    class="far fa-trash-alt"></i>Delete
                   Profile</button>
                 <div id="myModal" class="modal fade" id="deleteModal">
                   <div class="modal-dialog modal-confirm">
@@ -157,7 +154,8 @@
                       </div>
                       <div class="modal-footer">
                         <div class="row">
-                          <div class="col-md-6"><button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button></div>
+                          <div class="col-md-6"><button type="button" class="btn btn-info"
+                              data-dismiss="modal">Cancel</button></div>
                           <div class="col-md-6"><button type="button" class="btn btn-danger">Delete</button></div>
                         </div>
                       </div>
@@ -172,11 +170,11 @@
 
         </div>
         <!--/tab-pane-->
-        
-    </div>
-    <!--/tab-content-->
 
+      </div>
+      <!--/tab-content-->
+
+    </div>
+    <!--/col-9-->
   </div>
-  <!--/col-9-->
-</div>
-<!--/row-->
+  <!--/row-->

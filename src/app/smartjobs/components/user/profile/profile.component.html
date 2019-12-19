@@ -17,11 +17,11 @@
           <h6 style='color: #222;'>
             Profile Complete
           </h6>
-          <div class="progress"> 
-            <div class="progress-bar" [style.width.%]="[ profileComplete ]"> 
-              {{profileComplete}}% 
-            </div> 
-        </div> 
+          <div class="progress">
+            <div class="progress-bar" [style.width.%]="[ profileComplete ]">
+              {{profileComplete}}%
+            </div>
+          </div>
           <p class="proile-rating">RANKINGS : <span>{{usr.Overall_Rating}}</span></p>
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
@@ -36,7 +36,9 @@
         </div>
       </div>
       <div class="col-md-2">
-        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
+        <button class="btn btn-lg profile-edit-btn" [routerLink]="['/edit-profile']" >
+          <i class="fa fa-pencil"></i> Edit Profile
+        </button>
       </div>
     </div>
     <div class="row">
@@ -44,7 +46,7 @@
         <div class="profile-work">
           <p>SKILLS</p>
           <a href="#">{{usr.skills}}</a><br />
-          
+
         </div>
       </div>
       <div class="col-md-8">

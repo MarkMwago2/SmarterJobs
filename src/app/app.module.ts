@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -7,7 +7,7 @@ import { environment } from '../environments/environment';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import { Cloudinary } from 'cloudinary-core';
@@ -35,8 +35,17 @@ import { LoaderService } from './smartjobs/services/loader.service';
 import { LoaderInterceptor } from './smartjobs/interceptors/loader.interceptor';
 import { MergePipe } from './shared/pipes/merge.pipe';
 
+import { MatButtonModule, MatCardModule, MatSnackBarModule } from '@angular/material';
+const MatModules = [
+  MatButtonModule,
+  MatCardModule,
+  MatSnackBarModule
+];
+
+
+
 export const cloudinaryLib = {
-  Cloudinary: Cloudinary
+  Cloudinary
 };
 
 @NgModule({
@@ -69,6 +78,8 @@ export const cloudinaryLib = {
     HttpClientModule,
     FormsModule,
     CloudinaryModule.forRoot(cloudinaryLib, { cloud_name: environment.cloudName, secure: true }),
+    ...MatModules,
+    ReactiveFormsModule,
   ],
   providers: [
     AuthService,
@@ -81,6 +92,7 @@ export const cloudinaryLib = {
     LoaderService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
