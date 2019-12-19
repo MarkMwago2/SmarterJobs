@@ -34,6 +34,7 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 import { LoaderService } from './smartjobs/services/loader.service';
 import { LoaderInterceptor } from './smartjobs/interceptors/loader.interceptor';
 import { MergePipe } from './shared/pipes/merge.pipe';
+import { NotifierModule } from 'angular-notifier';
 
 import { MatButtonModule, MatCardModule, MatSnackBarModule } from '@angular/material';
 const MatModules = [
@@ -80,6 +81,13 @@ export const cloudinaryLib = {
     CloudinaryModule.forRoot(cloudinaryLib, { cloud_name: environment.cloudName, secure: true }),
     ...MatModules,
     ReactiveFormsModule,
+    NotifierModule.withConfig({
+      position: {
+        horizontal: {
+          position: 'right'
+        }
+      }
+    }),
   ],
   providers: [
     AuthService,

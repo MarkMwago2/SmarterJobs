@@ -1,21 +1,57 @@
-import { Component, OnInit, Input, forwardRef, NgZone } from '@angular/core';
-import { ProfileService } from '../../../services/profile.service';
-import { AuthService } from '../../../services/auth.service';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { CanActivate, Router } from '@angular/router';
+import {
+  Component,
+  OnInit,
+  Input,
+  forwardRef,
+  NgZone
+} from '@angular/core';
+import {
+  ProfileService
+} from '../../../services/profile.service';
+import {
+  AuthService
+} from '../../../services/auth.service';
+import {
+  HttpHeaders,
+  HttpClient
+} from '@angular/common/http';
+import {
+  Observable
+} from 'rxjs';
+import {
+  CanActivate,
+  Router
+} from '@angular/router';
 
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormGroup, Validator, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { environment } from '../../../../../environments/environment';
-import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALUE_ACCESSOR,
+  NG_VALIDATORS,
+  FormGroup,
+  Validator,
+  Validators,
+  AbstractControl,
+  ValidationErrors
+} from '@angular/forms';
+import {
+  environment
+} from '../../../../../environments/environment';
+import {
+  CloudinaryOptions,
+  CloudinaryUploader
+} from 'ng2-cloudinary';
+
+import {
+  NotifierService
+} from 'angular-notifier';
 
 
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.css'],
-  providers: [
-    {
+  providers: [{
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => EditProfileComponent),
       multi: true
@@ -28,13 +64,17 @@ import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
   ]
 })
 export class EditProfileComponent implements OnInit {
+  private readonly notifier: NotifierService;
 
   constructor(
     private http: HttpClient,
     private prof: ProfileService,
     private authservice: AuthService,
-    private router: Router
-  ) { }
+    private router: Router,
+    notifierService: NotifierService
+  ) {
+    this.notifier = notifierService;
+  }
   data: any[] = [];
   imageId;
   publicId;
@@ -49,27 +89,12 @@ export class EditProfileComponent implements OnInit {
 
   loading: any;
 
-  public uploadImageForm: FormGroup = new FormGroup(
-    {
-      public_id: new FormControl(this.publicId, [Validators.required]),
-    }
-  );
+  public uploadImageForm: FormGroup = new FormGroup({
+    public_id: new FormControl(this.publicId, [Validators.required]),
+  });
 
 
-  profile: any = {
-    telephone: '',
-    name: '',
-    role: '',
-    county: '',
-    dependence: '',
-    next_of_kin: '',
-    cumulative_experience: '',
-    national_id: '',
-    Availability_status: '',
-    academic_qualifications: '',
-    professional_qualification: '',
-    skills: ''
-  };
+  profile: any = {};
   upload() {
     this.loading = true;
     this.uploader.uploadAll();
@@ -90,35 +115,37 @@ export class EditProfileComponent implements OnInit {
 
   public onTouched: () => void = () => {};
 
-    writeValue(val: any): void {
-      val && this.uploadImageForm.setValue(val, {
-        emitEvent: false
-      });
-    }
-
-    registerOnChange(fn: any): void {
-      console.log('on change');
-      this.uploadImageForm.valueChanges.subscribe(fn);
-    }
-
-    registerOnTouched(fn: any): void {
-      console.log('on blur');
-      this.onTouched = fn;
-    }
-
-    setDisabledState?(isDisabled: boolean): void {
-      isDisabled ? this.uploadImageForm.disable() : this.uploadImageForm.enable();
-    }
-
-    validate(c: AbstractControl): ValidationErrors | null {
-      console.log('UploadImage form Validation', c);
-      return this.uploadImageForm.valid ? null : {
-        invalidForm: { valid: false, message: 'uploadImageForm field is invalid'}
-      };
-    }
-
-  ngOnInit() {
+  writeValue(val: any): void {
+    val && this.uploadImageForm.setValue(val, {
+      emitEvent: false
+    });
   }
+
+  registerOnChange(fn: any): void {
+    console.log('on change');
+    this.uploadImageForm.valueChanges.subscribe(fn);
+  }
+
+  registerOnTouched(fn: any): void {
+    console.log('on blur');
+    this.onTouched = fn;
+  }
+
+  setDisabledState ? (isDisabled: boolean) : void {
+    isDisabled ? this.uploadImageForm.disable() : this.uploadImageForm.enable();
+  }
+
+  validate(c: AbstractControl): ValidationErrors | null {
+    console.log('UploadImage form Validation', c);
+    return this.uploadImageForm.valid ? null : {
+      invalidForm: {
+        valid: false,
+        message: 'uploadImageForm field is invalid'
+      }
+    };
+  }
+
+  ngOnInit() {}
 
   onSubmit() {
     this.prof.updateProfile(this.profile).subscribe(

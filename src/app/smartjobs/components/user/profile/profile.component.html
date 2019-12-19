@@ -12,7 +12,7 @@
             {{usr.name}}
           </h5>
           <h6>
-            {{usr.role}}
+            {{usr.profession}}
           </h6>
           <h6 style='color: #222;'>
             Profile Complete
@@ -89,7 +89,7 @@
                 <label>Phone</label>
               </div>
               <div class="col-md-6">
-                <p>{{usr.telephone}}</p>
+                <p>+254{{usr.telephone}}</p>
               </div>
             </div>
             <div class="row">
@@ -97,7 +97,7 @@
                 <label>Profession</label>
               </div>
               <div class="col-md-6">
-                <p>{{usr.role}}</p>
+                <p>{{usr.profession}}</p>
               </div>
             </div>
             <div class="row">
@@ -158,33 +158,10 @@
                 <label>Cumulative Experience</label>
               </div>
               <div class="col-md-6">
-                <p>{{usr.cumulative_experience}}</p>
+                <p>{{usr.cumulative_experience}} Years</p>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>KRA PiN</label>
-              </div>
-              <div class="col-md-6">
-                <p>{{usr.kra_pin}}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Dependence</label>
-              </div>
-              <div class="col-md-6">
-                <p>{{usr.dependence}}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Next of Kin</label>
-              </div>
-              <div class="col-md-6">
-                <p>{{usr.next_of_kin}}</p>
-              </div>
-            </div>
+            
             <div class="row">
               <div class="col-md-6">
                 <label>Professional Qualification</label>

@@ -29,3 +29,12 @@
 .image-container:hover .middle {
     opacity: 1;
 }
+.profile-edit-btn{
+    border: solid #317DFF 1px;
+    border-radius: 1.5rem;
+    width: 100%;
+    padding: 2%;
+    font-weight: 600;
+    color: #6c757d;
+    cursor: pointer;
+}
