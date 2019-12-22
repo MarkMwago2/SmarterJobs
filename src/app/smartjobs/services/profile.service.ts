@@ -61,6 +61,6 @@ export class ProfileService {
   }
 
   updatecompanyprofile(id, profile): Observable < any > {
-    return this.http.patch(this.apiRoot.concat('company/') + id + '/', profile);
+    return this.http.patch(this.apiRoot.concat('agency/') + id + '/', profile);
   }
 }
