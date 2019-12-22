@@ -33,6 +33,7 @@ const routes: Routes = [
 { path: 'company-profile', component: CompanyProfileComponent, canActivate: [AuthGuard] },
 { path: 'create-companyprofile', component: CreateCompanyProfileComponent, canActivate: [AuthGuard] },
 { path: 'edit-companyprofile', component: EditCompanyProfileComponent, canActivate: [AuthGuard] },
+{ path: 'dashboard', component: HrdashboardComponent, canActivate: [AuthGuard] },
 
 ];
 
