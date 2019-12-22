@@ -46,7 +46,7 @@ export class CompanyProfileComponent implements OnInit {
         let industryInfo = JSON.parse(str);
         const companyinfo = Object.assign({}, company, industryInfo);
         this.company.push(companyinfo);
-        console.log(this.company);
+        // console.log(this.company);
       })
     }, error => {
       console.log('Retrieve Unsuccessful')

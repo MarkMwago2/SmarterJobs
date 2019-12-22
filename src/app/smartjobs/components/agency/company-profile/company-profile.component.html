@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngFor="let comp of company">
   <div class="row">
     <div class="col-12">
       <div class="card">
@@ -15,7 +15,7 @@
                 </div>
               </div>
               <div class="userData ml-3">
-                <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">General electrics</h2>
+                <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">{{comp.name}}</h2>
                 <h6 class="d-block"><a href="#">15</a> Employees</h6>
                 <h6 class="d-block"><a href="#">3</a> Departments</h6>
                 <button class="btn btn-lg profile-edit-btn" [routerLink]="['/edit-companyprofile']">
@@ -49,7 +49,7 @@
                       <label style="font-weight:bold;">Company Name</label>
                     </div>
                     <div class="col-md-8 col-6">
-                      General electrics
+                      {{comp.name}}
                     </div>
                   </div>
                   <hr />
@@ -59,7 +59,47 @@
                       <label style="font-weight:bold;">Location</label>
                     </div>
                     <div class="col-md-8 col-6">
-                      Nairobi
+                      {{comp.location}}
+                    </div>
+                  </div>
+                  <hr />
+
+                  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">Industry</label>
+                    </div>
+                    <div class="col-md-8 col-6">
+                      {{comp.industry_name}}
+                    </div>
+                  </div>
+                  <hr />
+
+                  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">Contact Person Title</label>
+                    </div>
+                    <div class="col-md-8 col-6">
+                      {{comp.contact_person_title}}
+                    </div>
+                  </div>
+                  <hr />
+
+                  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">Contact Person</label>
+                    </div>
+                    <div class="col-md-8 col-6">
+                      {{comp.contact_person}}
+                    </div>
+                  </div>
+                  <hr />
+
+                  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">Head Office Address</label>
+                    </div>
+                    <div class="col-md-8 col-6">
+                      {{comp.head_office_address}}
                     </div>
                   </div>
                   <hr />
@@ -70,7 +110,7 @@
                       <label style="font-weight:bold;">Phone</label>
                     </div>
                     <div class="col-md-8 col-6">
-                      0987654321
+                      {{comp.phone_number}}
                     </div>
                   </div>
                   <hr />
@@ -79,16 +119,16 @@
                       <label style="font-weight:bold;">Email</label>
                     </div>
                     <div class="col-md-8 col-6">
-                      GeneralElect@ge.co
+                      {{comp.contact_email}}
                     </div>
                   </div>
                   <hr />
                   <div class="row">
                     <div class="col-sm-3 col-md-2 col-5">
-                      <label style="font-weight:bold;">Something</label>
+                      <label style="font-weight:bold;">Website</label>
                     </div>
                     <div class="col-md-8 col-6">
-                      Something
+                      {{comp.website_address}}
                     </div>
                   </div>
                   <hr />
@@ -96,7 +136,7 @@
                 </div>
                 <div class="tab-pane fade" id="connectedServices" role="tabpanel"
                   aria-labelledby="ConnectedServices-tab">
-                  Electronics maintenance, Electronics manufacture, Electronics sale, Electronics distribution...
+                 {{comp.services_offered}}
                 </div>
               </div>
             </div>
