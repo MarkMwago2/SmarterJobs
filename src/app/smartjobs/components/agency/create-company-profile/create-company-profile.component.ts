@@ -8,6 +8,8 @@ import {
 import {
   ProfileService
 } from '../../../services/profile.service';
+import { IndustryService } from '../../../services/industry.service';
+
 
 @Component({
   selector: 'app-create-company-profile',
@@ -19,20 +21,28 @@ export class CreateCompanyProfileComponent implements OnInit {
   companyprofile: any = {
     user: this.userId,
   };
+  industries: any[];
+  isLoaded = false;
+  types$;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private prof: ProfileService,
+    private indu: IndustryService,
   ) { }
 
+  getIndustries() {
+    return this.indu.industries();
+  }
+
   ngOnInit() {
+    this.types$ = this.getIndustries();
   }
 
   onSubmit() {
     this.prof.createcompanyprofile(this.companyprofile).subscribe(
       res => {
-        console.log('update successful');
         this.router.navigate(['company-profile']);
       }, err => {
         console.log('update unsuccessful');

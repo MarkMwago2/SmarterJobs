@@ -48,6 +48,10 @@ export class ProfileService {
     return this.http.get(this.apiRoot.concat('company/') + id + '/');
   }
 
+  getcompanyprofileByUserId(id): Observable < any > {
+    return this.http.get(this.apiRoot.concat('agency/') + id + '/');
+  }
+
   createcompanyprofile(company): Observable < any > {
     return this.http.post(this.apiRoot.concat('companies/'), company);
   }
