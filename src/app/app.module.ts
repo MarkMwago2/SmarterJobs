@@ -32,6 +32,8 @@ import { AuthService, AuthInterceptor, AuthGuard } from './smartjobs/services/au
 import { LoaderComponent } from './shared/components/loader/loader.component';
 
 import { LoaderService } from './smartjobs/services/loader.service';
+import { ProfileService } from './smartjobs/services/profile.service';
+import { IndustryService } from './smartjobs/services/industry.service';
 import { LoaderInterceptor } from './smartjobs/interceptors/loader.interceptor';
 import { MergePipe } from './shared/pipes/merge.pipe';
 import { NotifierModule } from 'angular-notifier';
@@ -100,7 +102,9 @@ import { IntropageComponent } from './smartjobs/components/intropage/intropage.c
       useClass: AuthInterceptor,
       multi: true,
     },
+    IndustryService,
     LoaderService,
+    ProfileService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],

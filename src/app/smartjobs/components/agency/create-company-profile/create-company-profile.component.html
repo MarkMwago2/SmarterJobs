@@ -59,6 +59,17 @@
                   title="phone number ">
               </div>
             </div>
+            <div class="form-group">
+
+              <div class="col-xs-6">
+                <label for="industry">
+                  <h4>Industry Type</h4>
+                </label>
+                <select  class="form-control" id="industry" data-live-search="true" name="industry" [(ngModel)]='companyprofile.industry'>
+                  <option *ngFor="let test of types$ | async"  [value]="test.id">{{test.name}}</option>
+               </select>
+              </div>
+            </div>
 
             <div class="form-group">
               <div class="col-xs-6">
@@ -76,8 +87,28 @@
                 <label for="website_address">
                   <h4>Website Address</h4>
                 </label>
-                <input type="website_address" class="form-control" name="dob" [(ngModel)]='companyprofile.website_address' id="dob" placeholder="website_address"
+                <input type="text" class="form-control" name="dob" [(ngModel)]='companyprofile.website_address' id="dob" placeholder="website_address"
                   title="website_address ">
+              </div>
+            </div>
+            <div class="form-group">
+
+              <div class="col-xs-6">
+                <label for="contact_person">
+                  <h4>Contact Person</h4>
+                </label>
+                <input type="text" class="form-control" name="contact_person" [(ngModel)]='companyprofile.contact_person' id="contact_person" placeholder="contact person"
+                  title="contact_person ">
+              </div>
+            </div>
+            <div class="form-group">
+
+              <div class="col-xs-6">
+                <label for="contact_person_title">
+                  <h4>Contact Person Title</h4>
+                </label>
+                <input type="text" class="form-control" name="contact_person_title" [(ngModel)]='companyprofile.contact_person_title' id="contact_person_title" placeholder="contact person title"
+                  title="contact_person_title ">
               </div>
             </div>
             <div class="form-group">

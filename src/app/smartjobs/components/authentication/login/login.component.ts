@@ -59,9 +59,14 @@ export class LoginComponent implements OnInit {
                 company = company;
                 const user = this.prof.loggedInUserId();
                 const companyexists = company.filter(e => e.user.includes(user));
+                if (companyexists.length >= 1) {
+                  this.router.navigate(['dashboard']);
+                } else {
+                  this.router.navigate(['create-companyprofile']);
+                }
                 console.log(companyexists);
               });
-              this.router.navigate(['company-profile']);
+              
             }
           });
         });

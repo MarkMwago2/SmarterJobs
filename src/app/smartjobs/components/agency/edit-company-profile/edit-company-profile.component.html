@@ -27,14 +27,14 @@
       <div class="tab-content">
         <div class="tab-pane active" id="home">
           <hr>
-          <form class="form" action="##" method="post" id="registrationForm">
+          <form class="form" (ngSubmit)="onSubmit()" novalidate id="registrationForm">
             <div class="form-group">
 
               <div class="col-xs-6">
                 <label for="name">
                   <h4>Company Name</h4>
                 </label>
-                <input type="text" class="form-control" name="name" id="name" placeholder="Company name"
+                <input type="text" class="form-control" name="name" [(ngModel)]='companyprofile.name' id="name" placeholder="Company name"
                   title="company name">
               </div>
             </div>
@@ -44,7 +44,7 @@
                 <label for="location">
                   <h4>Location</h4>
                 </label>
-                <input type="text" class="form-control" name="location" id="location" placeholder="location"
+                <input type="text" class="form-control" name="location" [(ngModel)]='companyprofile.location' id="location" placeholder="location"
                   title="location">
               </div>
             </div>
@@ -55,19 +55,60 @@
                 <label for="phone">
                   <h4>Phone</h4>
                 </label>
-                <input type="number" class="form-control" name="phone" id="phone" placeholder="phone number"
+                <input type="number" class="form-control" name="phone" [(ngModel)]='companyprofile.phone_number' id="phone" placeholder="phone number"
                   title="phone number ">
+              </div>
+            </div>
+            <div class="form-group">
+
+              <div class="col-xs-6">
+                <label for="industry">
+                  <h4>Industry Type</h4>
+                </label>
+                <select  class="form-control" id="industry" data-live-search="true" name="industry" [(ngModel)]='companyprofile.industry'>
+                  <option *ngFor="let test of types$ | async"  [value]="test.id">{{test.name}}</option>
+               </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-xs-6">
+                <label for="head_office_address">
+                  <h4>Head Office Address</h4>
+                </label>
+                <input type="text" class="form-control" name="head_office_address" [(ngModel)]='companyprofile.head_office_address' id="head_office_address" placeholder="head_office_address"
+                  title="head_office_address ">
               </div>
             </div>
 
             <div class="form-group">
 
               <div class="col-xs-6">
-                <label for="sth">
-                  <h4>Sth</h4>
+                <label for="website_address">
+                  <h4>Website Address</h4>
                 </label>
-                <input type="sth" class="form-control" name="dob" id="dob" placeholder="sth"
-                  title="sth ">
+                <input type="text" class="form-control" name="dob" [(ngModel)]='companyprofile.website_address' id="dob" placeholder="website_address"
+                  title="website_address ">
+              </div>
+            </div>
+            <div class="form-group">
+
+              <div class="col-xs-6">
+                <label for="contact_person">
+                  <h4>Contact Person</h4>
+                </label>
+                <input type="text" class="form-control" name="contact_person" [(ngModel)]='companyprofile.contact_person' id="contact_person" placeholder="contact person"
+                  title="contact_person ">
+              </div>
+            </div>
+            <div class="form-group">
+
+              <div class="col-xs-6">
+                <label for="contact_person_title">
+                  <h4>Contact Person Title</h4>
+                </label>
+                <input type="text" class="form-control" name="contact_person_title" [(ngModel)]='companyprofile.contact_person_title' id="contact_person_title" placeholder="contact person title"
+                  title="contact_person_title ">
               </div>
             </div>
             <div class="form-group">
@@ -76,7 +117,7 @@
                 <label for="email">
                   <h4>Email</h4>
                 </label>
-                <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com"
+                <input type="email" class="form-control" name="email" [(ngModel)]='companyprofile.contact_email' id="email" placeholder="you@email.com"
                   title="email.">
               </div>
             </div>
@@ -86,49 +127,20 @@
                 <label for="services">
                   <h4>Services Offered</h4>
                 </label>
-                <input type="text" class="form-control" name="services" id="services" placeholder="services" title="skills.">
+                <input type="text" class="form-control" name="services" [(ngModel)]='companyprofile.services_offered' id="services" placeholder="services" title="skills.">
               </div>
             </div>
             <div class="form-group">
               <div class="col-xs-12">
                 <br>
-                <button class="btn btn-md btn-success mr-2" type="submit"><i class="fas fa-user-edit"></i>Edit
-                  Profile</button>
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i>Delete
-                  Profile</button>
-                <div id="myModal" class="modal fade" id="deleteModal">
-                  <div class="modal-dialog modal-confirm">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <div class="icon-box">
-                          <i class="material-icons">&#xE5CD;</i>
-                        </div>
-                        <h4 class="modal-title">Are you sure?</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                      </div>
-                      <div class="modal-body">
-                        <p>Do you really want to delete this profile? This process cannot be undone.</p>
-                      </div>
-                      <div class="modal-footer">
-                        <div class="row">
-                          <div class="col-md-6"><button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button></div>
-                          <div class="col-md-6"><button type="button" class="btn btn-danger">Delete</button></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <button class="btn btn-md btn-success mr-2" type="submit"><i class="fas fa-edit"></i> Update Profile</button>
               </div>
             </div>
           </form>
-
-
         </div>
-        <!--/tab-pane-->
-        
+        <!--/tab-pane-->      
     </div>
     <!--/tab-content-->
-
   </div>
   <!--/col-9-->
 </div>
