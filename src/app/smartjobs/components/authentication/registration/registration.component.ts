@@ -1,7 +1,20 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from '../../../services/auth.service';
+import {
+  Component,
+  OnInit,
+  ViewEncapsulation
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl
+} from '@angular/forms';
+import {
+  Router
+} from '@angular/router';
+import {
+  AuthService
+} from '../../../services/auth.service';
 import {
   Country,
   UsernameValidator,
@@ -9,6 +22,9 @@ import {
   ParentErrorStateMatcher,
   PhoneValidator
 } from '../../../../shared/validators';
+import {
+  ToastrService
+} from 'ngx-toastr';
 
 
 @Component({
@@ -26,32 +42,70 @@ export class RegistrationComponent implements OnInit {
   parentErrorStateMatcher = new ParentErrorStateMatcher();
 
   account_validation_messages = {
-    'username': [
-      { type: 'required', message: 'Username is required' },
-      { type: 'minlength', message: 'Username must be at least 5 characters long' },
-      { type: 'maxlength', message: 'Username cannot be more than 25 characters long' },
-      { type: 'pattern', message: 'Your username must contain only letters' },
-      { type: 'validUsername', message: 'Your username has already been taken' }
+    'username': [{
+        type: 'required',
+        message: 'Username is required'
+      },
+      {
+        type: 'minlength',
+        message: 'Username must be at least 5 characters long'
+      },
+      {
+        type: 'maxlength',
+        message: 'Username cannot be more than 25 characters long'
+      },
+      {
+        type: 'pattern',
+        message: 'Your username must contain only letters'
+      },
+      {
+        type: 'validUsername',
+        message: 'Your username has already been taken'
+      }
     ],
-    'email': [
-      { type: 'required', message: 'Email is required' },
-      { type: 'pattern', message: 'Enter a valid email' }
+    'email': [{
+        type: 'required',
+        message: 'Email is required'
+      },
+      {
+        type: 'pattern',
+        message: 'Enter a valid email'
+      }
     ],
-    'confirm_password': [
-      { type: 'required', message: 'Confirm password is required' },
-      { type: 'areEqual', message: 'Password mismatch' }
+    'confirm_password': [{
+        type: 'required',
+        message: 'Confirm password is required'
+      },
+      {
+        type: 'areEqual',
+        message: 'Password mismatch'
+      }
     ],
-    'password': [
-      { type: 'required', message: 'Password is required' },
-      { type: 'minlength', message: 'Password must be at least 5 characters long' },
-      { type: 'pattern', message: 'Your password must contain at least one uppercase, one lowercase, and one number' }
+    'password': [{
+        type: 'required',
+        message: 'Password is required'
+      },
+      {
+        type: 'minlength',
+        message: 'Password must be at least 5 characters long'
+      },
+      {
+        type: 'pattern',
+        message: 'Your password must contain at least one uppercase, one lowercase, and one number'
+      }
     ],
-    'terms': [
-      { type: 'pattern', message: 'You must accept terms and conditions' }
-    ]
-  }
+    'terms': [{
+      type: 'pattern',
+      message: 'You must accept terms and conditions'
+    }]
+  };
 
-  constructor(private fb: FormBuilder) { }
+  username: string;
+  email: string;
+  password: string;
+  error: any;
+
+  constructor(private fb: FormBuilder, private toastr: ToastrService, private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.createForms();
@@ -73,11 +127,11 @@ export class RegistrationComponent implements OnInit {
     // user links form validations
     this.accountDetailsForm = this.fb.group({
       username: new FormControl('', Validators.compose([
-       UsernameValidator.validUsername,
-       Validators.maxLength(25),
-       Validators.minLength(5),
-       Validators.pattern('^[a-zA-Z]+$'),
-       Validators.required
+        UsernameValidator.validUsername,
+        Validators.maxLength(25),
+        Validators.minLength(5),
+        Validators.pattern('^[a-zA-Z]+$'),
+        Validators.required
       ])),
       email: new FormControl('', Validators.compose([
         Validators.required,
@@ -89,8 +143,26 @@ export class RegistrationComponent implements OnInit {
 
   }
 
-  onSubmitAccountDetails(value){
-    console.log(value);
+  onSubmitAccountDetails(value) {
+    // this.username = value['username'];
+    // this.email = value['email'];
+    // this.password = value['matching_passwords']['password'];
+    // this.authService.signup(this.username, this.email, this.password).subscribe(
+    //   success => {
+    //     this.showSuccess(value['username']);
+    //     this.router.navigate(['sign-in']);
+    //   },
+    //   error => this.error = error
+    // );
+    const delayInMilliseconds = 3000;
+
+    setTimeout(() => {
+      this.showSuccess(value['username']);
+    }, delayInMilliseconds);
+    console.log(value['matching_passwords']['password']);
+  }
+  showSuccess(username) {
+    this.toastr.success('Welcome ' + username, 'Registration Successful!');
   }
 
 }

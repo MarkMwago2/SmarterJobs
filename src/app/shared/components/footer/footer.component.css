@@ -23,7 +23,7 @@
 
 /* Footer */
 .footer {
-  border-top: 2px solid #F05E23;
+  border-top: 2px solid #4159B5;
   position: relative;
   background-color: #fff;
   color: #000;
@@ -36,7 +36,7 @@
   margin: 5px 0 0;
   width: 200px;
   height: 2px;
-  background-color: #F05E23;
+  background-color: #4159B5;
   ;
 }
 
@@ -63,7 +63,7 @@
 
 .social {
   margin: 7px 7px 7px 0px;
-  color: #F05E23;
+  color: #4159B5;
   ;
 }
 
@@ -86,4 +86,8 @@
 #social-em:hover {
   color: #f39c12;
   transition: all .25s;
+}
+
+.bg-primary {
+  color: #4159B5;
 }

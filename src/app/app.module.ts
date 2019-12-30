@@ -38,6 +38,9 @@ import { LoaderInterceptor } from './smartjobs/interceptors/loader.interceptor';
 import { MergePipe } from './shared/pipes/merge.pipe';
 import { NotifierModule } from 'angular-notifier';
 
+import { ToastrModule } from 'ngx-toastr';
+
+
 import { MatButtonModule, MatCardModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatSelectModule, } from '@angular/material';
 const MatModules = [
   MatButtonModule,
@@ -90,6 +93,7 @@ import { IntropageComponent } from './smartjobs/components/intropage/intropage.c
     CloudinaryModule.forRoot(cloudinaryLib, { cloud_name: environment.cloudName, secure: true }),
     ...MatModules,
     ReactiveFormsModule,
+    ToastrModule.forRoot(), // ToastrModule added
     NotifierModule.withConfig({
       position: {
         horizontal: {

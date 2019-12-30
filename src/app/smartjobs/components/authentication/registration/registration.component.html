@@ -53,7 +53,7 @@
           </div>
 
           <mat-checkbox formControlName="terms">
-            I accept terms and conditions
+          I accept<a [routerLink]="['/#']" class="ml-2">terms and conditions</a>
           </mat-checkbox>
           <mat-error *ngFor="let validation of account_validation_messages.terms">
             <mat-error class="error-message"
