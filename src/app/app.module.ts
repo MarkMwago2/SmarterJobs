@@ -38,11 +38,15 @@ import { LoaderInterceptor } from './smartjobs/interceptors/loader.interceptor';
 import { MergePipe } from './shared/pipes/merge.pipe';
 import { NotifierModule } from 'angular-notifier';
 
-import { MatButtonModule, MatCardModule, MatSnackBarModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatSelectModule, } from '@angular/material';
 const MatModules = [
   MatButtonModule,
   MatCardModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatButtonModule,
+  MatCheckboxModule,
+  MatInputModule,
+  MatSelectModule,
 ];
 
 
