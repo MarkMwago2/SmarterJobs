@@ -9,7 +9,7 @@
       </div>
       <div class="d-flex justify-content-center form_container">
 
-        <form [formGroup]="accountDetailsForm" novalidate (ngSubmit)="onSubmitAccountDetails(accountDetailsForm.value)">
+        <form [formGroup]="accountDetailsForm" novalidate (ngSubmit)="onSubmitAccountDetails(accountDetailsForm.value)" [loader]="isLoading">
 
           <mat-form-field class="full-width">
             <input matInput maxlength="25" placeholder="Username" formControlName="username" required>

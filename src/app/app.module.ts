@@ -39,6 +39,7 @@ import { MergePipe } from './shared/pipes/merge.pipe';
 import { NotifierModule } from 'angular-notifier';
 
 import { ToastrModule } from 'ngx-toastr';
+import {NgxLoaderIndicatorModule} from 'ngx-loader-indicator';
 
 
 import { MatButtonModule, MatCardModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatSelectModule, } from '@angular/material';
@@ -94,6 +95,12 @@ import { IntropageComponent } from './smartjobs/components/intropage/intropage.c
     ...MatModules,
     ReactiveFormsModule,
     ToastrModule.forRoot(), // ToastrModule added
+    NgxLoaderIndicatorModule.forRoot({
+      imgStyles: {
+        width: '30px', // '30px'
+        color: 'rgb(25.5, 34.9, 71)', // 'yellow' or rgb(255, 255, 0)
+      },
+    }),
     NotifierModule.withConfig({
       position: {
         horizontal: {

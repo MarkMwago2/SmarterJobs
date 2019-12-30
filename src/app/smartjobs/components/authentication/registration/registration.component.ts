@@ -104,6 +104,7 @@ export class RegistrationComponent implements OnInit {
   email: string;
   password: string;
   error: any;
+  isLoading: boolean;
 
   constructor(private fb: FormBuilder, private toastr: ToastrService, private authService: AuthService, private router: Router) {}
 
@@ -144,25 +145,37 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmitAccountDetails(value) {
-    // this.username = value['username'];
-    // this.email = value['email'];
-    // this.password = value['matching_passwords']['password'];
-    // this.authService.signup(this.username, this.email, this.password).subscribe(
-    //   success => {
-    //     this.showSuccess(value['username']);
-    //     this.router.navigate(['sign-in']);
-    //   },
-    //   error => this.error = error
-    // );
-    const delayInMilliseconds = 3000;
+    this.isLoading = true;
+    this.username = value['username'];
+    this.email = value['email'];
+    this.password = value['matching_passwords']['password'];
+    this.authService.signup(this.username, this.email, this.password).subscribe(
+      success => {
+        this.showSuccess(value['username']);
+        const delayInMilliseconds = 2000;
 
-    setTimeout(() => {
-      this.showSuccess(value['username']);
-    }, delayInMilliseconds);
-    console.log(value['matching_passwords']['password']);
+        setTimeout(() => {
+          this.router.navigate(['sign-in']);
+        }, delayInMilliseconds);
+      },
+      error => this.error = error
+    );
+    // const delayInMilliseconds = 3000;
+
+    // setTimeout(() => {
+    //   this.showSuccess(value['username']);
+    // }, delayInMilliseconds);
+    // this.isLoading = true;
+    // console.log(value['matching_passwords']['password']);
   }
   showSuccess(username) {
-    this.toastr.success('Welcome ' + username, 'Registration Successful!');
+    this.toastr.success('Welcome ' + username, 'Registration Successful!', {
+      progressAnimation: 'increasing',
+      timeOut: 2000,
+      tapToDismiss: true,
+      easing: 'ease-in'
+    });
+    this.isLoading = false;
   }
 
 }
