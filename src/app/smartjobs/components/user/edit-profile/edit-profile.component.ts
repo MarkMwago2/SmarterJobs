@@ -61,7 +61,7 @@ export class EditProfileComponent implements OnInit {
   @ViewChild(MatPaginator, {static: false})
   paginator: MatPaginator;
   length: number;
-  pageSize = 4;
+  pageSize = 3;
   pageSizeOptions: number[] = [2, 3, 4, 5];
   hidePageSize = true;
   showFirstLastButtons = false;
@@ -133,6 +133,27 @@ export class EditProfileComponent implements OnInit {
     });
     console.log(pageIndex);
     this.changePageName(pageIndex);
+    // this.changePageSize(pageIndex);
+  }
+
+  changePageSize(pageIndex) {
+    if (pageIndex === 0) {
+      this.pageSize = 3;
+    } else if ( pageIndex === 1) {
+      this.pageSize = 4;
+    } else if ( pageIndex === 2) {
+      this.pageSize = 5;
+    } else if ( pageIndex === 3) {
+      this.pageSize = 4;
+    } else if ( pageIndex === 4) {
+      this.pageSize = 4;
+    } else if ( pageIndex === 5) {
+      this.pageSize = 4;
+    } else if ( pageIndex === 1) {
+      this.pageSize = 4;
+    } else {
+      this.pageSize = 1;
+    }
   }
 
   changePageName(pageIndex) {
