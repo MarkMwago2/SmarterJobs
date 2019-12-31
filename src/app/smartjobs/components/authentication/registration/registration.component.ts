@@ -160,16 +160,9 @@ export class RegistrationComponent implements OnInit {
       },
       error => this.error = error
     );
-    // const delayInMilliseconds = 3000;
-
-    // setTimeout(() => {
-    //   this.showSuccess(value['username']);
-    // }, delayInMilliseconds);
-    // this.isLoading = true;
-    // console.log(value['matching_passwords']['password']);
   }
   showSuccess(username) {
-    this.toastr.success('Welcome ' + username, 'Registration Successful!', {
+    this.toastr.success('Account for ' + username + ' created', 'Registration Successful!', {
       progressAnimation: 'increasing',
       timeOut: 2000,
       tapToDismiss: true,
