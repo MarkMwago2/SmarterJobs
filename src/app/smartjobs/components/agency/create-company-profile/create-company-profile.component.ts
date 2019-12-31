@@ -194,23 +194,23 @@ export class CreateCompanyProfileComponent implements OnInit {
         UsernameValidator.validUsername,
         Validators.maxLength(25),
         Validators.minLength(5),
-        Validators.pattern('^[a-zA-Z]+$'),
+        Validators.pattern('^[a-zA-Z ]+$'),
         Validators.required
       ])),
       email: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+        Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
       ])),
-      physicaladdress: new FormControl('', Validators.pattern('true')),
-      postaladdress: new FormControl('', Validators.pattern('true')),
-      phonenumber: new FormControl('', Validators.pattern('true')),
-      website: new FormControl('', Validators.pattern('true')),
-      industriy: new FormControl('', Validators.pattern('true')),
-      employees: new FormControl('', Validators.pattern('true')),
-      contactPersonName: new FormControl('', Validators.pattern('true')),
-      contactPersonTitle: new FormControl('', Validators.pattern('true')),
-      contactPersonEmail: new FormControl('', Validators.pattern('true')),
-      contactPersonPhoneNumber: new FormControl('', Validators.pattern('true')),
+      physicaladdress: new FormControl('', Validators.required),
+      postaladdress: new FormControl('', Validators.required),
+      phonenumber: new FormControl('', Validators.required),
+      website: new FormControl('', Validators.required),
+      industriy: new FormControl('', Validators.required),
+      employees: new FormControl('', Validators.required),
+      contactPersonName: new FormControl('', Validators.required),
+      contactPersonTitle: new FormControl('', Validators.required),
+      contactPersonEmail: new FormControl('', Validators.required),
+      contactPersonPhoneNumber: new FormControl('', Validators.required),
 
     });
 
