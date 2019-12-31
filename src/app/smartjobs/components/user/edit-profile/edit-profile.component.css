@@ -121,3 +121,54 @@
 .modal-confirm .btn-danger:focus {
   background: #ee3535;
 }
+
+/* Pagination CSS */
+.mat-paginator-container {
+  
+}
+
+/* mat-card-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+mat-form-field[hidden] {
+  display: none;
+}
+
+.mat-paginator-range-label {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: none !important;
+  background: blue;
+  display: inline;
+}
+
+form {
+  padding: 40px;
+  width: 70%;
+}
+
+.nonFooter {
+  min-height: 100%;
+  position: relative;
+  /* Firefox */
+  min-height: -moz-calc(100% - 100px);
+  /* WebKit */
+  min-height: -webkit-calc(100% - 100px);
+  /* Opera */
+  min-height: -o-calc(100% - 100px);
+  /* Standard */
+  min-height: calc(100% - 100px);
+  margin-left: 20px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.form_container {
+  /* border: 2px solid #4159B5;;
+  border-radius: 5px; */
+}

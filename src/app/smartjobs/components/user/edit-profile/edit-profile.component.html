@@ -1,192 +1,75 @@
 <app-header></app-header>
-<div class="container bootstrap snippet">
-  <div class="row">
-    <div class="col-sm-10">
+<div class="text-center">
+  <h3>{{pageName}}</h3><br>
+</div>
+
+
+    <mat-paginator #paginator [label]='person' [length]="length" [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions" (page)="pageEvent($event)" [hidePageSize]="hidePageSize"
+      [showFirstLastButtons]="showFirstLastButtons" class="mat-paginator-container">
+    </mat-paginator>
+
+
+    <div class="d-flex justify-content-center form_container">
+      <form [formGroup]="myForm">
+        <p>
+          <mat-form-field [hidden]="formData[0].display == true" class="full-width">
+            <input matInput #dataValue0 placeholder="Last Name" formControlName="dataValue0" required>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field [hidden]="formData[1].display == true">
+            <input matInput placeholder="First Name" formControlName="dataValue1" required>
+          </mat-form-field>
+          <p>
+            <mat-form-field [hidden]="formData[2].display == true">
+              <input matInput placeholder="Address 1" formControlName="dataValue2">
+            </mat-form-field>
+            <p>
+              <mat-form-field [hidden]="formData[3].display == true">
+                <input matInput placeholder="Address 2" formControlName="dataValue3">
+              </mat-form-field>
+              <p>
+                <mat-form-field [hidden]="formData[4].display == true">
+
+                  <input matInput placeholder="City" formControlName="dataValue4" required>
+                </mat-form-field>
+                <p>
+                  <mat-form-field [hidden]="formData[5].display == true">
+
+                    <input matInput placeholder="Province" formControlName="dataValue5">
+                  </mat-form-field>
+                  <p>
+                    <mat-form-field [hidden]="formData[6].display == true">
+                      <input matInput placeholder="Postal code" formControlName="dataValue6">
+                    </mat-form-field>
+                    <p>
+                      <mat-form-field [hidden]="formData[7].display == true">
+                        <input matInput placeholder="Phone cell" formControlName="dataValue7" required>
+                      </mat-form-field>
+                      <p>
+                        <mat-form-field class="full-width" [hidden]="formData[8].display == true">
+                          <input matInput placeholder="Phone home" formControlName="dataValue8">
+                        </mat-form-field>
+                        <p>
+                          <mat-form-field [hidden]="formData[9].display == true">
+                            <input matInput placeholder="Direction" formControlName="dataValue9">
+                          </mat-form-field>
+                          <p>
+                            <mat-form-field [hidden]="formData[10].display == true">
+                              <input matInput placeholder="Country" formControlName="dataValue10">
+                            </mat-form-field>
+                            <div class="submit-style">
+                              <button mat-raised-button color="primary" [disabled]="!isLastPage"
+                                (click)="submitExecuted()">
+                                Submit
+                              </button>
+                            </div>
+      </form>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-3">
-      <!--left col-->
+    <!-- 
+use <div  *ngIf="isLastPage" class="submit-style"> 
+if you want to hide button
+-->
 
-
-      <div class="text-center">
-        <img src="assets/profile/blank-profile-picture-973460_1280.png" class="avatar img-circle img-thumbnail"
-          alt="avatar">
-        <h6>Upload a photo</h6>
-        <ng-container [formGroup]='uploadImageForm'>
-          <mat-list>
-            <mat-list-item class="form-field-item">
-              <div mat-line>
-                <form>
-                  <div class='imageUpload'>
-                    Choose File
-                    <input type="file" class="hide_file" ng2FileSelect accept="image/*;capture=camera">
-                  </div>
-                </form>
-                <button mat-raised-button (click)="upload()" color="primary"
-                  [disabled]="loading">{{ (loading) ? 'Uploading...' : 'Upload now'}}</button>
-              </div>
-            </mat-list-item>
-          </mat-list>
-        </ng-container>
-      </div><br>
-
-
-    </div>
-    <!--/col-3-->
-    <div class="col-sm-9">
-
-      <div class="tab-content">
-        <div class="tab-pane active" id="home">
-          <hr>
-          <form class="form" novalidate (ngSubmit)="onSubmit()">
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <label for="name">
-                  <h4>Name</h4>
-                </label>
-                <input type="text" class="form-control" name="name" id="name" [(ngModel)]='profile.name'
-                  placeholder="full name" title="enter your full name.">
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <label for="last_name">
-                  <h4>national ID</h4>
-                </label>
-                <input type="number" class="form-control" name="national_id" id="national_id"
-                  [(ngModel)]='profile.national_id' placeholder="national ID" title="national ID">
-              </div>
-            </div>
-
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <label for="phone">
-                  <h4>Phone</h4>
-                </label>
-                <input type="number" class="form-control" name="telephone" id="telephone"
-                  [(ngModel)]='profile.telephone' placeholder="phone number" title="phone number ">
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <label for="profession">
-                  <h4>Profession</h4>
-                </label>
-                <input type="text" class="form-control" id="profession" name="profession" placeholder="profession"
-                  [(ngModel)]='profile.profession' title="profession">
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <label for="county">
-                  <h4>county</h4>
-                </label>
-                <input type="text" class="form-control" id="county" name="county" [(ngModel)]='profile.county'
-                  placeholder="county" title="county">
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <label for="cumulative_experience">
-                  <h4>Cumulative Experience</h4>
-                </label>
-                <input type="text" class="form-control" id="cumulative_experience" name="cumulative_experience"
-                  [(ngModel)]='profile.cumulative_experience' placeholder="cumulative experience in years"
-                  title="cumulative_experience">
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <label for="Availability_status">
-                  <h4>Availability Status</h4>
-                </label>
-                <input type="text" class="form-control" id="Availability_status" name="Availability_status"
-                  [(ngModel)]='profile.Availability_status' placeholder="Availability_status"
-                  title="Availability_status">
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <label for="academic qualifications">
-                  <h4>Academic Qualifications</h4>
-                </label>
-                <input type="text" class="form-control" name="academic_qualifications" id="academic_qualifications"
-                  [(ngModel)]='profile.academic_qualifications' placeholder="academic qualifications"
-                  title="academic qualifications.">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-xs-6">
-                <label for="professional qualification">
-                  <h4>Professional Qualification</h4>
-                </label>
-                <input type="text" class="form-control" name="professional_qualification"
-                  id="professional_qualification" [(ngModel)]='profile.professional_qualification'
-                  placeholder="professional qualification" title="professional qualification.">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-xs-6">
-                <label for="skills">
-                  <h4>Skills</h4>
-                </label>
-                <input type="text" class="form-control" name="skills" [(ngModel)]='profile.skills' id="skills"
-                  placeholder="skills" title="skills.">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-xs-12">
-                <br>
-                <button class="btn btn-md btn-success mr-2" type="submit"><i class="fas fa-user-edit"></i>Update
-                  Profile</button>
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i
-                    class="far fa-trash-alt"></i>Delete
-                  Profile</button>
-                <div id="myModal" class="modal fade" id="deleteModal">
-                  <div class="modal-dialog modal-confirm">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <div class="icon-box">
-                          <i class="material-icons">&#xE5CD;</i>
-                        </div>
-                        <h4 class="modal-title">Are you sure?</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                      </div>
-                      <div class="modal-body">
-                        <p>Do you really want to delete these your profile? This process cannot be undone.</p>
-                      </div>
-                      <div class="modal-footer">
-                        <div class="row">
-                          <div class="col-md-6"><button type="button" class="btn btn-info"
-                              data-dismiss="modal">Cancel</button></div>
-                          <div class="col-md-6"><button type="button" class="btn btn-danger">Delete</button></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-
-          <hr>
-
-        </div>
-        <!--/tab-pane-->
-
-      </div>
-      <!--/tab-content-->
-      
-    </div>
-    <!--/col-9-->
-  </div>
-  <!--/row-->

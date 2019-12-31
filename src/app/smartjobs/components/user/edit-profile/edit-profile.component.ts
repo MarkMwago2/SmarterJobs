@@ -3,7 +3,7 @@ import {
   OnInit,
   Input,
   forwardRef,
-  NgZone
+  NgZone, ViewChild
 } from '@angular/core';
 import {
   ProfileService
@@ -29,6 +29,7 @@ import {
   NG_VALUE_ACCESSOR,
   NG_VALIDATORS,
   FormGroup,
+  FormBuilder,
   Validator,
   Validators,
   AbstractControl,
@@ -41,121 +42,132 @@ import {
   CloudinaryOptions,
   CloudinaryUploader
 } from 'ng2-cloudinary';
+import { MatPaginator } from '@angular/material';
 
-import {
-  NotifierService
-} from 'angular-notifier';
-
+export interface FormData {
+  name: string;
+  page: number;
+  display: boolean;
+}
 
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.css'],
-  providers: [{
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => EditProfileComponent),
-      multi: true
-    },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => EditProfileComponent),
-      multi: true
-    }
-  ]
 })
 export class EditProfileComponent implements OnInit {
-  private readonly notifier: NotifierService;
+
+  myForm: FormGroup;
+  @ViewChild(MatPaginator, {static: false})
+  paginator: MatPaginator;
+  length: number;
+  pageSize = 4;
+  pageSizeOptions: number[] = [2, 3, 4, 5];
+  hidePageSize = true;
+  showFirstLastButtons = false;
+  pageIndex = 0;
+  pageName: string;
+  @Input() item;
+
+  formData: FormData[] = [];
+  isLastPage = false;
+
+  formValues = {
+    dataValue0: 'field0',
+    dataValue1: 'field1',
+    dataValue2: 'field2',
+    dataValue3: 'field3',
+    dataValue4: 'field4',
+    dataValue5: 'field5',
+    dataValue6: 'field6',
+    dataValue7: 'field7',
+    dataValue8: 'field8',
+    dataValue9: 'field9',
+    dataValue10: 'field10'
+  };
+
 
   constructor(
     private http: HttpClient,
     private prof: ProfileService,
     private authservice: AuthService,
     private router: Router,
-    notifierService: NotifierService
+    private fb: FormBuilder
   ) {
-    this.notifier = notifierService;
-  }
-  data: any[] = [];
-  imageId;
-  publicId;
-  imageUrl;
-
-  uploader: CloudinaryUploader = new CloudinaryUploader(
-    new CloudinaryOptions({
-      cloudName: environment.cloudName,
-      uploadPreset: environment.uploadPreset
-    })
-  );
-
-  loading: any;
-
-  public uploadImageForm: FormGroup = new FormGroup({
-    public_id: new FormControl(this.publicId, [Validators.required]),
-  });
-
-
-  profile: any = {};
-  upload() {
-    this.loading = true;
-    this.uploader.uploadAll();
-    this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
-      const res: any = JSON.parse(response);
-      this.loading = false;
-      this.imageId = res.public_id;
-      const timeTaken = new Date().getTime();
-      this.publicId = this.imageId;
-      this.imageUrl = res.url;
-      console.log(this.imageUrl);
-
-    };
-    this.uploader.onErrorItem = (fileItem, response, status, headers) => {
-      console.info('onErrorItem', fileItem, response, status, headers);
-    };
+    this.myForm = this.fb.group(this.formValues);
   }
 
-  public onTouched: () => void = () => {};
 
-  writeValue(val: any): void {
-    val && this.uploadImageForm.setValue(val, {
-      emitEvent: false
+  ngOnInit() {
+    let indexNo = 0;
+    let pageNo = 0;
+    let i = 0;
+
+    for (const prop in this.formValues) {
+      this.formData.push(this.createFormData(prop, pageNo));
+      indexNo++;
+      i++;
+       // increment page number
+      if (indexNo >= this.pageSize) {
+          indexNo = 0;
+          pageNo++;
+        }
+      }
+    this.length = i;
+    this.setPageFormFieldPaging(this.pageIndex, this.pageSize);
+  }
+
+  createFormData(prop: string, pageNumber: number): FormData {
+    const item: FormData = { name: prop, page: pageNumber, display: true };
+    return item;
+  }
+
+  setPageFormFieldPaging(pageIndex: number, pageSize: number) {
+    const lowerBound: number = ((pageIndex + 1) * pageSize) - pageSize;
+    const upperBound: number = ((pageIndex + 1) * pageSize) - 1;
+    this.formData.forEach((item, index) => {
+    item.display = true;
+    if (index >= lowerBound && index <= upperBound) {
+        item.display = false;
+      }
     });
+    console.log(pageIndex);
+    this.changePageName(pageIndex);
   }
 
-  registerOnChange(fn: any): void {
-    console.log('on change');
-    this.uploadImageForm.valueChanges.subscribe(fn);
+  changePageName(pageIndex) {
+    if (pageIndex === 0) {
+      this.pageName = 'Personal Bio-Data';
+    } else if ( pageIndex === 1) {
+      this.pageName = 'Work Experience';
+    } else if ( pageIndex === 2) {
+      this.pageName = 'Academic Qualification';
+    } else if ( pageIndex === 3) {
+      this.pageName = 'Professional Qualification';
+    } else if ( pageIndex === 4) {
+      this.pageName = 'Special Skills And Talent';
+    } else if ( pageIndex === 5) {
+      this.pageName = 'Membership';
+    } else if ( pageIndex === 1) {
+      this.pageName = 'Availability Status';
+    } else {
+      this.pageName = 'Referees';
+    }
   }
 
-  registerOnTouched(fn: any): void {
-    console.log('on blur');
-    this.onTouched = fn;
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
 
-  setDisabledState ? (isDisabled: boolean) : void {
-    isDisabled ? this.uploadImageForm.disable() : this.uploadImageForm.enable();
+  pageEvent($event) {
+    this.pageSize = $event.pageSize;
+    this.pageIndex = $event.pageIndex;
+    this.setPageFormFieldPaging(this.pageIndex, this.pageSize);
+    this.isLastPage = !this.paginator.hasNextPage();
   }
 
-  validate(c: AbstractControl): ValidationErrors | null {
-    console.log('UploadImage form Validation', c);
-    return this.uploadImageForm.valid ? null : {
-      invalidForm: {
-        valid: false,
-        message: 'uploadImageForm field is invalid'
-      }
-    };
-  }
-
-  ngOnInit() {}
-
-  onSubmit() {
-    this.prof.updateProfile(this.profile).subscribe(
-      res => {
-        console.log('update successful');
-        this.router.navigate(['profile']);
-      }, err => {
-        console.log('update unsuccessful');
-      }
-    );
-  }
+  submitExecuted() {
+    console.log('submit executed ' + this.isLastPage);
+}
 
 }

@@ -43,6 +43,8 @@ import {NgxLoaderIndicatorModule} from 'ngx-loader-indicator';
 
 
 import { MatButtonModule, MatCardModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatSelectModule, } from '@angular/material';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 const MatModules = [
   MatButtonModule,
   MatCardModule,
@@ -91,6 +93,7 @@ import { IntropageComponent } from './smartjobs/components/intropage/intropage.c
     AngularFontAwesomeModule,
     HttpClientModule,
     FormsModule,
+    MatPaginatorModule,
     CloudinaryModule.forRoot(cloudinaryLib, { cloud_name: environment.cloudName, secure: true }),
     ...MatModules,
     ReactiveFormsModule,
