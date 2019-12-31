@@ -2,147 +2,137 @@
 <div class="container bootstrap snippet">
   <div class="row">
     <div class="col-sm-10">
-      <h1>Company name</h1>
+      <h3>Fill in the details of Your Company</h3>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-3">
-      <!--left col-->
+  <div class="d-flex justify-content-center form_container mb-2">
+    <form [formGroup]="accountDetailsForm" novalidate (ngSubmit)="onSubmitAccountDetails(accountDetailsForm.value)"
+      [loader]="isLoading">
 
+      <mat-form-field class="full-width">
+        <input matInput maxlength="25" placeholder="Companyname" formControlName="companyname" required>
+        <mat-error *ngFor="let validation of account_validation_messages.companyname">
+          <mat-error class="error-message"
+            *ngIf="accountDetailsForm.get('companyname').hasError(validation.type) && (accountDetailsForm.get('companyname').dirty || accountDetailsForm.get('companyname').touched)">
+            {{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
 
-      <div class="text-center">
-        <img src="assets/profile/blank-profile-picture-973460_1280.png" class="avatar img-circle img-thumbnail"
-          alt="avatar">
-        <h6>Upload a logo</h6>
-        <div class="custom-file mb-3">
-          <input type="file" class="custom-file-input" id="customFile" name="filename">
-          <label class="custom-file-label" for="customFile">Choose file</label>
-        </div>
-      </div><br>
+      <mat-form-field class="full-width">
+        <input matInput type="email" placeholder="Email" formControlName="email" required>
+        <mat-error *ngFor="let validation of account_validation_messages.email">
+          <mat-error class="error-message"
+            *ngIf="accountDetailsForm.get('email').hasError(validation.type) && (accountDetailsForm.get('email').dirty || accountDetailsForm.get('email').touched)">
+            {{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
 
+      <mat-form-field class="full-width">
+        <input matInput type="text" placeholder="Physical Address" formControlName="physicaladdress" required>
+        <mat-error *ngFor="let validation of account_validation_messages.physicaladdress">
+          <mat-error class="error-message"
+            *ngIf="accountDetailsForm.get('physicaladdress').hasError(validation.type) && (accountDetailsForm.get('physicaladdress').dirty || accountDetailsForm.get('physicaladdress').touched)">
+            {{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
 
-    </div>
-    <!--/col-3-->
-    <div class="col-sm-9">
+      <mat-form-field class="full-width">
+        <input matInput type="text" placeholder="Postal Address" formControlName="postaladdress" required>
+        <mat-error *ngFor="let validation of account_validation_messages.postaladdress">
+          <mat-error class="error-message"
+            *ngIf="accountDetailsForm.get('postaladdress').hasError(validation.type) && (accountDetailsForm.get('postaladdress').dirty || accountDetailsForm.get('postaladdress').touched)">
+            {{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
 
-      <div class="tab-content">
-        <div class="tab-pane active" id="home">
-          <hr>
-          <form class="form" (ngSubmit)="onSubmit()" novalidate id="registrationForm">
-            <div class="form-group">
+      <mat-form-field class="full-width">
+        <input matInput type="text" placeholder="Website" formControlName="website" required>
+        <mat-error *ngFor="let validation of account_validation_messages.website">
+          <mat-error class="error-message"
+            *ngIf="accountDetailsForm.get('website').hasError(validation.type) && (accountDetailsForm.get('website').dirty || accountDetailsForm.get('website').touched)">
+            {{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
 
-              <div class="col-xs-6">
-                <label for="name">
-                  <h4>Company Name</h4>
-                </label>
-                <input type="text" class="form-control" name="name" [(ngModel)]='companyprofile.name' id="name" placeholder="Company name"
-                  title="company name">
-              </div>
-            </div>
-            <div class="form-group">
+      <mat-form-field class="full-width">
+        <input matInput type="number" placeholder="Phone Number" formControlName="phonenumber" required>
+        <mat-error *ngFor="let validation of account_validation_messages.phonenumber">
+          <mat-error class="error-message"
+            *ngIf="accountDetailsForm.get('phonenumber').hasError(validation.type) && (accountDetailsForm.get('phonenumber').dirty || accountDetailsForm.get('phonenumber').touched)">
+            {{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
 
-              <div class="col-xs-6">
-                <label for="location">
-                  <h4>Location</h4>
-                </label>
-                <input type="text" class="form-control" name="location" [(ngModel)]='companyprofile.location' id="location" placeholder="location"
-                  title="location">
-              </div>
-            </div>
+      
+      <mat-form-field class="full-width">
+        <mat-label>Industry</mat-label>
+        <mat-select formControlName="industriy" name="industriy" matInput placeholder="Industry" required>
+          <mat-option *ngFor="let industry of inds" [value]="industry.value" >
+            {{industry.viewValue}}
+          </mat-option>
+        </mat-select>
+        <mat-error class="error-message" *ngIf="accountDetailsForm.controls['industriy'].hasError('required')">Industry is required</mat-error> 
+      </mat-form-field> 
+      
+      <mat-form-field class="full-width">
+        <mat-label>Number of Employees</mat-label>
+        <mat-select formControlName="employees" name="employees" matInput placeholder="Number of Employees" required>
+          <mat-option *ngFor="let employee of employees" [value]="employee.value">
+            {{employee.viewValue}}
+          </mat-option>
+        </mat-select>
+        <mat-error class="error-message"
+            *ngIf="accountDetailsForm.controls['employees'].hasError('required')">
+            Number of Employees is required
+        </mat-error>
+      </mat-form-field>
 
-            <div class="form-group">
+      <mat-form-field class="full-width">
+        <input matInput type="text" placeholder="Contact Person Name" formControlName="contactPersonName" required>
+        <mat-error *ngFor="let validation of account_validation_messages.contactPersonName">
+          <mat-error class="error-message"
+            *ngIf="accountDetailsForm.get('contactPersonName').hasError(validation.type) && (accountDetailsForm.get('contactPersonName').dirty || accountDetailsForm.get('contactPersonName').touched)">
+            {{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
 
-              <div class="col-xs-6">
-                <label for="phone">
-                  <h4>Phone</h4>
-                </label>
-                <input type="number" class="form-control" name="phone" [(ngModel)]='companyprofile.phone_number' id="phone" placeholder="phone number"
-                  title="phone number ">
-              </div>
-            </div>
-            <div class="form-group">
+      <mat-form-field class="full-width">
+        <input matInput type="text" placeholder="Contact Person Title" formControlName="contactPersonTitle" required>
+        <mat-error *ngFor="let validation of account_validation_messages.contactPersonTitle">
+          <mat-error class="error-message"
+            *ngIf="accountDetailsForm.get('contactPersonTitle').hasError(validation.type) && (accountDetailsForm.get('contactPersonTitle').dirty || accountDetailsForm.get('contactPersonTitle').touched)">
+            {{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
 
-              <div class="col-xs-6">
-                <label for="industry">
-                  <h4>Industry Type</h4>
-                </label>
-                <select  class="form-control" id="industry" data-live-search="true" name="industry" [(ngModel)]='companyprofile.industry'>
-                  <option *ngFor="let test of types$ | async"  [value]="test.id">{{test.name}}</option>
-               </select>
-              </div>
-            </div>
+      <mat-form-field class="full-width">
+        <input matInput type="email" placeholder="Contact Person Email" formControlName="contactPersonEmail" required>
+        <mat-error *ngFor="let validation of account_validation_messages.contactPersonEmail">
+          <mat-error class="error-message"
+            *ngIf="accountDetailsForm.get('contactPersonEmail').hasError(validation.type) && (accountDetailsForm.get('contactPersonEmail').dirty || accountDetailsForm.get('contactPersonTitle').touched)">
+            {{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
 
-            <div class="form-group">
-              <div class="col-xs-6">
-                <label for="head_office_address">
-                  <h4>Head Office Address</h4>
-                </label>
-                <input type="text" class="form-control" name="head_office_address" [(ngModel)]='companyprofile.head_office_address' id="head_office_address" placeholder="head_office_address"
-                  title="head_office_address ">
-              </div>
-            </div>
+      <mat-form-field class="full-width">
+        <input matInput type="number" placeholder="Contact Person Phone Number"
+          formControlName="contactPersonPhoneNumber" required>
+        <mat-error *ngFor="let validation of account_validation_messages.contactPersonPhoneNumber">
+          <mat-error class="error-message"
+            *ngIf="accountDetailsForm.get('contactPersonPhoneNumber').hasError(validation.type) && (accountDetailsForm.get('contactPersonPhoneNumber').dirty || accountDetailsForm.get('contactPersonPhoneNumber').touched)">
+            {{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
 
-            <div class="form-group">
+      <div class="mt-2">
+        <div class="d-flex justify-content-center links">
+          <button class="submit-btn" color="primary" mat-raised-button type="submit"
+            [disabled]="!accountDetailsForm.valid">
+            Register
+          </button> </div>
+      </div>
 
-              <div class="col-xs-6">
-                <label for="website_address">
-                  <h4>Website Address</h4>
-                </label>
-                <input type="text" class="form-control" name="dob" [(ngModel)]='companyprofile.website_address' id="dob" placeholder="website_address"
-                  title="website_address ">
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <label for="contact_person">
-                  <h4>Contact Person</h4>
-                </label>
-                <input type="text" class="form-control" name="contact_person" [(ngModel)]='companyprofile.contact_person' id="contact_person" placeholder="contact person"
-                  title="contact_person ">
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <label for="contact_person_title">
-                  <h4>Contact Person Title</h4>
-                </label>
-                <input type="text" class="form-control" name="contact_person_title" [(ngModel)]='companyprofile.contact_person_title' id="contact_person_title" placeholder="contact person title"
-                  title="contact_person_title ">
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <label for="email">
-                  <h4>Email</h4>
-                </label>
-                <input type="email" class="form-control" name="email" [(ngModel)]='companyprofile.contact_email' id="email" placeholder="you@email.com"
-                  title="email.">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="col-xs-6">
-                <label for="services">
-                  <h4>Services Offered</h4>
-                </label>
-                <input type="text" class="form-control" name="services" [(ngModel)]='companyprofile.services_offered' id="services" placeholder="services" title="skills.">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-xs-12">
-                <br>
-                <button class="btn btn-md btn-success mr-2" type="submit"><i class="far fa-save"></i> Create Profile</button>
-              </div>
-            </div>
-          </form>
-        </div>
-        <!--/tab-pane-->      
-    </div>
-    <!--/tab-content-->
+    </form>
   </div>
-  <!--/col-9-->
 </div>
 <!--/row-->
