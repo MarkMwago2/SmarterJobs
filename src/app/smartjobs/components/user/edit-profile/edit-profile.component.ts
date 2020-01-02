@@ -42,8 +42,9 @@ import {
   CloudinaryOptions,
   CloudinaryUploader
 } from 'ng2-cloudinary';
-import { MatPaginator } from '@angular/material';
+import { MatPaginator, MatToolbarModule } from '@angular/material';
 import {MatTooltipModule, MatTooltip} from '@angular/material/tooltip';
+import {MatSelect} from '@angular/material/select';
 
 import {
   Country,
@@ -91,11 +92,149 @@ export class EditProfileComponent implements OnInit {
   formData: FormData[] = [];
   isLastPage = false;
 
+  formValues = {
+    firstname: '',
+    lastname: '',
+    email: '',
+    phonenumber: '',
+    dateofbirth: '',
+    address: '',
+    gender: '',
+    nationality: '',
+    workexperience: '',
+    academicqualifications: '',
+    pqualification: '',
+    skills: '',
+    membership: '',
+    referees: '',
+  };
+  showTab = 1;
+
   genders: Gender[] = [
     {value: 'Female', viewValue: 'Female'},
     {value: 'Male', viewValue: 'Male'},
     {value: 'Rather Not Say', viewValue: 'Rather Not Say'},
   ];
+
+  account_validation_messages = {
+    'companyname': [{
+        type: 'required',
+        message: 'Companyname is required'
+      },
+      {
+        type: 'minlength',
+        message: 'Companyname must be at least 5 characters long'
+      },
+      {
+        type: 'maxlength',
+        message: 'Companyname cannot be more than 25 characters long'
+      },
+      {
+        type: 'pattern',
+        message: 'Your Companyname must contain only letters'
+      },
+      {
+        type: 'validCompanyname',
+        message: 'Your Companyname has already been taken'
+      }
+    ],
+    'lastname': [{
+      type: 'required',
+      message: 'lastname is required'
+    },
+    {
+      type: 'minlength',
+      message: 'lastname must be at least 5 characters long'
+    },
+    {
+      type: 'maxlength',
+      message: 'lastname cannot be more than 25 characters long'
+    },
+    {
+      type: 'pattern',
+      message: 'Your lastname must contain only letters'
+    },
+    {
+      type: 'validlastname',
+      message: 'Your lastname has already been taken'
+    }
+  ],
+    'firstname': [{
+      type: 'required',
+      message: 'firstname is required'
+    },
+    {
+      type: 'minlength',
+      message: 'firstname must be at least 5 characters long'
+    },
+    {
+      type: 'maxlength',
+      message: 'firstname cannot be more than 25 characters long'
+    },
+    {
+      type: 'pattern',
+      message: 'Your firstname must contain only letters'
+    },
+    {
+      type: 'validfirstname',
+      message: 'Your firstname has already been taken'
+    }
+  ],
+    'email': [{
+        type: 'required',
+        message: 'Email is required'
+      },
+      {
+        type: 'pattern',
+        message: 'Enter a valid email'
+      }
+    ],
+    'IDnumber':[{
+      type: 'required',
+      message: 'National Identification is required'
+    }],
+    'nationality': [{
+      type: 'required',
+      message: 'Nationality is required'
+    }],
+    'gender': [{
+      type: 'required',
+      message: 'Gender is required'
+    }],
+    'phonenumber': [{
+      type: 'required',
+      message: 'Phone Number is required'
+    }],
+    'address': [{
+      type: 'required',
+      message: 'Address is required'
+    }],
+    'wCompanyname': [{
+      type: 'required',
+      message: 'Company Name is required'
+    }],
+    'duties': [{
+      type: 'required',
+      message: 'Duties and Responsibility is required'
+    }],
+    'institutionname': [{
+      type: 'required',
+      message: 'Institution name is required'
+    }],
+    'merit': [{
+      type: 'required',
+      message: 'Qualification is required'
+    }],
+    'refereeEmail': [{
+      type: 'pattern',
+      message: 'Enter a valid email'
+    }],
+    'refereePhonenumber': [{
+      type: 'pattern',
+      message: 'Enter a valid phone'
+    }]
+
+  };
 
 
   constructor(
@@ -104,50 +243,8 @@ export class EditProfileComponent implements OnInit {
     private authservice: AuthService,
     private router: Router,
     private fb: FormBuilder
-  ) {
-    this.accountDetailsForm = this.fb.group({
-      firstname: new FormControl('', Validators.compose([
-        UsernameValidator.validUsername,
-        Validators.maxLength(25),
-        Validators.minLength(3),
-        Validators.pattern('^[a-zA-Z ]+$'),
-        Validators.required
-      ])),
-      lastname: new FormControl('', Validators.compose([
-        UsernameValidator.validUsername,
-        Validators.maxLength(25),
-        Validators.minLength(3),
-        Validators.pattern('^[a-zA-Z ]+$'),
-        Validators.required
-      ])),
-      email: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
-      ])),
-      IDnumber: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[0-9]+$'),
-        Validators.maxLength(8),
-        Validators.minLength(7),
-      ])),
-      phonenumber: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern('^((\\+254-?)|0)?[0-9]{10}$'),
-        Validators.maxLength(12),
-        Validators.minLength(10),
-      ])),
-      dateofbirth: new FormControl('', Validators.required),
-      address: new FormControl('', Validators.required),
-      gender: new FormControl('', Validators.required),
-      nationality: new FormControl('', Validators.required),
-      workexperience: this.workExperienceForm,
-      academicqualifications: this.academicQualificationForm,
-      pqualification: new FormControl(''),
-      skills: new FormControl(''),
-      membership: new FormControl(''),
-      referees: this.refereeForm,
-    });
-  }
+  ) {}
+  
 
 
   ngOnInit() {
@@ -172,7 +269,7 @@ export class EditProfileComponent implements OnInit {
 
   createForms() {
     this.workExperienceForm = new FormGroup({
-      companyname: new FormControl('', Validators.compose([
+      wCompanyname: new FormControl('', Validators.compose([
         UsernameValidator.validUsername,
         Validators.maxLength(25),
         Validators.minLength(3),
@@ -223,17 +320,57 @@ export class EditProfileComponent implements OnInit {
       ])),
       refereeAddress: new FormControl('', Validators.required),
       refereeEmail: new FormControl('', Validators.compose([
-        Validators.required,
         Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
       ])),
       refereePhonenumber: new FormControl('', Validators.compose([
-        Validators.required,
         Validators.pattern('^((\\+254-?)|0)?[0-9]{10}$'),
         Validators.maxLength(12),
         Validators.minLength(10),
       ])),
     }, (formGroup: FormGroup) => {
       return formGroup;
+    });
+    this.accountDetailsForm = this.fb.group({
+      firstname: new FormControl('', Validators.compose([
+        UsernameValidator.validUsername,
+        Validators.maxLength(25),
+        Validators.minLength(3),
+        Validators.pattern('^[a-zA-Z ]+$'),
+        Validators.required
+      ])),
+      lastname: new FormControl('', Validators.compose([
+        UsernameValidator.validUsername,
+        Validators.maxLength(25),
+        Validators.minLength(3),
+        Validators.pattern('^[a-zA-Z ]+$'),
+        Validators.required
+      ])),
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
+      ])),
+      IDnumber: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[0-9]+$'),
+        Validators.maxLength(8),
+        Validators.minLength(7),
+      ])),
+      phonenumber: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^((\\+254-?)|0)?[0-9]{10}$'),
+        Validators.maxLength(12),
+        Validators.minLength(10),
+      ])),
+      dateofbirth: new FormControl('', Validators.required),
+      address: new FormControl('', Validators.required),
+      gender: new FormControl('', Validators.required),
+      nationality: new FormControl('', Validators.required),
+      workexperience: this.workExperienceForm,
+      academicQualification: this.academicQualificationForm,
+      pqualification: new FormControl(''),
+      skills: new FormControl(''),
+      membership: new FormControl(''),
+      referees: this.refereeForm,
     });
   }
 
@@ -307,8 +444,10 @@ export class EditProfileComponent implements OnInit {
     this.isLastPage = !this.paginator.hasNextPage();
   }
 
-  submitExecuted() {
-    console.log('submit executed ' + this.isLastPage);
+  onSubmitAccountDetails(value) {
+    console.log(value);
 }
-
+  tabToggle(index) {
+    this.showTab = index;
+  }
 }

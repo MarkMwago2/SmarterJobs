@@ -42,7 +42,7 @@ import { ToastrModule } from 'ngx-toastr';
 import {NgxLoaderIndicatorModule} from 'ngx-loader-indicator';
 
 
-import { MatButtonModule, MatCardModule, MatDatepickerModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatSelectModule, } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatDatepickerModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatSelectModule, MatToolbarModule, MatSidenavModule} from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatNativeDateModule, MatIconModule} from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
@@ -50,6 +50,8 @@ import { MatSelectCountryModule } from '@angular-material-extensions/select-coun
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, SatDatepickerModule } from 'saturn-datepicker';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import {MatTooltipModule, MatTooltip} from '@angular/material/tooltip';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 
 
@@ -66,6 +68,9 @@ const MatModules = [
   MatNativeDateModule,
   MatMomentDateModule,
   MatTooltipModule,
+  MatToolbarModule,
+  FlexLayoutModule,
+  MatSidenavModule,
 ];
 
 
