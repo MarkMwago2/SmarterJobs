@@ -47,10 +47,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatNativeDateModule, MatIconModule} from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, SatDatepickerModule } from 'saturn-datepicker';
+import {  MAT_DATE_LOCALE, SatDatepickerModule } from 'saturn-datepicker';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import {MatTooltipModule, MatTooltip} from '@angular/material/tooltip';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
+import { AppDateAdapter, APP_DATE_FORMATS } from 'src/app/shared/helpers/format-datepicker';
 
 
 
@@ -145,7 +147,8 @@ import { IntropageComponent } from './smartjobs/components/intropage/intropage.c
     ProfileService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
-    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+    {provide: DateAdapter, useClass: AppDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

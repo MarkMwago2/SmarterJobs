@@ -79,36 +79,14 @@ export class EditProfileComponent implements OnInit {
   workExperienceForm: FormGroup;
   academicQualificationForm: FormGroup;
   refereeForm: FormGroup;
-  @ViewChild(MatPaginator, {static: false})
-  paginator: MatPaginator;
-  length: number;
-  pageSize = 3;
-  pageSizeOptions: number[] = [2, 3, 4, 5];
-  hidePageSize = true;
-  showFirstLastButtons = false;
-  pageIndex = 0;
-  pageName: string;
 
   formData: FormData[] = [];
   isLastPage = false;
 
-  formValues = {
-    firstname: '',
-    lastname: '',
-    email: '',
-    phonenumber: '',
-    dateofbirth: '',
-    address: '',
-    gender: '',
-    nationality: '',
-    workexperience: '',
-    academicqualifications: '',
-    pqualification: '',
-    skills: '',
-    membership: '',
-    referees: '',
-  };
   showTab = 1;
+  showRef = 1;
+  showAca = 1;
+  showWex = 1;
 
   genders: Gender[] = [
     {value: 'Female', viewValue: 'Female'},
@@ -117,7 +95,7 @@ export class EditProfileComponent implements OnInit {
   ];
 
   account_validation_messages = {
-    'companyname': [{
+    companyname: [{
         type: 'required',
         message: 'Companyname is required'
       },
@@ -138,7 +116,7 @@ export class EditProfileComponent implements OnInit {
         message: 'Your Companyname has already been taken'
       }
     ],
-    'lastname': [{
+    lastname: [{
       type: 'required',
       message: 'lastname is required'
     },
@@ -159,7 +137,7 @@ export class EditProfileComponent implements OnInit {
       message: 'Your lastname has already been taken'
     }
   ],
-    'firstname': [{
+    firstname: [{
       type: 'required',
       message: 'firstname is required'
     },
@@ -180,7 +158,7 @@ export class EditProfileComponent implements OnInit {
       message: 'Your firstname has already been taken'
     }
   ],
-    'email': [{
+    email: [{
         type: 'required',
         message: 'Email is required'
       },
@@ -189,47 +167,47 @@ export class EditProfileComponent implements OnInit {
         message: 'Enter a valid email'
       }
     ],
-    'IDnumber':[{
+    IDnumber: [{
       type: 'required',
       message: 'National Identification is required'
     }],
-    'nationality': [{
+    nationality: [{
       type: 'required',
       message: 'Nationality is required'
     }],
-    'gender': [{
+    gender: [{
       type: 'required',
       message: 'Gender is required'
     }],
-    'phonenumber': [{
+    phonenumber: [{
       type: 'required',
       message: 'Phone Number is required'
     }],
-    'address': [{
+    address: [{
       type: 'required',
       message: 'Address is required'
     }],
-    'wCompanyname': [{
+    wCompanyname: [{
       type: 'required',
       message: 'Company Name is required'
     }],
-    'duties': [{
+    duties: [{
       type: 'required',
       message: 'Duties and Responsibility is required'
     }],
-    'institutionname': [{
+    institutionname: [{
       type: 'required',
       message: 'Institution name is required'
     }],
-    'merit': [{
+    merit: [{
       type: 'required',
       message: 'Qualification is required'
     }],
-    'refereeEmail': [{
+    refereeEmail: [{
       type: 'pattern',
       message: 'Enter a valid email'
     }],
-    'refereePhonenumber': [{
+    refereePhonenumber: [{
       type: 'pattern',
       message: 'Enter a valid phone'
     }]
@@ -244,27 +222,9 @@ export class EditProfileComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder
   ) {}
-  
-
 
   ngOnInit() {
     this.createForms();
-    let indexNo = 0;
-    let pageNo = 0;Number;
-    let i = 0;
-
-    for (const prop in this.formValues) {
-      this.formData.push(this.createFormData(prop, pageNo));
-      indexNo++;
-      i++;
-       // increment page number
-      if (indexNo >= this.pageSize) {
-          indexNo = 0;
-          pageNo++;
-        }
-      }
-    this.length = i;
-    this.setPageFormFieldPaging(this.pageIndex, this.pageSize);
   }
 
   createForms() {
@@ -279,6 +239,24 @@ export class EditProfileComponent implements OnInit {
       Pstartdate: new FormControl('', Validators.required),
       Penddate: new FormControl('', Validators.required),
       duties: new FormControl('', Validators.required),
+      wCompanyname1: new FormControl('', Validators.compose([
+        UsernameValidator.validUsername,
+        Validators.maxLength(25),
+        Validators.minLength(3),
+        Validators.pattern('^[a-zA-Z ]+$')
+      ])),
+      Pstartdate1: new FormControl(''),
+      Penddate1: new FormControl(''),
+      duties1: new FormControl(''),
+      wCompanyname2: new FormControl('', Validators.compose([
+        UsernameValidator.validUsername,
+        Validators.maxLength(25),
+        Validators.minLength(3),
+        Validators.pattern('^[a-zA-Z ]+$')
+      ])),
+      Pstartdate2: new FormControl(''),
+      Penddate2: new FormControl(''),
+      duties2: new FormControl(''),
     }, (formGroup: FormGroup) => {
       return formGroup;
     });
@@ -293,6 +271,24 @@ export class EditProfileComponent implements OnInit {
       Astartdate: new FormControl('', Validators.required),
       Aenddate: new FormControl('', Validators.required),
       merit: new FormControl('', Validators.required),
+      institutionname1: new FormControl('', Validators.compose([
+        UsernameValidator.validUsername,
+        Validators.maxLength(25),
+        Validators.minLength(3),
+        Validators.pattern('^[a-zA-Z ]+$'),
+      ])),
+      Astartdate1: new FormControl(''),
+      Aenddate1: new FormControl(''),
+      merit1: new FormControl(''),
+      institutionname2: new FormControl('', Validators.compose([
+        UsernameValidator.validUsername,
+        Validators.maxLength(25),
+        Validators.minLength(3),
+        Validators.pattern('^[a-zA-Z ]+$'),
+      ])),
+      Astartdate2: new FormControl(''),
+      Aenddate2: new FormControl(''),
+      merit2: new FormControl(''),
     }, (formGroup: FormGroup) => {
       return formGroup;
     });
@@ -323,6 +319,60 @@ export class EditProfileComponent implements OnInit {
         Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
       ])),
       refereePhonenumber: new FormControl('', Validators.compose([
+        Validators.pattern('^((\\+254-?)|0)?[0-9]{10}$'),
+        Validators.maxLength(12),
+        Validators.minLength(10),
+      ])),
+      refereetitle1: new FormControl('', Validators.compose([
+        UsernameValidator.validUsername,
+        Validators.maxLength(25),
+        Validators.minLength(3),
+        Validators.pattern('^[a-zA-Z ]+$'),
+      ])),
+      refereefname1: new FormControl('', Validators.compose([
+        UsernameValidator.validUsername,
+        Validators.maxLength(25),
+        Validators.minLength(3),
+        Validators.pattern('^[a-zA-Z ]+$'),
+      ])),
+      refereelname1: new FormControl('', Validators.compose([
+        UsernameValidator.validUsername,
+        Validators.maxLength(25),
+        Validators.minLength(3),
+        Validators.pattern('^[a-zA-Z ]+$'),
+      ])),
+      refereeAddress1: new FormControl(''),
+      refereeEmail1: new FormControl('', Validators.compose([
+        Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
+      ])),
+      refereePhonenumber1: new FormControl('', Validators.compose([
+        Validators.pattern('^((\\+254-?)|0)?[0-9]{10}$'),
+        Validators.maxLength(12),
+        Validators.minLength(10),
+      ])),
+      refereetitle2: new FormControl('', Validators.compose([
+        UsernameValidator.validUsername,
+        Validators.maxLength(25),
+        Validators.minLength(3),
+        Validators.pattern('^[a-zA-Z ]+$')
+      ])),
+      refereefname2: new FormControl('', Validators.compose([
+        UsernameValidator.validUsername,
+        Validators.maxLength(25),
+        Validators.minLength(3),
+        Validators.pattern('^[a-zA-Z ]+$')
+      ])),
+      refereelname2: new FormControl('', Validators.compose([
+        UsernameValidator.validUsername,
+        Validators.maxLength(25),
+        Validators.minLength(3),
+        Validators.pattern('^[a-zA-Z ]+$')
+      ])),
+      refereeAddress2: new FormControl(''),
+      refereeEmail2: new FormControl('', Validators.compose([
+        Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
+      ])),
+      refereePhonenumber2: new FormControl('', Validators.compose([
         Validators.pattern('^((\\+254-?)|0)?[0-9]{10}$'),
         Validators.maxLength(12),
         Validators.minLength(10),
@@ -374,80 +424,30 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
-  createFormData(prop: string, pageNumber: number): FormData {
-    const item: FormData = { name: prop, page: pageNumber, display: true };
-    return item;
-  }
-
-  setPageFormFieldPaging(pageIndex: number, pageSize: number) {
-    const lowerBound: number = ((pageIndex + 1) * pageSize) - pageSize;
-    const upperBound: number = ((pageIndex + 1) * pageSize) - 1;
-    this.formData.forEach((item, index) => {
-    item.display = true;
-    if (index >= lowerBound && index <= upperBound) {
-        item.display = false;
-      }
-    });
-    console.log(pageIndex);
-    this.changePageName(pageIndex);
-    // this.changePageSize(pageIndex);
-  }
-
-  changePageSize(pageIndex) {
-    if (pageIndex === 0) {
-      this.pageSize = 3;
-    } else if ( pageIndex === 1) {
-      this.pageSize = 4;
-    } else if ( pageIndex === 2) {
-      this.pageSize = 5;
-    } else if ( pageIndex === 3) {
-      this.pageSize = 4;
-    } else if ( pageIndex === 4) {
-      this.pageSize = 4;
-    } else if ( pageIndex === 5) {
-      this.pageSize = 4;
-    } else if ( pageIndex === 1) {
-      this.pageSize = 4;
-    } else {
-      this.pageSize = 1;
-    }
-  }
-
-  changePageName(pageIndex) {
-    if (pageIndex === 0) {
-      this.pageName = 'Personal Bio-Data';
-    } else if ( pageIndex === 1) {
-      this.pageName = 'Work Experience';
-    } else if ( pageIndex === 2) {
-      this.pageName = 'Academic Qualification';
-    } else if ( pageIndex === 3) {
-      this.pageName = 'Professional Qualification';
-    } else if ( pageIndex === 4) {
-      this.pageName = 'Special Skills And Talent';
-    } else if ( pageIndex === 5) {
-      this.pageName = 'Membership';
-    } else if ( pageIndex === 1) {
-      this.pageName = 'Availability Status';
-    } else {
-      this.pageName = 'Referees';
-    }
-  }
-
-  setPageSizeOptions(setPageSizeOptionsInput: string) {
-    this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
-  }
-
-  pageEvent($event) {
-    this.pageSize = $event.pageSize;
-    this.pageIndex = $event.pageIndex;
-    this.setPageFormFieldPaging(this.pageIndex, this.pageSize);
-    this.isLastPage = !this.paginator.hasNextPage();
-  }
-
   onSubmitAccountDetails(value) {
     console.log(value);
-}
+  }
   tabToggle(index) {
     this.showTab = index;
+  }
+  showReferee() {
+    if (this.showRef < 3) {
+      this.showRef++;
+    }
+    console.log(this.showRef);
+  }
+  showAcademia() {
+    if (this.showAca < 3) {
+      this.showAca++;
+    }
+    this.showAca;
+    console.log(this.showAca);
+  }
+  showWorkEx() {
+    if (this.showWex < 3) {
+      this.showWex++;
+    }
+    this.showWex;
+    console.log(this.showWex);
   }
 }
