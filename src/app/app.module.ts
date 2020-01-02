@@ -42,8 +42,16 @@ import { ToastrModule } from 'ngx-toastr';
 import {NgxLoaderIndicatorModule} from 'ngx-loader-indicator';
 
 
-import { MatButtonModule, MatCardModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatSelectModule, } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatDatepickerModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatSelectModule, } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatNativeDateModule, MatIconModule} from '@angular/material';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, SatDatepickerModule } from 'saturn-datepicker';
+import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import {MatTooltipModule, MatTooltip} from '@angular/material/tooltip';
+
+
 
 const MatModules = [
   MatButtonModule,
@@ -53,6 +61,11 @@ const MatModules = [
   MatCheckboxModule,
   MatInputModule,
   MatSelectModule,
+  MatIconModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatMomentDateModule,
+  MatTooltipModule,
 ];
 
 
@@ -94,6 +107,8 @@ import { IntropageComponent } from './smartjobs/components/intropage/intropage.c
     HttpClientModule,
     FormsModule,
     MatPaginatorModule,
+    MatSelectCountryModule,
+    SatDatepickerModule,
     CloudinaryModule.forRoot(cloudinaryLib, { cloud_name: environment.cloudName, secure: true }),
     ...MatModules,
     ReactiveFormsModule,
@@ -123,7 +138,9 @@ import { IntropageComponent } from './smartjobs/components/intropage/intropage.c
     IndustryService,
     LoaderService,
     ProfileService,
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

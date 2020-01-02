@@ -1,7 +1,7 @@
 import {
   Component,
   OnInit,
-  Input,
+  Input, ViewEncapsulation,
   forwardRef,
   NgZone, ViewChild
 } from '@angular/core';
@@ -43,21 +43,41 @@ import {
   CloudinaryUploader
 } from 'ng2-cloudinary';
 import { MatPaginator } from '@angular/material';
+import {MatTooltipModule, MatTooltip} from '@angular/material/tooltip';
 
+import {
+  Country,
+  UsernameValidator,
+  PasswordValidator,
+  ParentErrorStateMatcher,
+  PhoneValidator
+} from '../../../../shared/validators';
 export interface FormData {
   name: string;
   page: number;
   display: boolean;
 }
 
+export interface Gender {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.css'],
+  encapsulation: ViewEncapsulation.None
+
 })
 export class EditProfileComponent implements OnInit {
 
-  myForm: FormGroup;
+  parentErrorStateMatcher = new ParentErrorStateMatcher();
+
+  accountDetailsForm: FormGroup;
+  workExperienceForm: FormGroup;
+  academicQualificationForm: FormGroup;
+  refereeForm: FormGroup;
   @ViewChild(MatPaginator, {static: false})
   paginator: MatPaginator;
   length: number;
@@ -67,24 +87,15 @@ export class EditProfileComponent implements OnInit {
   showFirstLastButtons = false;
   pageIndex = 0;
   pageName: string;
-  @Input() item;
 
   formData: FormData[] = [];
   isLastPage = false;
 
-  formValues = {
-    dataValue0: 'field0',
-    dataValue1: 'field1',
-    dataValue2: 'field2',
-    dataValue3: 'field3',
-    dataValue4: 'field4',
-    dataValue5: 'field5',
-    dataValue6: 'field6',
-    dataValue7: 'field7',
-    dataValue8: 'field8',
-    dataValue9: 'field9',
-    dataValue10: 'field10'
-  };
+  genders: Gender[] = [
+    {value: 'Female', viewValue: 'Female'},
+    {value: 'Male', viewValue: 'Male'},
+    {value: 'Rather Not Say', viewValue: 'Rather Not Say'},
+  ];
 
 
   constructor(
@@ -94,13 +105,55 @@ export class EditProfileComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder
   ) {
-    this.myForm = this.fb.group(this.formValues);
+    this.accountDetailsForm = this.fb.group({
+      firstname: new FormControl('', Validators.compose([
+        UsernameValidator.validUsername,
+        Validators.maxLength(25),
+        Validators.minLength(3),
+        Validators.pattern('^[a-zA-Z ]+$'),
+        Validators.required
+      ])),
+      lastname: new FormControl('', Validators.compose([
+        UsernameValidator.validUsername,
+        Validators.maxLength(25),
+        Validators.minLength(3),
+        Validators.pattern('^[a-zA-Z ]+$'),
+        Validators.required
+      ])),
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
+      ])),
+      IDnumber: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[0-9]+$'),
+        Validators.maxLength(8),
+        Validators.minLength(7),
+      ])),
+      phonenumber: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^((\\+254-?)|0)?[0-9]{10}$'),
+        Validators.maxLength(12),
+        Validators.minLength(10),
+      ])),
+      dateofbirth: new FormControl('', Validators.required),
+      address: new FormControl('', Validators.required),
+      gender: new FormControl('', Validators.required),
+      nationality: new FormControl('', Validators.required),
+      workexperience: this.workExperienceForm,
+      academicqualifications: this.academicQualificationForm,
+      pqualification: new FormControl(''),
+      skills: new FormControl(''),
+      membership: new FormControl(''),
+      referees: this.refereeForm,
+    });
   }
 
 
   ngOnInit() {
+    this.createForms();
     let indexNo = 0;
-    let pageNo = 0;
+    let pageNo = 0;Number;
     let i = 0;
 
     for (const prop in this.formValues) {
@@ -115,6 +168,73 @@ export class EditProfileComponent implements OnInit {
       }
     this.length = i;
     this.setPageFormFieldPaging(this.pageIndex, this.pageSize);
+  }
+
+  createForms() {
+    this.workExperienceForm = new FormGroup({
+      companyname: new FormControl('', Validators.compose([
+        UsernameValidator.validUsername,
+        Validators.maxLength(25),
+        Validators.minLength(3),
+        Validators.pattern('^[a-zA-Z ]+$'),
+        Validators.required
+      ])),
+      Pstartdate: new FormControl('', Validators.required),
+      Penddate: new FormControl('', Validators.required),
+      duties: new FormControl('', Validators.required),
+    }, (formGroup: FormGroup) => {
+      return formGroup;
+    });
+    this.academicQualificationForm = new FormGroup({
+      institutionname: new FormControl('', Validators.compose([
+        UsernameValidator.validUsername,
+        Validators.maxLength(25),
+        Validators.minLength(3),
+        Validators.pattern('^[a-zA-Z ]+$'),
+        Validators.required
+      ])),
+      Astartdate: new FormControl('', Validators.required),
+      Aenddate: new FormControl('', Validators.required),
+      merit: new FormControl('', Validators.required),
+    }, (formGroup: FormGroup) => {
+      return formGroup;
+    });
+    this.refereeForm = new FormGroup({
+      refereetitle: new FormControl('', Validators.compose([
+        UsernameValidator.validUsername,
+        Validators.maxLength(25),
+        Validators.minLength(3),
+        Validators.pattern('^[a-zA-Z ]+$'),
+        Validators.required
+      ])),
+      refereefname: new FormControl('', Validators.compose([
+        UsernameValidator.validUsername,
+        Validators.maxLength(25),
+        Validators.minLength(3),
+        Validators.pattern('^[a-zA-Z ]+$'),
+        Validators.required
+      ])),
+      refereelname: new FormControl('', Validators.compose([
+        UsernameValidator.validUsername,
+        Validators.maxLength(25),
+        Validators.minLength(3),
+        Validators.pattern('^[a-zA-Z ]+$'),
+        Validators.required
+      ])),
+      refereeAddress: new FormControl('', Validators.required),
+      refereeEmail: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
+      ])),
+      refereePhonenumber: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^((\\+254-?)|0)?[0-9]{10}$'),
+        Validators.maxLength(12),
+        Validators.minLength(10),
+      ])),
+    }, (formGroup: FormGroup) => {
+      return formGroup;
+    });
   }
 
   createFormData(prop: string, pageNumber: number): FormData {
