@@ -180,7 +180,20 @@ export class EditProfileComponent implements OnInit {
     phonenumber: [{
       type: 'required',
       message: 'Phone Number is required'
-    }],
+    },
+    {
+      type: 'minlength',
+      message: 'phone number cannot be less than 10 digits long'
+    },
+    {
+      type: 'maxlength',
+      message: 'phone number cannot be more than 12 digits long'
+    },
+    {
+      type: 'pattern',
+      message: 'Enter a valid phone number starting with +254 or 07'
+    }
+    ],
     address: [{
       type: 'required',
       message: 'Address is required'
@@ -188,6 +201,22 @@ export class EditProfileComponent implements OnInit {
     wCompanyname: [{
       type: 'required',
       message: 'Company Name is required'
+    },
+    {
+      type: 'minlength',
+      message: 'Company must be at least 3 characters long'
+    },
+    {
+      type: 'maxlength',
+      message: 'Company cannot be more than 25 characters long'
+    },
+    {
+      type: 'pattern',
+      message: 'Your Company must contain only letters'
+    },
+    {
+      type: 'validCompany',
+      message: 'Your Company has already been taken'
     }],
     duties: [{
       type: 'required',
@@ -219,6 +248,9 @@ export class EditProfileComponent implements OnInit {
     }]
 
   };
+
+  keRegexPattern = /^(?:254|\+254|0)?(7(?:(?:[129][0-9])|(?:0[0-8])|(4[0-1]))[0-9]{6})$/;
+  emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 
   constructor(
@@ -264,8 +296,6 @@ export class EditProfileComponent implements OnInit {
       Pstartdate2: new FormControl(''),
       Penddate2: new FormControl(''),
       duties2: new FormControl(''),
-    }, (formGroup: FormGroup) => {
-      return formGroup;
     });
     this.academicQualificationForm = new FormGroup({
       institutionname: new FormControl('', Validators.compose([
@@ -296,8 +326,6 @@ export class EditProfileComponent implements OnInit {
       Astartdate2: new FormControl(''),
       Aenddate2: new FormControl(''),
       merit2: new FormControl(''),
-    }, (formGroup: FormGroup) => {
-      return formGroup;
     });
     this.refereeForm = new FormGroup({
       refereetitle: new FormControl('', Validators.compose([
@@ -321,12 +349,13 @@ export class EditProfileComponent implements OnInit {
         Validators.pattern('^[a-zA-Z ]+$'),
         Validators.required
       ])),
+      refereeComp: new FormControl('', Validators.required),
       refereeAddress: new FormControl('', Validators.required),
       refereeEmail: new FormControl('', Validators.compose([
-        Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
+        Validators.pattern(this.emailPattern)
       ])),
       refereePhonenumber: new FormControl('', Validators.compose([
-        Validators.pattern('^((\\+254-?)|0)?[0-9]{10}$'),
+        Validators.pattern(this.keRegexPattern),
         Validators.maxLength(12),
         Validators.minLength(10),
       ])),
@@ -349,11 +378,12 @@ export class EditProfileComponent implements OnInit {
         Validators.pattern('^[a-zA-Z ]+$'),
       ])),
       refereeAddress1: new FormControl(''),
+      refereeComp1: new FormControl(''),
       refereeEmail1: new FormControl('', Validators.compose([
-        Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
+        Validators.pattern(this.emailPattern)
       ])),
       refereePhonenumber1: new FormControl('', Validators.compose([
-        Validators.pattern('^((\\+254-?)|0)?[0-9]{10}$'),
+        Validators.pattern(this.keRegexPattern),
         Validators.maxLength(12),
         Validators.minLength(10),
       ])),
@@ -376,16 +406,15 @@ export class EditProfileComponent implements OnInit {
         Validators.pattern('^[a-zA-Z ]+$')
       ])),
       refereeAddress2: new FormControl(''),
+      refereeComp2: new FormControl(''),
       refereeEmail2: new FormControl('', Validators.compose([
-        Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
+        Validators.pattern(this.emailPattern)
       ])),
       refereePhonenumber2: new FormControl('', Validators.compose([
-        Validators.pattern('^((\\+254-?)|0)?[0-9]{10}$'),
+        Validators.pattern(this.keRegexPattern),
         Validators.maxLength(12),
         Validators.minLength(10),
       ])),
-    }, (formGroup: FormGroup) => {
-      return formGroup;
     });
     this.accountDetailsForm = this.fb.group({
       firstname: new FormControl('', Validators.compose([
@@ -404,7 +433,7 @@ export class EditProfileComponent implements OnInit {
       ])),
       email: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
+        Validators.pattern(this.emailPattern),
       ])),
       IDnumber: new FormControl('', Validators.compose([
         Validators.required,
@@ -414,14 +443,13 @@ export class EditProfileComponent implements OnInit {
       ])),
       phonenumber: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.pattern('^((\\+254-?)|0)?[0-9]{10}$'),
+        Validators.pattern(this.keRegexPattern),
         Validators.maxLength(12),
         Validators.minLength(10),
       ])),
       dateofbirth: new FormControl('', Validators.required),
       address: new FormControl('', Validators.required),
       gender: new FormControl('', Validators.required),
-      nationality: new FormControl('', Validators.required),
       workexperience: this.workExperienceForm,
       academicQualification: this.academicQualificationForm,
       pqualification: new FormControl(''),

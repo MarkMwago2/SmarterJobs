@@ -443,6 +443,10 @@
         <mat-form-field class="full-width">
           <input matInput type="text" placeholder="Title" matTooltip="Enter the title of the referee" formControlName="refereetitle">
         </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Company" formControlName="refereeComp"
+              matTooltip="Enter the title of the referee works at">
+          </mat-form-field>
 
         <table class="full-width" cellspacing="0">
           <tr>
@@ -492,6 +496,10 @@
         <div *ngIf="showRef == 2 || showRef == 3">
           <mat-form-field class="full-width">
             <input matInput type="text" placeholder="Title" formControlName="refereetitle1" matTooltip="Enter the title of the referee">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Company" formControlName="refereeComp1"
+              matTooltip="Enter the title of the referee works at" required>
           </mat-form-field>
 
           <table class="full-width" cellspacing="0">
@@ -543,6 +551,10 @@
         <div *ngIf="showRef == 3">
           <mat-form-field class="full-width">
             <input matInput type="text" placeholder="Title" formControlName="refereetitle2" matTooltip="Enter the title of the referee">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Company" formControlName="refereeComp2"
+              matTooltip="Enter the title of the referee works at">
           </mat-form-field>
 
           <table class="full-width" cellspacing="0">

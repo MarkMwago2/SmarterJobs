@@ -264,8 +264,6 @@ export class CreateProfileComponent implements OnInit {
       Pstartdate2: new FormControl(''),
       Penddate2: new FormControl(''),
       duties2: new FormControl(''),
-    }, (formGroup: FormGroup) => {
-      return formGroup;
     });
     this.academicQualificationForm = new FormGroup({
       institutionname: new FormControl('', Validators.compose([
@@ -296,8 +294,6 @@ export class CreateProfileComponent implements OnInit {
       Astartdate2: new FormControl(''),
       Aenddate2: new FormControl(''),
       merit2: new FormControl(''),
-    }, (formGroup: FormGroup) => {
-      return formGroup;
     });
     this.refereeForm = new FormGroup({
       refereetitle: new FormControl('', Validators.compose([
@@ -322,6 +318,7 @@ export class CreateProfileComponent implements OnInit {
         Validators.required
       ])),
       refereeAddress: new FormControl('', Validators.required),
+      refereeComp: new FormControl('', Validators.required),
       refereeEmail: new FormControl('', Validators.compose([
         Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
       ])),
@@ -349,6 +346,7 @@ export class CreateProfileComponent implements OnInit {
         Validators.pattern('^[a-zA-Z ]+$'),
       ])),
       refereeAddress1: new FormControl(''),
+      refereeComp1: new FormControl(''),
       refereeEmail1: new FormControl('', Validators.compose([
         Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
       ])),
@@ -376,6 +374,7 @@ export class CreateProfileComponent implements OnInit {
         Validators.pattern('^[a-zA-Z ]+$')
       ])),
       refereeAddress2: new FormControl(''),
+      refereeComp2: new FormControl(''),
       refereeEmail2: new FormControl('', Validators.compose([
         Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
       ])),
@@ -384,8 +383,6 @@ export class CreateProfileComponent implements OnInit {
         Validators.maxLength(12),
         Validators.minLength(10),
       ])),
-    }, (formGroup: FormGroup) => {
-      return formGroup;
     });
     this.accountDetailsForm = this.fb.group({
       firstname: new FormControl('', Validators.compose([
@@ -421,7 +418,6 @@ export class CreateProfileComponent implements OnInit {
       dateofbirth: new FormControl('', Validators.required),
       address: new FormControl('', Validators.required),
       gender: new FormControl('', Validators.required),
-      nationality: new FormControl('', Validators.required),
       workexperience: this.workExperienceForm,
       academicQualification: this.academicQualificationForm,
       pqualification: new FormControl(''),
