@@ -45,7 +45,9 @@ import {
 import { MatPaginator, MatToolbarModule } from '@angular/material';
 import {MatTooltipModule, MatTooltip} from '@angular/material/tooltip';
 import {MatSelect} from '@angular/material/select';
-
+import {
+  ToastrService
+} from 'ngx-toastr';
 import {
   Country,
   UsernameValidator,
@@ -53,11 +55,7 @@ import {
   ParentErrorStateMatcher,
   PhoneValidator
 } from '../../../../shared/validators';
-export interface FormData {
-  name: string;
-  page: number;
-  display: boolean;
-}
+
 
 export interface Gender {
   value: string;
@@ -80,13 +78,13 @@ export class EditProfileComponent implements OnInit {
   academicQualificationForm: FormGroup;
   refereeForm: FormGroup;
 
-  formData: FormData[] = [];
-  isLastPage = false;
-
   showTab = 1;
   showRef = 1;
   showAca = 1;
   showWex = 1;
+
+  isLoading: boolean;
+
 
   genders: Gender[] = [
     {value: 'Female', viewValue: 'Female'},
@@ -210,6 +208,14 @@ export class EditProfileComponent implements OnInit {
     refereePhonenumber: [{
       type: 'pattern',
       message: 'Enter a valid phone'
+    }],
+    startingdate: [{
+      type: 'pattern',
+      message: 'Starting Date is required'
+    }],
+    endingdate: [{
+      type: 'pattern',
+      message: 'Ending date is required'
     }]
 
   };
@@ -220,7 +226,8 @@ export class EditProfileComponent implements OnInit {
     private prof: ProfileService,
     private authservice: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit() {
@@ -449,5 +456,23 @@ export class EditProfileComponent implements OnInit {
     }
     this.showWex;
     console.log(this.showWex);
+  }
+  showSuccess(firstname) {
+    this.toastr.success(firstname + '\'s' + 'profile has been updated successfully', 'Update Successful!', {
+      progressAnimation: 'increasing',
+      timeOut: 2000,
+      tapToDismiss: true,
+      easing: 'ease-in'
+    });
+    this.isLoading = false;
+  }
+  showFailure() {
+    this.toastr.error('profile has been not updated', 'Update Unsuccessful!', {
+      progressAnimation: 'increasing',
+      timeOut: 2000,
+      tapToDismiss: true,
+      easing: 'ease-in'
+    });
+    this.isLoading = false;
   }
 }
