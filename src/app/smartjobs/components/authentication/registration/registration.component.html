@@ -8,33 +8,70 @@
         </div>
       </div>
       <div class="d-flex justify-content-center form_container">
-        <form>
-          <h3 class="login-header">Sign Up</h3>
-          <div class="input-group mb-2">
-            <div class="input-group-append">
-              <span class="input-group-text"><i class="fas fa-user"></i></span>
-            </div>
-            <input type="text" name="" #username class="form-control input_user" value="" placeholder="username">
+
+        <form [formGroup]="accountDetailsForm" novalidate (ngSubmit)="onSubmitAccountDetails(accountDetailsForm.value)" [loader]="isLoading">
+
+          <mat-form-field class="full-width">
+            <input matInput maxlength="25" placeholder="Username" formControlName="username" required>
+            <mat-error *ngFor="let validation of account_validation_messages.username">
+              <mat-error class="error-message"
+                *ngIf="accountDetailsForm.get('username').hasError(validation.type) && (accountDetailsForm.get('username').dirty || accountDetailsForm.get('username').touched)">
+                {{validation.message}}</mat-error>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <input matInput type="email" placeholder="Email" formControlName="email" required>
+            <mat-error *ngFor="let validation of account_validation_messages.email">
+              <mat-error class="error-message"
+                *ngIf="accountDetailsForm.get('email').hasError(validation.type) && (accountDetailsForm.get('email').dirty || accountDetailsForm.get('email').touched)">
+                {{validation.message}}</mat-error>
+            </mat-error>
+          </mat-form-field>
+
+
+          <div formGroupName="matching_passwords">
+            <mat-form-field class="full-width">
+              <input matInput type="password" placeholder="Password" formControlName="password" required>
+              <mat-error *ngFor="let validation of account_validation_messages.password">
+                <mat-error class="error-message"
+                  *ngIf="accountDetailsForm.get('matching_passwords').get('password').hasError(validation.type) && (accountDetailsForm.get('matching_passwords').get('password').dirty || accountDetailsForm.get('matching_passwords').get('password').touched)">
+                  {{validation.message}}</mat-error>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+              <input matInput type="password" placeholder="Confirm Password" formControlName="confirm_password"
+                [errorStateMatcher]="parentErrorStateMatcher" required>
+              <mat-error *ngFor="let validation of account_validation_messages.confirm_password">
+                <mat-error class="error-message"
+                  *ngIf="(accountDetailsForm.get('matching_passwords').get('confirm_password').hasError(validation.type)|| accountDetailsForm.get('matching_passwords').hasError(validation.type)) && (accountDetailsForm.get('matching_passwords').get('confirm_password').dirty || accountDetailsForm.get('matching_passwords').get('confirm_password').touched)">
+                  {{validation.message}}</mat-error>
+              </mat-error>
+            </mat-form-field>
+
           </div>
-          <div class="input-group mb-2">
-            <div class="input-group-append">
-              <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-            </div>
-            <input type="email" name="" #email class="form-control input_user" value="" placeholder="email">
+
+          <mat-checkbox formControlName="terms">
+          I accept<a [routerLink]="['/#']" class="ml-2">terms and conditions</a>
+          </mat-checkbox>
+          <mat-error *ngFor="let validation of account_validation_messages.terms">
+            <mat-error class="error-message"
+              *ngIf="accountDetailsForm.get('terms').hasError(validation.type) && (accountDetailsForm.get('terms').dirty || accountDetailsForm.get('terms').touched)">
+              {{validation.message}}</mat-error>
+          </mat-error>
+
+          <div class="mt-2">
+            <div class="d-flex justify-content-center links">
+              <button class="submit-btn" color="primary" mat-raised-button type="submit"
+                [disabled]="!accountDetailsForm.valid">
+                Register
+              </button> </div>
           </div>
-          
-          <div class="input-group mb-2">
-            <div class="input-group-append">
-              <span class="input-group-text"><i class="fas fa-key"></i></span>
-            </div>
-            <input type="password" name="" class="form-control input_pass" value="" placeholder="password" #password>
-          </div>
-          <div class="d-flex justify-content-center mt-3 login_container">
-            <button type="button" name="button" class="btn login_btn" (click)="register(username.value, email.value, password.value)">Sign Up</button>
-          </div>
+
         </form>
       </div>
-      <div class="mt-2">
+      <div class="mt-2 mb-2">
         <div class="d-flex justify-content-center links">
           Already have an account? <a [routerLink]="['/sign-in']" class="ml-2">Sign In</a>
         </div>

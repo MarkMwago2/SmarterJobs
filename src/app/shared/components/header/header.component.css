@@ -3,7 +3,7 @@
     border-radius: 4px;
 }
 .form-control:focus {
-    border-color: #F05E23;
+    border-color: #4159B5;
     box-shadow: 0 0 8px rgba(0,0,0,0.1);
 }
 .navbar-header.col {
@@ -23,16 +23,16 @@
 }
 .navbar .navbar-brand b {
     font-weight: bold;
-    color: #F05E23;	
+    color: #4159B5;	
 }
 .navbar ul.nav li a {
     color: #888;
 }
 .navbar ul.nav li a:hover, .navbar ul.nav li a:focus {
-    color: #F05E23 !important;
+    color: #4159B5 !important;
 }
 .navbar ul.nav li.active > a, .navbar ul.nav li.open > a {
-    color: #F05E23 !important;
+    color: #4159B5 !important;
     background: transparent !important;
 }
 .search-box {
@@ -48,8 +48,8 @@
     border-radius: 2px;
 }
 .search-box .input-group-btn .btn {
-    border-color: #F05E23;
-    background: #F05E23;
+    border-color: #4159B5;
+    background: #4159B5;
     outline: none;
 }
 .navbar .nav-item i {

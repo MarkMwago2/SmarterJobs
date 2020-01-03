@@ -121,3 +121,104 @@
 .modal-confirm .btn-danger:focus {
   background: #ee3535;
 }
+
+/* Pagination CSS */
+.mat-paginator-container {
+  
+}
+
+/* mat-card-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+mat-form-field[hidden] {
+  display: none;
+}
+
+.mat-paginator-range-label {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: none !important;
+  background: blue;
+  display: inline;
+}
+
+form {
+  padding: 40px;
+  width: 70%;
+}
+
+.nonFooter {
+  min-height: 100%;
+  position: relative;
+  /* Firefox */
+  min-height: -moz-calc(100% - 100px);
+  /* WebKit */
+  min-height: -webkit-calc(100% - 100px);
+  /* Opera */
+  min-height: -o-calc(100% - 100px);
+  /* Standard */
+  min-height: calc(100% - 100px);
+  margin-left: 20px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.form_container {
+  padding-bottom: 10px;
+}
+/* span {
+  font-size: 10px;
+} */
+
+/* ToolBar CSS */
+.companyName{
+  font-size: 150%;
+}
+
+.mat-toolbar{
+height: 7vh;
+}
+
+div {
+  overflow: inherit;
+}
+
+.mat-sidenav-container{
+background-color: lightskyblue;
+min-height: 93vh !important;
+}
+
+a{
+  text-decoration: none;
+  font-size: 110%;
+  white-space: normal;
+}
+
+button{
+  font-size: 110%;
+  min-width: min-content;
+}
+
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-sidenav-content{
+    font-size: 200%;
+    text-align: center;
+}
+.mat-toolbar.mat-primary {
+  background: #007bff;
+  color: #fff;
+}
+.position-fixed {
+  position:absolute; top:7%; bottom:5%; left:0; right: 0; display: flex; flex-direction: row;z-index: 999;}
