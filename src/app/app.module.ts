@@ -33,6 +33,7 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 
 import { LoaderService } from './smartjobs/services/loader.service';
 import { ProfileService } from './smartjobs/services/profile.service';
+import { JobsService } from './smartjobs/services/jobs.service';
 import { IndustryService } from './smartjobs/services/industry.service';
 import { LoaderInterceptor } from './smartjobs/interceptors/loader.interceptor';
 import { MergePipe } from './shared/pipes/merge.pipe';
@@ -42,7 +43,8 @@ import { ToastrModule } from 'ngx-toastr';
 import {NgxLoaderIndicatorModule} from 'ngx-loader-indicator';
 
 
-import { MatButtonModule, MatCardModule, MatDatepickerModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatSelectModule, MatToolbarModule, MatSidenavModule} from '@angular/material';
+import { MatButtonModule, MatCardModule, MatDatepickerModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatSelectModule, MatToolbarModule, MatSidenavModule, MatChipsModule, MatRadioModule,MatBadgeModule,MatListModule,
+MatGridListModule,MatFormFieldModule, MatTableModule, } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatNativeDateModule, MatIconModule} from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
@@ -73,6 +75,8 @@ const MatModules = [
   MatToolbarModule,
   FlexLayoutModule,
   MatSidenavModule,
+  MatChipsModule, MatRadioModule,MatBadgeModule,MatListModule,
+  MatGridListModule,MatFormFieldModule, MatTableModule,
 ];
 
 
@@ -153,6 +157,7 @@ import { ViewAllJobsComponent } from './smartjobs/components/jobs/view-all-jobs/
     IndustryService,
     LoaderService,
     ProfileService,
+    JobsService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: DateAdapter, useClass: AppDateAdapter},

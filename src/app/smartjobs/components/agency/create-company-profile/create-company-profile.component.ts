@@ -233,8 +233,6 @@ export class CreateCompanyProfileComponent implements OnInit {
         this.showFailure();
       }
     );
-
-    console.log(value);
   }
 
   showSuccess(username) {
