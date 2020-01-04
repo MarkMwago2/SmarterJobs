@@ -123,9 +123,7 @@
 }
 
 /* Pagination CSS */
-.mat-paginator-container {
-  
-}
+.mat-paginator-container {}
 
 /* mat-card-content {
   display: flex;
@@ -168,38 +166,41 @@ form {
   width: 100%;
   margin-bottom: 10px;
 }
+
 .form_container {
   padding-bottom: 10px;
+  margin-top: 20px;
 }
+
 /* span {
   font-size: 10px;
 } */
 
 /* ToolBar CSS */
-.companyName{
+.companyName {
   font-size: 150%;
 }
 
-.mat-toolbar{
-height: 7vh;
+.mat-toolbar {
+  height: 7vh;
 }
 
 div {
   overflow: inherit;
 }
 
-.mat-sidenav-container{
-background-color: lightskyblue;
-min-height: 93vh !important;
+.mat-sidenav-container {
+  background-color: lightskyblue;
+  min-height: 93vh !important;
 }
 
-a{
+a {
   text-decoration: none;
   font-size: 110%;
   white-space: normal;
 }
 
-button{
+button {
   font-size: 110%;
   min-width: min-content;
 }
@@ -212,13 +213,24 @@ button{
   flex: 1 1 auto;
 }
 
-.mat-sidenav-content{
-    font-size: 200%;
-    text-align: center;
+.mat-sidenav-content {
+  font-size: 200%;
+  text-align: center;
 }
+
 .mat-toolbar.mat-primary {
   background: #007bff;
   color: #fff;
 }
+
 .position-fixed {
-  position:absolute; top:7%; bottom:5%; left:0; right: 0; display: flex; flex-direction: row;z-index: 999;}
+  position: absolute;
+  top: 7%;
+  bottom: 5%;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  z-index: 999;
+  margin-bottom: 20px;
+}

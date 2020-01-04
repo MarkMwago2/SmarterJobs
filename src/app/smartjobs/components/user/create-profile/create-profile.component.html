@@ -6,7 +6,7 @@
         <mat-icon>menu</mat-icon>
       </button>
     </div>
-    <span> Profile</span>
+    <span>Create Profile</span>
     <div fxShow="true" fxHide.lt-md="true">
       <a mat-button (click)="tabToggle(1)">Personal Bio-Data</a>
       <a mat-button (click)="tabToggle(2)">Work Experience</a>
@@ -20,7 +20,7 @@
   </mat-toolbar>
   <mat-sidenav color="primary" #sidenav mode="over" opened="false" fxHide.gt-sm="true">
     <div fxLayout="column">
-      <span> Profile</span>
+      <span>Create Profile</span>
       <a mat-button style="margin-top:12px;" (click)="tabToggle(1)">Personal Bio-Data</a>
       <a mat-button (click)="tabToggle(2)">Work Experience</a>
       <a mat-button (click)="tabToggle(3)">Academic Qualifications</a>
@@ -100,17 +100,7 @@
             {{validation.message}}</mat-error>
         </mat-error>
       </mat-form-field>
-
-      <mat-form-field class="full-width">
-        <input matInput type="email" placeholder="Email" formControlName="email" matTooltip="Enter your Email" required>
-        <mat-error *ngFor="let validation of account_validation_messages.email">
-          <mat-error class="error-message"
-            *ngIf="accountDetailsForm.get('email').hasError(validation.type) && (accountDetailsForm.get('email').dirty || accountDetailsForm.get('email').touched)">
-            {{validation.message}}</mat-error>
-        </mat-error>
-      </mat-form-field>
-
-      
+ 
       <mat-form-field class="full-width">
         <input matInput type="text" placeholder="Address" formControlName="address" matTooltip="Enter your Address" required>
         <mat-error *ngFor="let validation of account_validation_messages.address">
@@ -441,19 +431,23 @@
     <div *ngIf="showTab == 7">
       <div formGroupName="referees" name="refereeForm">
         <mat-form-field class="full-width">
-          <input matInput type="text" placeholder="Title" matTooltip="Enter the title of the referee" formControlName="refereetitle">
+          <input matInput type="text" placeholder="Title" matTooltip="Enter the title of the referee" formControlName="refereetitle" required>
         </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Company" formControlName="refereeComp"
+              matTooltip="Enter the title of the company where the referee works at" required>
+          </mat-form-field>
 
         <table class="full-width" cellspacing="0">
           <tr>
             <td>
               <mat-form-field class="full-width">
-                <input type="text" matInput placeholder="First name" formControlName="refereefname" matTooltip="Enter the first name of the referee">
+                <input type="text" matInput placeholder="First name" formControlName="refereefname" matTooltip="Enter the first name of the referee" required>
               </mat-form-field>
             </td>
             <td>
               <mat-form-field class="full-width">
-                <input type="text" matInput placeholder="Last Name" formControlName="refereelname" matTooltip="Enter the last name of the referee">
+                <input type="text" matInput placeholder="Last Name" formControlName="refereelname" matTooltip="Enter the last name of the referee" required>
               </mat-form-field>
             </td>
           </tr>
@@ -461,7 +455,7 @@
 
         <p>
           <mat-form-field class="full-width">
-            <textarea matInput placeholder="Address" formControlName="refereeAddress" matTooltip="Enter the Address of the referee"></textarea>
+            <textarea matInput placeholder="Address" formControlName="refereeAddress" matTooltip="Enter the Address of the referee" required></textarea>
           </mat-form-field>
         </p>
 
@@ -489,9 +483,15 @@
             </td>
           </tr>
         </table>
+
+        <!--Referee Form 1-->
         <div *ngIf="showRef == 2 || showRef == 3">
           <mat-form-field class="full-width">
             <input matInput type="text" placeholder="Title" formControlName="refereetitle1" matTooltip="Enter the title of the referee">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Company" formControlName="refereeComp1"
+              matTooltip="Enter the title of the company where the referee works at" required>
           </mat-form-field>
 
           <table class="full-width" cellspacing="0">
@@ -540,9 +540,15 @@
             </tr>
           </table>
         </div>
+
+        <!--Referee Form 2-->
         <div *ngIf="showRef == 3">
           <mat-form-field class="full-width">
             <input matInput type="text" placeholder="Title" formControlName="refereetitle2" matTooltip="Enter the title of the referee">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Company" formControlName="refereeComp2"
+              matTooltip="Enter the title of the company where the referee works at">
           </mat-form-field>
 
           <table class="full-width" cellspacing="0">
@@ -607,7 +613,7 @@
           [matTooltipDisabled]="accountDetailsForm.valid">
           <button class="submit-btn" color="primary" mat-raised-button type="submit"
             [disabled]="!accountDetailsForm.valid">
-            Submit
+            Create
           </button>
         </div>
       </div>

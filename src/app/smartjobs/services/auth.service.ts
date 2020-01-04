@@ -16,7 +16,7 @@ import { headersToString } from 'selenium-webdriver/http';
 })
 export class AuthService {
 
-  private apiRoot = 'https://smarterjobs.herokuapp.com/api/';
+  private apiRoot = 'http://127.0.0.1:8000/api/';
 
   constructor(private http: HttpClient, private router: Router) { }
 
