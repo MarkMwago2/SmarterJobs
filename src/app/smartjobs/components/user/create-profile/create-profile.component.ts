@@ -83,13 +83,31 @@ export class CreateProfileComponent implements OnInit {
   showWex = 1;
 
   isLoading: boolean;
-
+  firstname: string;
+  lastname: string;
+  email: string;
+  IDnumber: number;
+  phonenumber: number;
+  dateofbirth: any;
+  address: string;
+  gender: string;
+  workexperience: {};
+  academicQualification: {};
+  pqualification: string;
+  skills: string;
+  membership: string;
+  referees: {};
 
   genders: Gender[] = [
     {value: 'Female', viewValue: 'Female'},
     {value: 'Male', viewValue: 'Male'},
     {value: 'Rather Not Say', viewValue: 'Rather Not Say'},
   ];
+
+  keRegexPattern = /^(?:254|\+254|0)?(7(?:(?:[129][0-9])|(?:0[0-8])|(4[0-1]))[0-9]{6})$/;
+  emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+
 
   account_validation_messages = {
     companyname: [{
@@ -232,6 +250,7 @@ export class CreateProfileComponent implements OnInit {
 
   ngOnInit() {
     this.createForms();
+    this.showCreateProfile();
   }
 
   createForms() {
@@ -317,13 +336,13 @@ export class CreateProfileComponent implements OnInit {
         Validators.pattern('^[a-zA-Z ]+$'),
         Validators.required
       ])),
-      refereeAddress: new FormControl('', Validators.required),
       refereeComp: new FormControl('', Validators.required),
+      refereeAddress: new FormControl('', Validators.required),
       refereeEmail: new FormControl('', Validators.compose([
-        Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
+        Validators.pattern(this.emailPattern)
       ])),
       refereePhonenumber: new FormControl('', Validators.compose([
-        Validators.pattern('^((\\+254-?)|0)?[0-9]{10}$'),
+        Validators.pattern(this.keRegexPattern),
         Validators.maxLength(12),
         Validators.minLength(10),
       ])),
@@ -348,10 +367,10 @@ export class CreateProfileComponent implements OnInit {
       refereeAddress1: new FormControl(''),
       refereeComp1: new FormControl(''),
       refereeEmail1: new FormControl('', Validators.compose([
-        Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
+        Validators.pattern(this.emailPattern)
       ])),
       refereePhonenumber1: new FormControl('', Validators.compose([
-        Validators.pattern('^((\\+254-?)|0)?[0-9]{10}$'),
+        Validators.pattern(this.keRegexPattern),
         Validators.maxLength(12),
         Validators.minLength(10),
       ])),
@@ -376,10 +395,10 @@ export class CreateProfileComponent implements OnInit {
       refereeAddress2: new FormControl(''),
       refereeComp2: new FormControl(''),
       refereeEmail2: new FormControl('', Validators.compose([
-        Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
+        Validators.pattern(this.emailPattern)
       ])),
       refereePhonenumber2: new FormControl('', Validators.compose([
-        Validators.pattern('^((\\+254-?)|0)?[0-9]{10}$'),
+        Validators.pattern(this.keRegexPattern),
         Validators.maxLength(12),
         Validators.minLength(10),
       ])),
@@ -399,10 +418,6 @@ export class CreateProfileComponent implements OnInit {
         Validators.pattern('^[a-zA-Z ]+$'),
         Validators.required
       ])),
-      email: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
-      ])),
       IDnumber: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^[0-9]+$'),
@@ -411,7 +426,7 @@ export class CreateProfileComponent implements OnInit {
       ])),
       phonenumber: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.pattern('^((\\+254-?)|0)?[0-9]{10}$'),
+        Validators.pattern(this.keRegexPattern),
         Validators.maxLength(12),
         Validators.minLength(10),
       ])),
@@ -428,6 +443,21 @@ export class CreateProfileComponent implements OnInit {
   }
 
   onSubmitAccountDetails(value) {
+    this.isLoading = true;
+    value.workexperience = JSON.stringify(JSON.stringify(value.workexperience));
+    value.academicQualification = JSON.stringify(JSON.stringify(value.academicQualification));
+    value.referees = JSON.stringify(JSON.stringify(value.referees));
+    console.log(value);
+    this.prof.updateProfile(value).subscribe(
+      res => {
+        console.log(value);
+        this.showSuccess(value.firstname);
+        this.router.navigate(['profile']);
+      }, err => {
+        this.showFailure();
+      }
+    );
+
     console.log(value);
   }
   tabToggle(index) {
@@ -454,9 +484,9 @@ export class CreateProfileComponent implements OnInit {
     console.log(this.showWex);
   }
   showSuccess(firstname) {
-    this.toastr.success(firstname + '\'s' + 'profile has been updated successfully', 'Update Successful!', {
+    this.toastr.success(firstname + '\'s' + 'profile has been created successfully', 'Create Successful!', {
       progressAnimation: 'increasing',
-      timeOut: 2000,
+      timeOut: 4000,
       tapToDismiss: true,
       easing: 'ease-in'
     });
@@ -465,7 +495,16 @@ export class CreateProfileComponent implements OnInit {
   showFailure() {
     this.toastr.error('profile has been not updated', 'Update Unsuccessful!', {
       progressAnimation: 'increasing',
-      timeOut: 2000,
+      timeOut: 4000,
+      tapToDismiss: true,
+      easing: 'ease-in'
+    });
+    this.isLoading = false;
+  }
+  showCreateProfile() {
+    this.toastr.info('Create Your Profile to proceed', 'Profile', {
+      progressAnimation: 'increasing',
+      timeOut: 4000,
       tapToDismiss: true,
       easing: 'ease-in'
     });

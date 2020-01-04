@@ -82,6 +82,10 @@ export const cloudinaryLib = {
 };
 
 import { IntropageComponent } from './smartjobs/components/intropage/intropage.component';
+import { AddJobComponent } from './smartjobs/components/jobs/add-job/add-job.component';
+import { ViewJobComponent } from './smartjobs/components/jobs/view-job/view-job.component';
+import { EditJobComponent } from './smartjobs/components/jobs/edit-job/edit-job.component';
+import { ViewAllJobsComponent } from './smartjobs/components/jobs/view-all-jobs/view-all-jobs.component';
 
 @NgModule({
   declarations: [
@@ -103,7 +107,11 @@ import { IntropageComponent } from './smartjobs/components/intropage/intropage.c
     CreateCompanyProfileComponent,
     LoaderComponent,
     HomepageComponent,
-    IntropageComponent
+    IntropageComponent,
+    AddJobComponent,
+    ViewJobComponent,
+    EditJobComponent,
+    ViewAllJobsComponent
 
   ],
   imports: [

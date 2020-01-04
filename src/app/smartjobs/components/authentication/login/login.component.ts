@@ -103,12 +103,13 @@ export class LoginComponent implements OnInit {
                   if (profile[key] !== '' && profile[key] !== null && profile[key] !== undefined) {
                     completeEntries++;
                     this.profileComplete = Math.round(100 * completeEntries / total);
+                    if (this.profileComplete >= 35) {
+                      this.router.navigate(['home']);
+                    } else {
+                      this.router.navigate(['create-profile']);
+                    }
+                    console.log(this.profileComplete);
                   }
-                }
-                if (this.profileComplete >= 80) {
-                  this.router.navigate(['home']);
-                } else {
-                  this.router.navigate(['profile']);
                 }
               } else {
                 this.router.navigate(['dashboard']);
