@@ -7,7 +7,7 @@
   </div>
   <div class="d-flex justify-content-center form_container mb-2">
     <form [formGroup]="accountDetailsForm" novalidate (ngSubmit)="onSubmitAccountDetails(accountDetailsForm.value)"
-      [loader]="isLoading">
+      [loader]="isLoading ">
 
       <mat-form-field class="full-width">
         <input matInput maxlength="25" placeholder="Companyname" formControlName="companyname" required>
@@ -66,12 +66,12 @@
       
       <mat-form-field class="full-width">
         <mat-label>Industry</mat-label>
-        <mat-select formControlName="industriy" name="industriy" matInput placeholder="Industry" required>
+        <mat-select formControlName="industry" name="industry" matInput placeholder="Industry" required>
           <mat-option *ngFor="let industry of inds" [value]="industry.value" >
             {{industry.viewValue}}
           </mat-option>
         </mat-select>
-        <mat-error class="error-message" *ngIf="accountDetailsForm.controls['industriy'].hasError('required')">Industry is required</mat-error> 
+        <mat-error class="error-message" *ngIf="accountDetailsForm.controls['industry'].hasError('required')">Industry is required</mat-error> 
       </mat-form-field> 
       
       <mat-form-field class="full-width">
