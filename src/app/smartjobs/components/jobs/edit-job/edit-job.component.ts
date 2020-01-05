@@ -6,8 +6,9 @@ import {
   ProfileService
 } from '../../../services/profile.service';
 import {
-  Router
+  Router, ActivatedRoute
 } from '@angular/router';
+import { Location } from '@angular/common';
 import {
   FormControl,
   FormGroup,
@@ -91,12 +92,16 @@ export class EditJobComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: ToastrService,
     private jobs: JobsService,
-  ) { }
+    private actRoute: ActivatedRoute,
+    private location: Location,
+  ) {
+  }
 
   ngOnInit() {
+    const jobId = this.actRoute.snapshot.paramMap.get('id');
     this.showCreate();
     this.getCompany();
-    // this.getJobById();
+    this.getJobById(jobId);
   }
 
   createForms() {
@@ -125,7 +130,7 @@ export class EditJobComponent implements OnInit {
       res => {
         console.log(value);
         this.showSuccess(value.job_title);
-        this.router.navigate(['home']);
+        this.router.navigate(['agency-jobs']);
       }, err => {
         this.showFailure();
       }
@@ -133,7 +138,7 @@ export class EditJobComponent implements OnInit {
   }
 
   showSuccess(title) {
-    this.toastr.success('Job with' + title + ' created' , 'Add Successful!', {
+    this.toastr.success('Job with' + title + ' updated' , 'Update Successful!', {
       progressAnimation: 'increasing',
       timeOut: 5000,
       tapToDismiss: true,
@@ -143,7 +148,7 @@ export class EditJobComponent implements OnInit {
   }
 
   showCreate() {
-    this.toastr.info('Fill in the form below with details about the job', 'Add job', {
+    this.toastr.info('Edit the form below with details about the job', 'Edit job', {
       progressAnimation: 'increasing',
       timeOut: 5000,
       tapToDismiss: true,
@@ -153,7 +158,7 @@ export class EditJobComponent implements OnInit {
   }
 
   showFailure() {
-    this.toastr.error('Job has not been added' + 'Check the details and try again', 'Add Unsuccessful!', {
+    this.toastr.error('Job has not been edited' + 'Check the details and try again', 'Edit Unsuccessful!', {
       progressAnimation: 'increasing',
       timeOut: 4000,
       tapToDismiss: true,
@@ -183,7 +188,7 @@ export class EditJobComponent implements OnInit {
       error => {
         console.error(error);
       }
-    )
+    );
   }
 
   /* Reset form */
