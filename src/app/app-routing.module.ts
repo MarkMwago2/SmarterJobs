@@ -9,6 +9,8 @@ import { DashboardComponent } from './smartjobs/components/dashboard/dashboard.c
 import { HomepageComponent } from './smartjobs/components/homepage/homepage.component';
 import { HrdashboardComponent } from './smartjobs/components/hrdashboard/hrdashboard.component';
 import { AddJobComponent } from './smartjobs/components/jobs/add-job/add-job.component';
+import { EditJobComponent } from './smartjobs/components/jobs/edit-job/edit-job.component';
+import { ViewAllJobsComponent } from './smartjobs/components/jobs/view-all-jobs/view-all-jobs.component';
 
 import { ProfileComponent } from './smartjobs/components/user/profile/profile.component';
 import { CreateProfileComponent } from './smartjobs/components/user/create-profile/create-profile.component';
@@ -35,7 +37,8 @@ const routes: Routes = [
 { path: 'dashboard', component: HrdashboardComponent, canActivate: [AuthGuard] },
 { path: 'userdashboard', component: HrdashboardComponent, canActivate: [AuthGuard] },
 { path: 'add-job', component: AddJobComponent },
-
+{ path: 'edit-job/:id', component: EditJobComponent },
+{ path: 'agency-jobs', component: ViewAllJobsComponent },
 ];
 
 @NgModule({

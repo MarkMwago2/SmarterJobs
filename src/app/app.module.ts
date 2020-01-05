@@ -8,6 +8,9 @@ import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import {CdkTableModule} from '@angular/cdk/table';
+import {CdkTreeModule} from '@angular/cdk/tree';
+import {CdkDetailRowDirective} from './cdk-detail-row.directive';
 
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import { Cloudinary } from 'cloudinary-core';
@@ -44,7 +47,7 @@ import {NgxLoaderIndicatorModule} from 'ngx-loader-indicator';
 
 
 import { MatButtonModule, MatCardModule, MatDatepickerModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatSelectModule, MatToolbarModule, MatSidenavModule, MatChipsModule, MatRadioModule,MatBadgeModule,MatListModule,
-MatGridListModule,MatFormFieldModule, MatTableModule, } from '@angular/material';
+MatGridListModule, MatFormFieldModule, MatSortModule, MatStepperModule, MatTableModule, } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatNativeDateModule, MatIconModule} from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
@@ -75,8 +78,10 @@ const MatModules = [
   MatToolbarModule,
   FlexLayoutModule,
   MatSidenavModule,
-  MatChipsModule, MatRadioModule,MatBadgeModule,MatListModule,
-  MatGridListModule,MatFormFieldModule, MatTableModule,
+  MatChipsModule, MatRadioModule, MatBadgeModule, MatListModule,
+  MatGridListModule, MatFormFieldModule, MatSortModule,
+  MatStepperModule,
+  MatTableModule,
 ];
 
 
@@ -90,11 +95,12 @@ import { AddJobComponent } from './smartjobs/components/jobs/add-job/add-job.com
 import { ViewJobComponent } from './smartjobs/components/jobs/view-job/view-job.component';
 import { EditJobComponent } from './smartjobs/components/jobs/edit-job/edit-job.component';
 import { ViewAllJobsComponent } from './smartjobs/components/jobs/view-all-jobs/view-all-jobs.component';
+import { ViewJobsByuserComponent } from './smartjobs/components/jobs/view-jobs-byuser/view-jobs-byuser.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-
+    CdkDetailRowDirective,
     FooterComponent,
     HeaderComponent,
     LoginComponent,
@@ -115,7 +121,8 @@ import { ViewAllJobsComponent } from './smartjobs/components/jobs/view-all-jobs/
     AddJobComponent,
     ViewJobComponent,
     EditJobComponent,
-    ViewAllJobsComponent
+    ViewAllJobsComponent,
+    ViewJobsByuserComponent
 
   ],
   imports: [
@@ -164,6 +171,6 @@ import { ViewAllJobsComponent } from './smartjobs/components/jobs/view-all-jobs/
     {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
   ],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  // schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

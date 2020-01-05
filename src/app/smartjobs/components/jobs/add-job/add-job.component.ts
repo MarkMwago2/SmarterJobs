@@ -3,28 +3,17 @@ import {
   ProfileService
 } from '../../../services/profile.service';
 import {
-  AuthService
-} from '../../../services/auth.service';
+  JobsService
+} from '../../../services/jobs.service';
 import {
-  HttpHeaders,
-  HttpClient
-} from '@angular/common/http';
-import {
-  CanActivate,
   Router
 } from '@angular/router';
 
 import {
-  ControlValueAccessor,
   FormControl,
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
   FormGroup,
   FormBuilder,
-  Validator,
   Validators,
-  AbstractControl,
-  ValidationErrors
 } from '@angular/forms';
 
 import { MatPaginator, MatToolbarModule } from '@angular/material';
@@ -33,13 +22,6 @@ import {MatSelect} from '@angular/material/select';
 import {
   ToastrService
 } from 'ngx-toastr';
-import {
-  Country,
-  UsernameValidator,
-  PasswordValidator,
-  ParentErrorStateMatcher,
-  PhoneValidator
-} from '../../../../shared/validators';
 
 export interface Industry {
   value: string;
@@ -108,11 +90,11 @@ export class AddJobComponent implements OnInit {
   };
 
   constructor(
-    private authService: AuthService,
     private router: Router,
     private prof: ProfileService,
     private fb: FormBuilder,
     private toastr: ToastrService,
+    private jobs: JobsService,
   ) { }
 
   ngOnInit() {
@@ -141,9 +123,8 @@ export class AddJobComponent implements OnInit {
 
   onSubmitAddJobs(value) {
     value.company = this.companyId;
-    console.log(value);
     this.isLoading = true;
-    this.prof.createcompanyprofile(value).subscribe(
+    this.jobs.createJob(value).subscribe(
       res => {
         console.log(value);
         this.showSuccess(value.job_title);
