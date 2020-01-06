@@ -32,9 +32,9 @@ export class ViewAllJobsComponent implements OnInit {
   companyId: any;
   userId: any;
   ELEMENT_DATA = [];
-
+  // dataSource: any;
   displayedColumns: string[] = ['id', 'job_title', 'industry', 'time_posted', 'application_deadline', 'action'];
-  dataSource = new MatTableDataSource<Jobs>(this.ELEMENT_DATA);
+  dataSource: MatTableDataSource<Jobs>;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
@@ -45,15 +45,51 @@ export class ViewAllJobsComponent implements OnInit {
   constructor(private router: Router,
               private prof: ProfileService,
               private toastr: ToastrService,
-              private jobs: JobsService) { }
+              private jobs: JobsService) {
+                this.userId = this.prof.loggedInUserId();
+                this.prof.getcompanyprofileByUserId(this.userId).subscribe(
+                  res => {
+                    this.companyId = res.id;
+                    this.jobs.getAllJobsByCompanyID(this.companyId).subscribe(
+                      success => {
+                        this.ELEMENT_DATA.push(success);
+                        console.log(this.ELEMENT_DATA);
+                        this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+                         /* Sort */
+                        this.dataSource.sort = this.sort;
+                        /* Pagination */
+                        setTimeout(() => {
+                          this.dataSource.paginator = this.paginator;
+                        }, 0);
+                      },
+                      error => {
+                        console.error(error);
+                      }
+                    );
+                  },
+                  error => {
+                    console.error(error);
+                  }
+                );
+                // this.jobs.getAllJobsByCompanyID(this.companyId).subscribe(
+                //   res => {
+                //     this.ELEMENT_DATA.push(res);
+                //     console.log(this.ELEMENT_DATA);
+                //     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+                //   },
+                //   error => {
+                //     console.error(error);
+                //   }
+                // );
+               }
 
   ngOnInit() {
-    this.getCompany();
-    this.dataSource.sort = this.sort;
+    // this.getCompany();
+    // this.dataSource.sort = this.sort;
   }
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+  // ngAfterViewInit() {
+  //   this.dataSource.paginator = this.paginator;
+  // }
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -66,6 +102,7 @@ export class ViewAllJobsComponent implements OnInit {
     this.prof.getcompanyprofileByUserId(this.userId).subscribe(
       res => {
         this.companyId = res.id;
+        console.log(this.companyId);
         this.getJobsByCompany(this.companyId);
       },
       error => {
@@ -78,6 +115,7 @@ export class ViewAllJobsComponent implements OnInit {
     this.jobs.getAllJobsByCompanyID(companyID).subscribe(
       res => {
         this.ELEMENT_DATA.push(res);
+        // console.log(this.ELEMENT_DATA);
       },
       error => {
         console.error(error);

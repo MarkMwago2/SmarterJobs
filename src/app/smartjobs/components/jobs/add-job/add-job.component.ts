@@ -39,8 +39,29 @@ export class AddJobComponent implements OnInit {
 
   @ViewChild('resetAddJobForm', {static: false}) myNgForm;
   inds: Industry[] = [
+    {value: 'Advertising and Marketing', viewValue: 'Advertising and Marketing'},
     {value: 'Agriculture and Farming', viewValue: 'Agriculture and Farming'},
+    {value: 'Automotive and Aviation', viewValue: 'Automotive and Aviation'},
+    {value: 'Banking, Finance & Insurance', viewValue: 'Banking, Finance & Insurance'},
     {value: 'Building and Construction', viewValue: 'Building and Construction'},
+    {value: 'Digital, Media & Communications', viewValue: 'Digital, Media & Communications'},
+    {value: 'Education & Training', viewValue: 'Education & Training'},
+    {value: 'Energy and Utilities', viewValue: 'Energy and Utilities'},
+    {value: 'Entertainment and Events', viewValue: 'Entertainment and Events'},
+    {value: 'Government', viewValue: 'Government'},
+    {value: 'Health', viewValue: 'Health'},
+    {value: 'Hospitality and Hotel', viewValue: 'Hospitality and Hotel'},
+    {value: 'Internet and Telecommunications', viewValue: 'Internet and Telecommunications'},
+    {value: 'Law ', viewValue: 'Law '},
+    {value: 'Law Enforcement and Security', viewValue: 'Law Enforcement and Security'},
+    {value: 'Logistics anbd Transportation', viewValue: 'Logistics anbd Transportation'},
+    {value: 'Manufacturing', viewValue: 'Manufacturing'},
+    {value: 'NGO', viewValue: 'NGO'},
+    {value: 'Real Estate', viewValue: 'Real Estate'},
+    {value: 'Recruitment', viewValue: 'Recruitment'},
+    {value: 'Retail & Fashion', viewValue: 'Retail & Fashion'},
+    {value: 'Technology', viewValue: 'Technology'},
+    {value: 'Tourism, Travel & Leisure', viewValue: 'Tourism, Travel & Leisure'}
   ];
   error: any;
   isLoading: boolean;
@@ -86,6 +107,18 @@ export class AddJobComponent implements OnInit {
     requirements: [{
       type: 'required',
       message: 'Requirements is required'
+    }],
+    location: [{
+      type: 'required',
+      message: 'location is required'
+    }],
+    application_deadline: [{
+      type: 'required',
+      message: 'Application Deadline is required'
+    }],
+    jobType: [{
+      type: 'required',
+      message: 'Job type is required'
     }]
   };
 
@@ -117,18 +150,22 @@ export class AddJobComponent implements OnInit {
       duties_and_responsibilities: new FormControl('', Validators.required),
       industry: new FormControl('', Validators.required),
       requirements: new FormControl('', Validators.required),
-      other_details: new FormControl('')
+      other_details: new FormControl(''),
+      location: new FormControl('', Validators.required),
+      application_deadline: new FormControl('', Validators.required),
+      jobType: new FormControl('', Validators.required)
     });
   }
 
   onSubmitAddJobs(value) {
     value.company = this.companyId;
     this.isLoading = true;
+    console.log(value);
     this.jobs.createJob(value).subscribe(
       res => {
         console.log(value);
         this.showSuccess(value.job_title);
-        this.router.navigate(['home']);
+        this.router.navigate(['agency-jobs']);
       }, err => {
         this.showFailure();
       }

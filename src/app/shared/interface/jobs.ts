@@ -11,4 +11,6 @@ export interface Jobs {
     duties_and_responsibilities: string;
     requirements: string;
     other_details: string;
+    location: string;
+    jobType: string;
 }

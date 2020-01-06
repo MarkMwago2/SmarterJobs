@@ -168,8 +168,29 @@ export class CreateCompanyProfileComponent implements OnInit {
   ];
 
   inds: Industry[] = [
+    {value: 'Advertising and Marketing', viewValue: 'Advertising and Marketing'},
     {value: 'Agriculture and Farming', viewValue: 'Agriculture and Farming'},
+    {value: 'Automotive and Aviation', viewValue: 'Automotive and Aviation'},
+    {value: 'Banking, Finance & Insurance', viewValue: 'Banking, Finance & Insurance'},
     {value: 'Building and Construction', viewValue: 'Building and Construction'},
+    {value: 'Digital, Media & Communications', viewValue: 'Digital, Media & Communications'},
+    {value: 'Education & Training', viewValue: 'Education & Training'},
+    {value: 'Energy and Utilities', viewValue: 'Energy and Utilities'},
+    {value: 'Entertainment and Events', viewValue: 'Entertainment and Events'},
+    {value: 'Government', viewValue: 'Government'},
+    {value: 'Health', viewValue: 'Health'},
+    {value: 'Hospitality and Hotel', viewValue: 'Hospitality and Hotel'},
+    {value: 'Internet and Telecommunications', viewValue: 'Internet and Telecommunications'},
+    {value: 'Law ', viewValue: 'Law '},
+    {value: 'Law Enforcement and Security', viewValue: 'Law Enforcement and Security'},
+    {value: 'Logistics anbd Transportation', viewValue: 'Logistics anbd Transportation'},
+    {value: 'Manufacturing', viewValue: 'Manufacturing'},
+    {value: 'NGO', viewValue: 'NGO'},
+    {value: 'Real Estate', viewValue: 'Real Estate'},
+    {value: 'Recruitment', viewValue: 'Recruitment'},
+    {value: 'Retail & Fashion', viewValue: 'Retail & Fashion'},
+    {value: 'Technology', viewValue: 'Technology'},
+    {value: 'Tourism, Travel & Leisure', viewValue: 'Tourism, Travel & Leisure'}
   ];
 
   emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;

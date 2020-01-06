@@ -11,6 +11,7 @@ import { HrdashboardComponent } from './smartjobs/components/hrdashboard/hrdashb
 import { AddJobComponent } from './smartjobs/components/jobs/add-job/add-job.component';
 import { EditJobComponent } from './smartjobs/components/jobs/edit-job/edit-job.component';
 import { ViewAllJobsComponent } from './smartjobs/components/jobs/view-all-jobs/view-all-jobs.component';
+import { ViewJobComponent } from './smartjobs/components/jobs/view-job/view-job.component';
 
 import { ProfileComponent } from './smartjobs/components/user/profile/profile.component';
 import { CreateProfileComponent } from './smartjobs/components/user/create-profile/create-profile.component';
@@ -39,6 +40,7 @@ const routes: Routes = [
 { path: 'add-job', component: AddJobComponent },
 { path: 'edit-job/:id', component: EditJobComponent },
 { path: 'agency-jobs', component: ViewAllJobsComponent },
+{path: 'view-job/:id', component: ViewJobComponent },
 ];
 
 @NgModule({
