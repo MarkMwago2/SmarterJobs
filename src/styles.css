@@ -385,3 +385,7 @@ body .push-right {
     font-size: 14px;
   }
 }
+
+.cdk-overlay-container, .cdk-overlay-pane {
+  z-index: 9999 !important;
+}

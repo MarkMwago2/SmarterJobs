@@ -230,6 +230,10 @@ export class EditProfileComponent implements OnInit {
       type: 'required',
       message: 'Qualification is required'
     }],
+    profession: [{
+      type: 'required',
+      message: 'profession is required'
+    }],
     refereeEmail: [{
       type: 'pattern',
       message: 'Enter a valid email'
@@ -460,6 +464,7 @@ export class EditProfileComponent implements OnInit {
       workexperience: this.workExperienceForm,
       academicQualification: this.academicQualificationForm,
       pqualification: new FormControl(this.profile[0].pqualification),
+      profession: new FormControl('', Validators.required),
       skills: new FormControl(this.profile[0].skills),
       membership: new FormControl(this.profile[0].membership),
       referees: this.refereeForm,

@@ -63,22 +63,26 @@
 
         <!-- Experience Level -->
         <mat-form-field class="full-width">
-          <input matInput placeholder="Experience Level" formControlName="experience_level" required>
-          <mat-error *ngFor="let validation of addJobMessages.experience_level">
-            <mat-error class="error-message"
-              *ngIf="AddJobForm.get('experience_level').hasError(validation.type) && (AddJobForm.get('experience_level').dirty || AddJobForm.get('experience_level').touched)">
-              {{validation.message}}</mat-error>
-          </mat-error>
+          <mat-label>Experience Level</mat-label>
+          <mat-select formControlName="experience_level" name="experience_level" matInput placeholder="Experience Level" required>
+            <mat-option *ngFor="let experience_level of exlvs" [value]="experience_level.value">
+              {{experience_level.viewValue}}
+            </mat-option>
+          </mat-select>
+          <mat-error class="error-message" *ngIf="AddJobForm.controls['experience_level'].hasError('required')">Experience Level is
+            required</mat-error>
         </mat-form-field>
 
         <!-- Experience Length -->
         <mat-form-field class="full-width">
-          <input matInput placeholder="Experience Length" formControlName="experience_length" required>
-          <mat-error *ngFor="let validation of addJobMessages.experience_length">
-            <mat-error class="error-message"
-              *ngIf="AddJobForm.get('experience_length').hasError(validation.type) && (AddJobForm.get('experience_length').dirty || AddJobForm.get('experience_length').touched)">
-              {{validation.message}}</mat-error>
-          </mat-error>
+          <mat-label>Experience Length</mat-label>
+          <mat-select formControlName="experience_length" name="experience_length" matInput placeholder="Experience Length" required>
+            <mat-option *ngFor="let experience_length of exlng" [value]="experience_length.value">
+              {{experience_length.viewValue}}
+            </mat-option>
+          </mat-select>
+          <mat-error class="error-message" *ngIf="AddJobForm.controls['experience_length'].hasError('required')">Experience Length is
+            required</mat-error>
         </mat-form-field>
 
         <!-- Job Description -->

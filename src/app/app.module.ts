@@ -47,7 +47,8 @@ import {NgxLoaderIndicatorModule} from 'ngx-loader-indicator';
 
 
 import { MatButtonModule, MatCardModule, MatDatepickerModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatSelectModule, MatToolbarModule, MatSidenavModule, MatChipsModule, MatRadioModule,MatBadgeModule,MatListModule,
-MatGridListModule, MatFormFieldModule, MatSortModule, MatStepperModule, MatTableModule, } from '@angular/material';
+MatGridListModule, MatFormFieldModule, MatSortModule, MatStepperModule, MatTableModule,  MatDialogModule,
+} from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatNativeDateModule, MatIconModule} from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
@@ -68,6 +69,7 @@ const MatModules = [
   MatSnackBarModule,
   MatButtonModule,
   MatCheckboxModule,
+  MatDialogModule,
   MatInputModule,
   MatSelectModule,
   MatIconModule,
@@ -96,6 +98,7 @@ import { ViewJobComponent } from './smartjobs/components/jobs/view-job/view-job.
 import { EditJobComponent } from './smartjobs/components/jobs/edit-job/edit-job.component';
 import { ViewAllJobsComponent } from './smartjobs/components/jobs/view-all-jobs/view-all-jobs.component';
 import { ViewJobsByuserComponent } from './smartjobs/components/jobs/view-jobs-byuser/view-jobs-byuser.component';
+import { DialogModalComponent } from './shared/components/dialog-modal/dialog-modal.component';
 
 @NgModule({
   declarations: [
@@ -122,7 +125,8 @@ import { ViewJobsByuserComponent } from './smartjobs/components/jobs/view-jobs-b
     ViewJobComponent,
     EditJobComponent,
     ViewAllJobsComponent,
-    ViewJobsByuserComponent
+    ViewJobsByuserComponent,
+    DialogModalComponent
 
   ],
   imports: [

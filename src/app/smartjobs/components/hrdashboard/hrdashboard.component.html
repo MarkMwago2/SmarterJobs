@@ -1,1 +1,15 @@
 <app-header></app-header>
+<div class="container bootstrap snippet">
+
+  <mat-grid-list cols="4" class="fill darken" gutterSize="50px">
+    <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.border]="tile.border">
+      <div>
+        <mat-grid-tile-header>
+          <h3 id="HiddenText">{{tile.title}}</h3>
+        </mat-grid-tile-header>
+        <img src={{tile.img}}>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+</div>

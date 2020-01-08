@@ -22,7 +22,16 @@ import {
   ToastrService
 } from 'ngx-toastr';
 
+
 export interface Industry {
+  value: string;
+  viewValue: string;
+}
+export interface Exlevel {
+  value: string;
+  viewValue: string;
+}
+export interface Exlength {
   value: string;
   viewValue: string;
 }
@@ -61,6 +70,33 @@ export class EditJobComponent implements OnInit {
     {value: 'Technology', viewValue: 'Technology'},
     {value: 'Tourism, Travel & Leisure', viewValue: 'Tourism, Travel & Leisure'}
   ];
+  exlvs: Exlevel[] = [
+    {value: 'Entry', viewValue: 'Entry'},
+    {value: 'Supervisory', viewValue: 'Supervisory'},
+    {value: 'Low Management', viewValue: 'Low Management'},
+    {value: 'Mid Management', viewValue: 'Mid Management'},
+    {value: 'Upper Management', viewValue: 'Upper Management'},
+    {value: 'Executive Management', viewValue: 'Executive Management'},
+  ];
+  exlng: Exlength[] = [
+    {value: 'Less than 1 year', viewValue: 'Less than 1 year'},
+    {value: '1 year', viewValue: '1 year'},
+    {value: '2 years', viewValue: '2 years'},
+    {value: '3 years', viewValue: '3 years'},
+    {value: '4 years', viewValue: '4 years'},
+    {value: '5 years', viewValue: '5 years'},
+    {value: '6 years', viewValue: '6 years'},
+    {value: '7 years', viewValue: '7 years'},
+    {value: '8 years', viewValue: '8 years'},
+    {value: '9 years', viewValue: '9 years'},
+    {value: '10 years', viewValue: '10 years'},
+    {value: '11 years', viewValue: '11 years'},
+    {value: '12 years', viewValue: '12 years'},
+    {value: '13 years', viewValue: '13 years'},
+    {value: '14 years', viewValue: '14 years'},
+    {value: '15 years', viewValue: '15 years'},
+    {value: 'Above 15 years', viewValue: 'Above 15 years'},
+  ]
   error: any;
   isLoading: boolean;
   AddJobForm: FormGroup;
@@ -132,7 +168,7 @@ export class EditJobComponent implements OnInit {
 
   ngOnInit() {
     this.jobId = this.actRoute.snapshot.paramMap.get('id');
-
+    // this.createForms();
     this.showCreate();
     this.getCompany();
     this.getJobById(this.jobId);

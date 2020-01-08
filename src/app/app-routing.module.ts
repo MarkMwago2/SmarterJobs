@@ -12,6 +12,7 @@ import { AddJobComponent } from './smartjobs/components/jobs/add-job/add-job.com
 import { EditJobComponent } from './smartjobs/components/jobs/edit-job/edit-job.component';
 import { ViewAllJobsComponent } from './smartjobs/components/jobs/view-all-jobs/view-all-jobs.component';
 import { ViewJobComponent } from './smartjobs/components/jobs/view-job/view-job.component';
+import { ViewJobsByuserComponent } from './smartjobs/components/jobs/view-jobs-byuser/view-jobs-byuser.component';
 
 import { ProfileComponent } from './smartjobs/components/user/profile/profile.component';
 import { CreateProfileComponent } from './smartjobs/components/user/create-profile/create-profile.component';
@@ -35,13 +36,15 @@ const routes: Routes = [
 { path: 'company-profile', component: CompanyProfileComponent, canActivate: [AuthGuard] },
 { path: 'create-companyprofile', component: CreateCompanyProfileComponent },
 { path: 'edit-companyprofile', component: EditCompanyProfileComponent, canActivate: [AuthGuard] },
+{ path: 'userdashboard', component: DashboardComponent, canActivate: [AuthGuard] },
 { path: 'dashboard', component: HrdashboardComponent, canActivate: [AuthGuard] },
-{ path: 'userdashboard', component: HrdashboardComponent, canActivate: [AuthGuard] },
 { path: 'add-job', component: AddJobComponent },
 { path: 'edit-job/:id', component: EditJobComponent },
 { path: 'agency-jobs', component: ViewAllJobsComponent },
 {path: 'view-job/:id', component: ViewJobComponent },
+{path: 'view-jobs', component: ViewJobsByuserComponent },
 ];
+
 
 @NgModule({
 imports: [RouterModule.forRoot(routes)],

@@ -40,10 +40,11 @@
     [loader]="isLoading">
 
     <!--Personal Bio-Data-->
-    
+
     <div *ngIf="showTab == 1">
       <mat-form-field class="full-width">
-        <input matInput type="text" placeholder="First Name" matTooltip="Enter your First Name" formControlName="firstname" required>
+        <input matInput type="text" placeholder="First Name" matTooltip="Enter your First Name"
+          formControlName="firstname" required>
         <mat-error *ngFor="let validation of account_validation_messages.firstname">
           <mat-error class="error-message"
             *ngIf="accountDetailsForm.get('firstname').hasError(validation.type) && (accountDetailsForm.get('firstname').dirty || accountDetailsForm.get('firstname').touched)">
@@ -52,7 +53,8 @@
       </mat-form-field>
 
       <mat-form-field class="full-width">
-        <input matInput type="text" placeholder="Last Name" matTooltip="Enter your Last Name" #lastname formControlName="lastname" required>
+        <input matInput type="text" placeholder="Last Name" matTooltip="Enter your Last Name" #lastname
+          formControlName="lastname" required>
         <mat-error *ngFor="let validation of account_validation_messages.lastname">
           <mat-error class="error-message"
             *ngIf="accountDetailsForm.get('lastname').hasError(validation.type) && (accountDetailsForm.get('lastname').dirty || accountDetailsForm.get('lastname').touched)">
@@ -62,7 +64,8 @@
 
       <mat-form-field class="full-width">
         <mat-label>Gender</mat-label>
-        <mat-select formControlName="gender" name="gender" matTooltip="Pick your Gender" matInput placeholder="Gender" required>
+        <mat-select formControlName="gender" name="gender" matTooltip="Pick your Gender" matInput placeholder="Gender"
+          required>
           <mat-option *ngFor="let gender of genders" [value]="gender.value">
             {{gender.viewValue}}
           </mat-option>
@@ -72,10 +75,10 @@
       </mat-form-field>
 
       <mat-form-field class="full-width">
-        <input matInput [matDatepicker]="picker" formControlName="dateofbirth" matTooltip="Select your date of birth" name="dateofbirth" matInput
-          placeholder="Date Of Birth" required>
+        <input matInput [matDatepicker]="picker" formControlName="dateofbirth" matTooltip="Select your date of birth"
+          name="dateofbirth" matInput placeholder="Date Of Birth" required>
         <mat-datepicker-toggle matSuffix [for]="picker">
-          
+
         </mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error class="error-message" *ngIf="accountDetailsForm.controls['dateofbirth'].hasError('required')">
@@ -84,7 +87,8 @@
       </mat-form-field>
 
       <mat-form-field class="full-width">
-        <input matInput type="number" placeholder="National Identification" matTooltip="Enter your National Identification number" formControlName="IDnumber" required>
+        <input matInput type="number" placeholder="National Identification"
+          matTooltip="Enter your National Identification number" formControlName="IDnumber" required>
         <mat-error *ngFor="let validation of account_validation_messages.IDnumber">
           <mat-error class="error-message"
             *ngIf="accountDetailsForm.get('IDnumber').hasError(validation.type) && (accountDetailsForm.get('IDnumber').dirty || accountDetailsForm.get('IDnumber').touched)">
@@ -93,16 +97,18 @@
       </mat-form-field>
 
       <mat-form-field class="full-width">
-        <input matInput type="number" placeholder="Phone Number" formControlName="phonenumber" matTooltip="Enter your Phone number" required>
+        <input matInput type="number" placeholder="Phone Number" formControlName="phonenumber"
+          matTooltip="Enter your Phone number" required>
         <mat-error *ngFor="let validation of account_validation_messages.phonenumber">
           <mat-error class="error-message"
             *ngIf="accountDetailsForm.get('phonenumber').hasError(validation.type) && (accountDetailsForm.get('phonenumber').dirty || accountDetailsForm.get('phonenumber').touched)">
             {{validation.message}}</mat-error>
         </mat-error>
       </mat-form-field>
- 
+
       <mat-form-field class="full-width">
-        <input matInput type="text" placeholder="Address" formControlName="address" matTooltip="Enter your Address" required>
+        <input matInput type="text" placeholder="Address" formControlName="address" matTooltip="Enter your Address"
+          required>
         <mat-error *ngFor="let validation of account_validation_messages.address">
           <mat-error class="error-message"
             *ngIf="accountDetailsForm.get('address').hasError(validation.type) && (accountDetailsForm.get('address').dirty || accountDetailsForm.get('address').touched)">
@@ -116,7 +122,8 @@
     <div *ngIf="showTab == 2">
       <div formGroupName="workexperience">
         <mat-form-field class="full-width">
-          <input matInput type="text" placeholder="Company Name" formControlName="wCompanyname" matTooltip="Enter the name of the company" required>
+          <input matInput type="text" placeholder="Company Name" formControlName="wCompanyname"
+            matTooltip="Enter the name of the company" required>
           <mat-error *ngFor="let validation of account_validation_messages.wCompanyname">
             <mat-error class="error-message"
               *ngIf="accountDetailsForm.get('workexperience').get('wCompanyname').hasError(validation.type) && (accountDetailsForm.get('workexperience').get('wCompanyname').dirty || accountDetailsForm.get('workexperience').get('wCompanyname').touched)">
@@ -128,23 +135,26 @@
           <tr>
             <td>
               <mat-form-field class="full-width">
-                <input matInput [matDatepicker]="picker3" formControlName="Pstartdate" matTooltip="Select the starting date" name="Pstartdate" matInput
+                <input matInput [matDatepicker]="picker3" formControlName="Pstartdate"
+                  matTooltip="Select the starting date" name="Pstartdate" matInput
                   placeholder="Choose the Starting Date" required>
                 <mat-datepicker-toggle matSuffix [for]="picker3">
-                  
+
                 </mat-datepicker-toggle>
                 <mat-datepicker #picker3></mat-datepicker>
-                <mat-error *ngIf="accountDetailsForm.get('workexperience').controls['Pstartdate'].hasError('required')">Please choose a date.</mat-error>
+                <mat-error *ngIf="accountDetailsForm.get('workexperience').controls['Pstartdate'].hasError('required')">
+                  Please choose a date.</mat-error>
               </mat-form-field>
             </td>
             <td>
               <mat-form-field class="full-width">
-                <input matInput [matDatepicker]="picker4" formControlName="Penddate" matTooltip="Select the ending date"  name="Penddate" matInput
-                  placeholder="Choose the Ending Date" required>
+                <input matInput [matDatepicker]="picker4" formControlName="Penddate" matTooltip="Select the ending date"
+                  name="Penddate" matInput placeholder="Choose the Ending Date" required>
                 <mat-datepicker-toggle matSuffix [for]="picker4">
                 </mat-datepicker-toggle>
                 <mat-datepicker #picker4></mat-datepicker>
-                <mat-error *ngIf="accountDetailsForm.get('workexperience').controls['Penddate'].hasError('required')">Please choose a date.</mat-error>
+                <mat-error *ngIf="accountDetailsForm.get('workexperience').controls['Penddate'].hasError('required')">
+                  Please choose a date.</mat-error>
               </mat-form-field>
             </td>
           </tr>
@@ -165,7 +175,8 @@
         <!--Work Experience form 2-->
         <div *ngIf="showWex == 2 || showWex == 3">
           <mat-form-field class="full-width">
-            <input matInput type="text" placeholder="Company Name" matTooltip="Enter the name of the company" formControlName="wCompanyname1">
+            <input matInput type="text" placeholder="Company Name" matTooltip="Enter the name of the company"
+              formControlName="wCompanyname1">
             <mat-error *ngFor="let validation of account_validation_messages.wCompanyname">
               <mat-error class="error-message"
                 *ngIf="accountDetailsForm.get('workexperience').get('wCompanyname').hasError(validation.type) && (accountDetailsForm.get('workexperience').get('wCompanyname').dirty || accountDetailsForm.get('workexperience').get('wCompanyname').touched)">
@@ -177,20 +188,21 @@
             <tr>
               <td>
                 <mat-form-field class="full-width">
-                  <input matInput [matDatepicker]="picker3" formControlName="Pstartdate1" matTooltip="Select the starting date" name="Pstartdate1" matInput
+                  <input matInput [matDatepicker]="picker3" formControlName="Pstartdate1"
+                    matTooltip="Select the starting date" name="Pstartdate1" matInput
                     placeholder="Choose the Starting Date">
                   <mat-datepicker-toggle matSuffix [for]="picker3">
-                    
+
                   </mat-datepicker-toggle>
                   <mat-datepicker #picker3></mat-datepicker>
                 </mat-form-field>
               </td>
               <td>
                 <mat-form-field class="full-width">
-                  <input matInput [matDatepicker]="picker4" formControlName="Penddate1" matTooltip="Select the ending date" name="Penddate1" matInput
-                    placeholder="Choose the Ending Date">
+                  <input matInput [matDatepicker]="picker4" formControlName="Penddate1"
+                    matTooltip="Select the ending date" name="Penddate1" matInput placeholder="Choose the Ending Date">
                   <mat-datepicker-toggle matSuffix [for]="picker4">
-                    
+
                   </mat-datepicker-toggle>
                   <mat-datepicker #picker4></mat-datepicker>
                 </mat-form-field>
@@ -214,7 +226,8 @@
         <!--Work Experience form 3-->
         <div *ngIf=" showWex == 3">
           <mat-form-field class="full-width">
-            <input matInput type="text" placeholder="Company Name" matTooltip="Enter the name of the company" formControlName="wCompanyname2">
+            <input matInput type="text" placeholder="Company Name" matTooltip="Enter the name of the company"
+              formControlName="wCompanyname2">
             <mat-error *ngFor="let validation of account_validation_messages.wCompanyname">
               <mat-error class="error-message"
                 *ngIf="accountDetailsForm.get('workexperience').get('wCompanyname').hasError(validation.type) && (accountDetailsForm.get('workexperience').get('wCompanyname').dirty || accountDetailsForm.get('workexperience').get('wCompanyname').touched)">
@@ -226,20 +239,21 @@
             <tr>
               <td>
                 <mat-form-field class="full-width">
-                  <input matInput [matDatepicker]="picker3" formControlName="Pstartdate2" matTooltip="Select the starting date" name="Pstartdate2" matInput
+                  <input matInput [matDatepicker]="picker3" formControlName="Pstartdate2"
+                    matTooltip="Select the starting date" name="Pstartdate2" matInput
                     placeholder="Choose the Starting Date">
                   <mat-datepicker-toggle matSuffix [for]="picker3">
-                    
+
                   </mat-datepicker-toggle>
                   <mat-datepicker #picker3></mat-datepicker>
                 </mat-form-field>
               </td>
               <td>
                 <mat-form-field class="full-width">
-                  <input matInput [matDatepicker]="picker4" formControlName="Penddate2" matTooltip="Select the ending date" name="Penddate2" matInput
-                    placeholder="Choose the Ending Date">
+                  <input matInput [matDatepicker]="picker4" formControlName="Penddate2"
+                    matTooltip="Select the ending date" name="Penddate2" matInput placeholder="Choose the Ending Date">
                   <mat-datepicker-toggle matSuffix [for]="picker4">
-                    
+
                   </mat-datepicker-toggle>
                   <mat-datepicker #picker4></mat-datepicker>
                 </mat-form-field>
@@ -271,30 +285,36 @@
     <div *ngIf="showTab == 3">
       <div formGroupName="academicQualification">
         <mat-form-field class="full-width">
-          <input matInput type="text" placeholder="Institution Name" matTooltip="Enter the name of the institution" formControlName="institutionname" required>
+          <input matInput type="text" placeholder="Institution Name" matTooltip="Enter the name of the institution"
+            formControlName="institutionname" required>
         </mat-form-field>
 
         <table class="full-width" cellspacing="0">
           <tr>
             <td>
               <mat-form-field class="full-width">
-                <input matInput [matDatepicker]="picker1" formControlName="Astartdate" matTooltip="Select the starting date" name="Astartdate" matInput
+                <input matInput [matDatepicker]="picker1" formControlName="Astartdate"
+                  matTooltip="Select the starting date" name="Astartdate" matInput
                   placeholder="Choose the Starting Date" required>
                 <mat-datepicker-toggle matSuffix [for]="picker1">
                 </mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
-                <mat-error *ngIf="accountDetailsForm.get('academicQualification').controls['Astartdate'].hasError('required')">Please choose a date.</mat-error>
+                <mat-error
+                  *ngIf="accountDetailsForm.get('academicQualification').controls['Astartdate'].hasError('required')">
+                  Please choose a date.</mat-error>
               </mat-form-field>
             </td>
             <td>
               <mat-form-field class="full-width">
-                <input matInput [matDatepicker]="picker2" formControlName="Aenddate" matTooltip="Select the ending date" name="Aenddate" matInput
-                  placeholder="Choose the Ending Date" required>
+                <input matInput [matDatepicker]="picker2" formControlName="Aenddate" matTooltip="Select the ending date"
+                  name="Aenddate" matInput placeholder="Choose the Ending Date" required>
                 <mat-datepicker-toggle matSuffix [for]="picker2">
-                  
+
                 </mat-datepicker-toggle>
                 <mat-datepicker #picker2></mat-datepicker>
-                <mat-error *ngIf="accountDetailsForm.get('academicQualification').controls['Aenddate'].hasError('required')">Please choose a date.</mat-error>
+                <mat-error
+                  *ngIf="accountDetailsForm.get('academicQualification').controls['Aenddate'].hasError('required')">
+                  Please choose a date.</mat-error>
               </mat-form-field>
             </td>
           </tr>
@@ -302,7 +322,8 @@
 
         <p>
           <mat-form-field class="full-width">
-            <textarea matInput placeholder="Qualification" formControlName="merit" matTooltip="Enter your qualifications" required></textarea>
+            <textarea matInput placeholder="Qualification" formControlName="merit"
+              matTooltip="Enter your qualifications" required></textarea>
             <mat-error *ngFor="let validation of account_validation_messages.merit">
               <mat-error class="error-message"
                 *ngIf="accountDetailsForm.get('academicQualification').get('merit').hasError(validation.type) && (accountDetailsForm.get('academicQualification').get('merit').dirty || accountDetailsForm.get('academicQualification').get('merit').touched)">
@@ -314,27 +335,29 @@
         <!--Academic Qualification form 2-->
         <div *ngIf="showAca == 2 || showAca == 3">
           <mat-form-field class="full-width">
-            <input matInput type="text" placeholder="Institution Name" matTooltip="Enter the name of the institution" formControlName="institutionname1">
+            <input matInput type="text" placeholder="Institution Name" matTooltip="Enter the name of the institution"
+              formControlName="institutionname1">
           </mat-form-field>
 
           <table class="full-width" cellspacing="0">
             <tr>
               <td>
                 <mat-form-field class="full-width">
-                  <input matInput [matDatepicker]="picker1" formControlName="Astartdate1" matTooltip="Select the starting date" name="Astartdate1" matInput
+                  <input matInput [matDatepicker]="picker1" formControlName="Astartdate1"
+                    matTooltip="Select the starting date" name="Astartdate1" matInput
                     placeholder="Choose the Starting Date">
                   <mat-datepicker-toggle matSuffix [for]="picker1">
-                    
+
                   </mat-datepicker-toggle>
                   <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
               </td>
               <td>
                 <mat-form-field class="full-width">
-                  <input matInput [matDatepicker]="picker2" formControlName="Aenddate1" matTooltip="Select the ending date" name="Aenddate1" matInput
-                    placeholder="Choose the Ending Date">
+                  <input matInput [matDatepicker]="picker2" formControlName="Aenddate1"
+                    matTooltip="Select the ending date" name="Aenddate1" matInput placeholder="Choose the Ending Date">
                   <mat-datepicker-toggle matSuffix [for]="picker2">
-                    
+
                   </mat-datepicker-toggle>
                   <mat-datepicker #picker2></mat-datepicker>
                 </mat-form-field>
@@ -343,7 +366,8 @@
           </table>
           <p>
             <mat-form-field class="full-width">
-              <textarea matInput placeholder="Qualification" formControlName="merit1" matTooltip="Enter your qualifications"></textarea>
+              <textarea matInput placeholder="Qualification" formControlName="merit1"
+                matTooltip="Enter your qualifications"></textarea>
               <mat-error *ngFor="let validation of account_validation_messages.merit">
                 <mat-error class="error-message"
                   *ngIf="accountDetailsForm.get('academicQualification').get('merit').hasError(validation.type) && (accountDetailsForm.get('academicQualification').get('merit').dirty || accountDetailsForm.get('academicQualification').get('merit').touched)">
@@ -355,27 +379,29 @@
         <!--Academic Qualification form 3-->
         <div *ngIf="showAca == 3">
           <mat-form-field class="full-width">
-            <input matInput type="text" placeholder="Institution Name" matTooltip="Enter the name of the institution" formControlName="institutionname2">
+            <input matInput type="text" placeholder="Institution Name" matTooltip="Enter the name of the institution"
+              formControlName="institutionname2">
           </mat-form-field>
 
           <table class="full-width" cellspacing="0">
             <tr>
               <td>
                 <mat-form-field class="full-width">
-                  <input matInput [matDatepicker]="picker1" formControlName="Astartdate2" matTooltip="Select the starting date" name="Astartdate2" matInput
+                  <input matInput [matDatepicker]="picker1" formControlName="Astartdate2"
+                    matTooltip="Select the starting date" name="Astartdate2" matInput
                     placeholder="Choose the Starting Date">
                   <mat-datepicker-toggle matSuffix [for]="picker1">
-                    
+
                   </mat-datepicker-toggle>
                   <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
               </td>
               <td>
                 <mat-form-field class="full-width">
-                  <input matInput [matDatepicker]="picker2" formControlName="Aenddate2" matTooltip="Select the ending date" name="Aenddate2" matInput
-                    placeholder="Choose the Ending Date">
+                  <input matInput [matDatepicker]="picker2" formControlName="Aenddate2"
+                    matTooltip="Select the ending date" name="Aenddate2" matInput placeholder="Choose the Ending Date">
                   <mat-datepicker-toggle matSuffix [for]="picker2">
-                    
+
                   </mat-datepicker-toggle>
                   <mat-datepicker #picker2></mat-datepicker>
                 </mat-form-field>
@@ -385,7 +411,8 @@
 
           <p>
             <mat-form-field class="full-width">
-              <textarea matInput placeholder="Qualification" formControlName="merit2" matTooltip="Enter your qualifications"></textarea>
+              <textarea matInput placeholder="Qualification" formControlName="merit2"
+                matTooltip="Enter your qualifications"></textarea>
               <mat-error *ngFor="let validation of account_validation_messages.merit">
                 <mat-error class="error-message"
                   *ngIf="accountDetailsForm.get('academicQualification').get('merit').hasError(validation.type) && (accountDetailsForm.get('academicQualification').get('merit').dirty || accountDetailsForm.get('academicQualification').get('merit').touched)">
@@ -405,9 +432,18 @@
     <!--Professional Qualification-->
     <div *ngIf="showTab == 4">
       <mat-form-field class="full-width">
+        <textarea matInput placeholder="Profession" matTooltip="Enter your Profession" formControlName="profession"
+          required></textarea>
+        <mat-error *ngFor="let validation of account_validation_messages.profession">
+          <mat-error class="error-message"
+            *ngIf="accountDetailsForm.get('profession').hasError(validation.type) && (accountDetailsForm.get('profession').dirty || accountDetailsForm.get('profession').touched)">
+            {{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
         <textarea matInput placeholder="Professional Qualification"
           matTooltip="Enter your Professional Qualifications separating each with a comma"
-          formControlName="pqualification" ></textarea>
+          formControlName="pqualification"></textarea>
       </mat-form-field>
     </div>
 
@@ -431,23 +467,26 @@
     <div *ngIf="showTab == 7">
       <div formGroupName="referees" name="refereeForm">
         <mat-form-field class="full-width">
-          <input matInput type="text" placeholder="Title" matTooltip="Enter the title of the referee" formControlName="refereetitle" required>
+          <input matInput type="text" placeholder="Title" matTooltip="Enter the title of the referee"
+            formControlName="refereetitle" required>
         </mat-form-field>
         <mat-form-field class="full-width">
-            <input matInput type="text" placeholder="Company" formControlName="refereeComp"
-              matTooltip="Enter the title of the company where the referee works at" required>
-          </mat-form-field>
+          <input matInput type="text" placeholder="Company" formControlName="refereeComp"
+            matTooltip="Enter the title of the company where the referee works at" required>
+        </mat-form-field>
 
         <table class="full-width" cellspacing="0">
           <tr>
             <td>
               <mat-form-field class="full-width">
-                <input type="text" matInput placeholder="First name" formControlName="refereefname" matTooltip="Enter the first name of the referee" required>
+                <input type="text" matInput placeholder="First name" formControlName="refereefname"
+                  matTooltip="Enter the first name of the referee" required>
               </mat-form-field>
             </td>
             <td>
               <mat-form-field class="full-width">
-                <input type="text" matInput placeholder="Last Name" formControlName="refereelname" matTooltip="Enter the last name of the referee" required>
+                <input type="text" matInput placeholder="Last Name" formControlName="refereelname"
+                  matTooltip="Enter the last name of the referee" required>
               </mat-form-field>
             </td>
           </tr>
@@ -455,7 +494,8 @@
 
         <p>
           <mat-form-field class="full-width">
-            <textarea matInput placeholder="Address" formControlName="refereeAddress" matTooltip="Enter the Address of the referee" required></textarea>
+            <textarea matInput placeholder="Address" formControlName="refereeAddress"
+              matTooltip="Enter the Address of the referee" required></textarea>
           </mat-form-field>
         </p>
 
@@ -463,7 +503,8 @@
           <tr>
             <td>
               <mat-form-field class="full-width">
-                <input type="email" matInput placeholder="Referee Email" formControlName="refereeEmail" matTooltip="Enter the referee's email">
+                <input type="email" matInput placeholder="Referee Email" formControlName="refereeEmail"
+                  matTooltip="Enter the referee's email">
                 <mat-error *ngFor="let validation of account_validation_messages.refereeEmail">
                   <mat-error class="error-message"
                     *ngIf="accountDetailsForm.get('referees').get('refereeEmail').hasError(validation.type) && (accountDetailsForm.get('referees').get('refereeEmail').dirty || accountDetailsForm.get('referees').get('refereeEmail').touched)">
@@ -473,7 +514,8 @@
             </td>
             <td>
               <mat-form-field class="full-width">
-                <input matInput type="number" placeholder="Referee PhoneNumber" formControlName="refereePhonenumber" matTooltip="Enter the referee's phone number">
+                <input matInput type="number" placeholder="Referee PhoneNumber" formControlName="refereePhonenumber"
+                  matTooltip="Enter the referee's phone number">
                 <mat-error *ngFor="let validation of account_validation_messages.refereePhonenumber">
                   <mat-error class="error-message"
                     *ngIf="accountDetailsForm.get('referees').get('refereePhonenumber').hasError(validation.type) && (accountDetailsForm.get('referees').get('refereePhonenumber').dirty || accountDetailsForm.get('referees').get('refereePhonenumber').touched)">
@@ -487,7 +529,8 @@
         <!--Referee Form 1-->
         <div *ngIf="showRef == 2 || showRef == 3">
           <mat-form-field class="full-width">
-            <input matInput type="text" placeholder="Title" formControlName="refereetitle1" matTooltip="Enter the title of the referee">
+            <input matInput type="text" placeholder="Title" formControlName="refereetitle1"
+              matTooltip="Enter the title of the referee">
           </mat-form-field>
           <mat-form-field class="full-width">
             <input matInput type="text" placeholder="Company" formControlName="refereeComp1"
@@ -498,12 +541,14 @@
             <tr>
               <td>
                 <mat-form-field class="full-width">
-                  <input type="text" matInput placeholder="First name" formControlName="refereefname1" matTooltip="Enter the first name of the referee">
+                  <input type="text" matInput placeholder="First name" formControlName="refereefname1"
+                    matTooltip="Enter the first name of the referee">
                 </mat-form-field>
               </td>
               <td>
                 <mat-form-field class="full-width">
-                  <input type="text" matInput placeholder="Last Name" formControlName="refereelname1" matTooltip="Enter the last name of the referee">
+                  <input type="text" matInput placeholder="Last Name" formControlName="refereelname1"
+                    matTooltip="Enter the last name of the referee">
                 </mat-form-field>
               </td>
             </tr>
@@ -511,7 +556,8 @@
 
           <p>
             <mat-form-field class="full-width">
-              <textarea matInput placeholder="Address" formControlName="refereeAddress1" matTooltip="Enter the Address of the referee"></textarea>
+              <textarea matInput placeholder="Address" formControlName="refereeAddress1"
+                matTooltip="Enter the Address of the referee"></textarea>
             </mat-form-field>
           </p>
 
@@ -519,7 +565,8 @@
             <tr>
               <td>
                 <mat-form-field class="full-width">
-                  <input type="email" matInput placeholder="Referee Email" formControlName="refereeEmail1" matTooltip="Enter the referee's email">
+                  <input type="email" matInput placeholder="Referee Email" formControlName="refereeEmail1"
+                    matTooltip="Enter the referee's email">
                   <mat-error *ngFor="let validation of account_validation_messages.refereeEmail1">
                     <mat-error class="error-message"
                       *ngIf="accountDetailsForm.get('referees').get('refereeEmail1').hasError(validation.type) && (accountDetailsForm.get('referees').get('refereeEmail1').dirty || accountDetailsForm.get('referees').get('refereeEmail1').touched)">
@@ -529,7 +576,8 @@
               </td>
               <td>
                 <mat-form-field class="full-width">
-                  <input matInput type="number" placeholder="Referee PhoneNumber" formControlName="refereePhonenumber1" matTooltip="Enter the referee's phone number">
+                  <input matInput type="number" placeholder="Referee PhoneNumber" formControlName="refereePhonenumber1"
+                    matTooltip="Enter the referee's phone number">
                   <mat-error *ngFor="let validation of account_validation_messages.refereePhonenumber1">
                     <mat-error class="error-message"
                       *ngIf="accountDetailsForm.get('referees').get('refereePhonenumber1').hasError(validation.type) && (accountDetailsForm.get('referees').get('refereePhonenumber1').dirty || accountDetailsForm.get('referees').get('refereePhonenumber1').touched)">
@@ -544,7 +592,8 @@
         <!--Referee Form 2-->
         <div *ngIf="showRef == 3">
           <mat-form-field class="full-width">
-            <input matInput type="text" placeholder="Title" formControlName="refereetitle2" matTooltip="Enter the title of the referee">
+            <input matInput type="text" placeholder="Title" formControlName="refereetitle2"
+              matTooltip="Enter the title of the referee">
           </mat-form-field>
           <mat-form-field class="full-width">
             <input matInput type="text" placeholder="Company" formControlName="refereeComp2"
@@ -555,12 +604,14 @@
             <tr>
               <td>
                 <mat-form-field class="full-width">
-                  <input type="text" matInput placeholder="First name" formControlName="refereefname2" matTooltip="Enter the first name of the referee">
+                  <input type="text" matInput placeholder="First name" formControlName="refereefname2"
+                    matTooltip="Enter the first name of the referee">
                 </mat-form-field>
               </td>
               <td>
                 <mat-form-field class="full-width">
-                  <input type="text" matInput placeholder="Last Name" formControlName="refereelname2" matTooltip="Enter the last name of the referee">
+                  <input type="text" matInput placeholder="Last Name" formControlName="refereelname2"
+                    matTooltip="Enter the last name of the referee">
                 </mat-form-field>
               </td>
             </tr>
@@ -568,7 +619,8 @@
 
           <p>
             <mat-form-field class="full-width">
-              <textarea matInput placeholder="Address" formControlName="refereeAddress2" matTooltip="Enter the Address of the referee"></textarea>
+              <textarea matInput placeholder="Address" formControlName="refereeAddress2"
+                matTooltip="Enter the Address of the referee"></textarea>
             </mat-form-field>
           </p>
 
@@ -576,7 +628,8 @@
             <tr>
               <td>
                 <mat-form-field class="full-width">
-                  <input type="email" matInput placeholder="Referee Email" formControlName="refereeEmail2" matTooltip="Enter the referee's email">
+                  <input type="email" matInput placeholder="Referee Email" formControlName="refereeEmail2"
+                    matTooltip="Enter the referee's email">
                   <mat-error *ngFor="let validation of account_validation_messages.refereeEmail2">
                     <mat-error class="error-message"
                       *ngIf="accountDetailsForm.get('referees').get('refereeEmail2').hasError(validation.type) && (accountDetailsForm.get('referees').get('refereeEmail2').dirty || accountDetailsForm.get('referees').get('refereeEmail2').touched)">
@@ -586,7 +639,8 @@
               </td>
               <td>
                 <mat-form-field class="full-width">
-                  <input matInput type="number" placeholder="Referee PhoneNumber" formControlName="refereePhonenumber2" matTooltip="Enter the referee's phone number">
+                  <input matInput type="number" placeholder="Referee PhoneNumber" formControlName="refereePhonenumber2"
+                    matTooltip="Enter the referee's phone number">
                   <mat-error *ngFor="let validation of account_validation_messages.refereePhonenumber2">
                     <mat-error class="error-message"
                       *ngIf="accountDetailsForm.get('referees').get('refereePhonenumber2').hasError(validation.type) && (accountDetailsForm.get('referees').get('refereePhonenumber2').dirty || accountDetailsForm.get('referees').get('refereePhonenumber2').touched)">

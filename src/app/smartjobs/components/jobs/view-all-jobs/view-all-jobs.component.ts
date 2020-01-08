@@ -54,7 +54,7 @@ export class ViewAllJobsComponent implements OnInit {
                       success => {
                         this.ELEMENT_DATA.push(success);
                         console.log(this.ELEMENT_DATA);
-                        this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+                        this.dataSource = new MatTableDataSource(this.ELEMENT_DATA[0]);
                          /* Sort */
                         this.dataSource.sort = this.sort;
                         /* Pagination */
