@@ -1,3 +1,162 @@
-<p>
-  add-job works!
-</p>
+<app-header></app-header>
+<!-- Title group  -->
+<div class="container bootstrap snippet">
+  <div class="row">
+    <div class="col-sm-10">
+      <h3>Fill in the details of the Job</h3>
+    </div>
+  </div>
+
+  <!-- Jobs form -->
+  <div class="d-flex justify-content-center form_container mb-2">
+    <mat-card>
+      <form [formGroup]="AddJobForm" (ngSubmit)="onSubmitAddJobs(AddJobForm.value)" #resetAddJobForm="ngForm" novalidate
+        [loader]="isLoading ">
+        <!-- Job Title -->
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Job Title" formControlName="job_title" required>
+          <mat-error *ngFor="let validation of addJobMessages.job_title">
+            <mat-error class="error-message"
+              *ngIf="AddJobForm.get('job_title').hasError(validation.type) && (AddJobForm.get('job_title').dirty || AddJobForm.get('job_title').touched)">
+              {{validation.message}}</mat-error>
+          </mat-error>
+        </mat-form-field>
+        <!-- Job Type -->
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Job Type" formControlName="jobType" required>
+          <mat-error *ngFor="let validation of addJobMessages.jobType">
+            <mat-error class="error-message"
+              *ngIf="AddJobForm.get('jobType').hasError(validation.type) && (AddJobForm.get('jobType').dirty || AddJobForm.get('job_title').touched)">
+              {{validation.message}}</mat-error>
+          </mat-error>
+        </mat-form-field>
+        <!--Job Industry-->
+        <mat-form-field class="full-width">
+          <mat-label>Industry</mat-label>
+          <mat-select formControlName="industry" name="industry" matInput placeholder="Industry" required>
+            <mat-option *ngFor="let industry of inds" [value]="industry.value">
+              {{industry.viewValue}}
+            </mat-option>
+          </mat-select>
+          <mat-error class="error-message" *ngIf="AddJobForm.controls['industry'].hasError('required')">Industry is
+            required</mat-error>
+        </mat-form-field>
+        <!-- Job Location-->
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Location" formControlName="location" required>
+          <mat-error *ngFor="let validation of addJobMessages.location">
+            <mat-error class="error-message"
+              *ngIf="AddJobForm.get('location').hasError(validation.type) && (AddJobForm.get('location').dirty || AddJobForm.get('job_title').touched)">
+              {{validation.message}}</mat-error>
+          </mat-error>
+        </mat-form-field>
+        <!--Minimum Qualification-->
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="Minimum Qualification" formControlName="minimum_qualification"
+            matTooltip="Enter your Minimum Qualification separating each with a comma" required></textarea>
+          <mat-error *ngFor="let validation of addJobMessages.minimum_qualification">
+            <mat-error class="error-message"
+              *ngIf="AddJobForm.get('minimum_qualification').hasError(validation.type) && (AddJobForm.get('minimum_qualification').dirty || AddJobForm.get('minimum_qualification').touched)">
+              {{validation.message}}</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Experience Level -->
+        <mat-form-field class="full-width">
+          <mat-label>Experience Level</mat-label>
+          <mat-select formControlName="experience_level" name="experience_level" matInput placeholder="Experience Level" required>
+            <mat-option *ngFor="let experience_level of exlvs" [value]="experience_level.value">
+              {{experience_level.viewValue}}
+            </mat-option>
+          </mat-select>
+          <mat-error class="error-message" *ngIf="AddJobForm.controls['experience_level'].hasError('required')">Experience Level is
+            required</mat-error>
+        </mat-form-field>
+
+        <!-- Experience Length -->
+        <mat-form-field class="full-width">
+          <mat-label>Experience Length</mat-label>
+          <mat-select formControlName="experience_length" name="experience_length" matInput placeholder="Experience Length" required>
+            <mat-option *ngFor="let experience_length of exlng" [value]="experience_length.value">
+              {{experience_length.viewValue}}
+            </mat-option>
+          </mat-select>
+          <mat-error class="error-message" *ngIf="AddJobForm.controls['experience_length'].hasError('required')">Experience Length is
+            required</mat-error>
+        </mat-form-field>
+
+        <!-- Job Description -->
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="Job Description" formControlName="job_description"
+            matTooltip="Enter the Job Description separating each with a comma" required></textarea>
+          <mat-error *ngFor="let validation of addJobMessages.job_description">
+            <mat-error class="error-message"
+              *ngIf="AddJobForm.get('job_description').hasError(validation.type) && (AddJobForm.get('job_description').dirty || AddJobForm.get('job_description').touched)">
+              {{validation.message}}</mat-error>
+          </mat-error>
+        </mat-form-field>
+        <!-- Duties and Responsibilties -->
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="Duties and Responsibilties" formControlName="duties_and_responsibilities"
+            matTooltip="Enter the Duties and Responsibilties separating each with a comma" required></textarea>
+          <mat-error *ngFor="let validation of addJobMessages.duties_and_responsibilities">
+            <mat-error class="error-message"
+              *ngIf="AddJobForm.get('duties_and_responsibilities').hasError(validation.type) && (AddJobForm.get('duties_and_responsibilities').dirty || AddJobForm.get('duties_and_responsibilities').touched)">
+              {{validation.message}}</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Requirements -->
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="Requirements" formControlName="requirements"
+            matTooltip="Enter the Requirements separating each with a comma" required></textarea>
+          <mat-error *ngFor="let validation of addJobMessages.requirements">
+            <mat-error class="error-message"
+              *ngIf="AddJobForm.get('requirements').hasError(validation.type) && (AddJobForm.get('requirements').dirty || AddJobForm.get('requirements').touched)">
+              {{validation.message}}</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Application Deadline -->
+        <mat-form-field class="full-width">
+          <input matInput [matDatepicker]="picker" formControlName="application_deadline" matTooltip="Select the job Application Deadline"
+            name="application_deadline" matInput placeholder="Application Deadline" required>
+          <mat-datepicker-toggle matSuffix [for]="picker">
+          </mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error class="error-message" *ngIf="AddJobForm.controls['application_deadline'].hasError('required')">
+            Application Deadline is required
+          </mat-error>
+        </mat-form-field>
+        <!-- Other Details -->
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="Other Details" formControlName="other_details"
+            matTooltip="Enter the Other Details"></textarea>
+          <mat-error *ngFor="let validation of addJobMessages.other_details">
+            <mat-error class="error-message"
+              *ngIf="AddJobForm.get('other_details').hasError(validation.type) && (AddJobForm.get('other_details').dirty || AddJobForm.get('other_details').touched)">
+              {{validation.message}}</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Submit & Reset -->
+        <div class="mt-2">
+          <div class="d-flex justify-content-around links">
+            <div matTooltip="Fill in all the *required details before submitting"
+              [matTooltipDisabled]="AddJobForm.valid">
+              <button class="submit-btn" color="primary" mat-raised-button type="submit" [disabled]="!AddJobForm.valid">
+                <mat-icon>add</mat-icon>
+                Add
+              </button>
+            </div>
+            <div matTooltip="By clicking clear the all the forms will be cleared">
+              <button mat-flat-button color="warn" type="button" (click)="resetForm()">
+                <mat-icon>clear</mat-icon>Clear
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

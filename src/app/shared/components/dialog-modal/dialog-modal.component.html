@@ -1,0 +1,33 @@
+<form [formGroup]="applicationForm" (ngSubmit)="onConfirmClick(applicationForm.value)" novalidate [loader]="isLoading ">
+  <mat-dialog-content>
+    <mat-form-field class="full-width">
+      <mat-label>Availability</mat-label>
+      <mat-select formControlName="availability" name="availability" matInput placeholder="How soon are you available?" required>
+        <mat-option *ngFor="let availability of availabilities" [value]="availability.value">
+          {{availability.viewValue}}
+        </mat-option>
+      </mat-select>
+      <mat-error class="error-message" *ngIf="applicationForm.controls['availability'].hasError('required')">
+        Availability is required</mat-error>
+    </mat-form-field>
+    <mat-dialog-content>
+      <mat-form-field class="full-width">
+        <mat-label>Expected Salary Range</mat-label>
+        <mat-select formControlName="expected_salary" name="expected_salary" matInput placeholder="What is Your Expected Salary Range?" required>
+          <mat-option *ngFor="let expected_salary of salaries" [value]="expected_salary.value">
+            {{expected_salary.viewValue}}
+          </mat-option>
+        </mat-select>
+        <mat-error class="error-message" *ngIf="applicationForm.controls['expected_salary'].hasError('required')">
+          Expected salary range is required</mat-error>
+      </mat-form-field>
+      <div class="icon-box">
+        <i class="material-icons">send</i>
+      </div>
+      <p>Your Profile will be sent to the recruiter</p>
+    </mat-dialog-content>
+    <mat-dialog-actions align="center">
+      <button mat-raised-button color="primary" type="submit"[disabled]="!applicationForm.valid"tabindex="1">Confirm</button>
+      <button mat-raised-button type="button" mat-dialog-close tabindex="-1">Cancel</button>
+    </mat-dialog-actions>
+

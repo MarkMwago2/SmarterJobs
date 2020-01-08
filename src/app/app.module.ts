@@ -8,6 +8,9 @@ import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import {CdkTableModule} from '@angular/cdk/table';
+import {CdkTreeModule} from '@angular/cdk/tree';
+import {CdkDetailRowDirective} from './cdk-detail-row.directive';
 
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import { Cloudinary } from 'cloudinary-core';
@@ -33,6 +36,7 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 
 import { LoaderService } from './smartjobs/services/loader.service';
 import { ProfileService } from './smartjobs/services/profile.service';
+import { JobsService } from './smartjobs/services/jobs.service';
 import { IndustryService } from './smartjobs/services/industry.service';
 import { LoaderInterceptor } from './smartjobs/interceptors/loader.interceptor';
 import { MergePipe } from './shared/pipes/merge.pipe';
@@ -42,7 +46,9 @@ import { ToastrModule } from 'ngx-toastr';
 import {NgxLoaderIndicatorModule} from 'ngx-loader-indicator';
 
 
-import { MatButtonModule, MatCardModule, MatDatepickerModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatSelectModule, MatToolbarModule, MatSidenavModule} from '@angular/material';
+import { MatButtonModule, MatCardModule, MatDatepickerModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatSelectModule, MatToolbarModule, MatSidenavModule, MatChipsModule, MatRadioModule,MatBadgeModule,MatListModule,
+MatGridListModule, MatFormFieldModule, MatSortModule, MatStepperModule, MatTableModule,  MatDialogModule,
+} from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatNativeDateModule, MatIconModule} from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
@@ -63,6 +69,7 @@ const MatModules = [
   MatSnackBarModule,
   MatButtonModule,
   MatCheckboxModule,
+  MatDialogModule,
   MatInputModule,
   MatSelectModule,
   MatIconModule,
@@ -73,6 +80,10 @@ const MatModules = [
   MatToolbarModule,
   FlexLayoutModule,
   MatSidenavModule,
+  MatChipsModule, MatRadioModule, MatBadgeModule, MatListModule,
+  MatGridListModule, MatFormFieldModule, MatSortModule,
+  MatStepperModule,
+  MatTableModule,
 ];
 
 
@@ -86,11 +97,13 @@ import { AddJobComponent } from './smartjobs/components/jobs/add-job/add-job.com
 import { ViewJobComponent } from './smartjobs/components/jobs/view-job/view-job.component';
 import { EditJobComponent } from './smartjobs/components/jobs/edit-job/edit-job.component';
 import { ViewAllJobsComponent } from './smartjobs/components/jobs/view-all-jobs/view-all-jobs.component';
+import { ViewJobsByuserComponent } from './smartjobs/components/jobs/view-jobs-byuser/view-jobs-byuser.component';
+import { DialogModalComponent } from './shared/components/dialog-modal/dialog-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-
+    CdkDetailRowDirective,
     FooterComponent,
     HeaderComponent,
     LoginComponent,
@@ -111,7 +124,9 @@ import { ViewAllJobsComponent } from './smartjobs/components/jobs/view-all-jobs/
     AddJobComponent,
     ViewJobComponent,
     EditJobComponent,
-    ViewAllJobsComponent
+    ViewAllJobsComponent,
+    ViewJobsByuserComponent,
+    DialogModalComponent
 
   ],
   imports: [
@@ -153,12 +168,13 @@ import { ViewAllJobsComponent } from './smartjobs/components/jobs/view-all-jobs/
     IndustryService,
     LoaderService,
     ProfileService,
+    JobsService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: DateAdapter, useClass: AppDateAdapter},
     {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
   ],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  // schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

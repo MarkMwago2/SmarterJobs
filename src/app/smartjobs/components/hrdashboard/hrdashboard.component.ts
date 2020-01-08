@@ -1,5 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-
+import {
+  Router, ActivatedRoute
+} from '@angular/router';
+export interface Tile {
+  cols: number;
+  rows: number;
+  text: string;
+  border: string;
+  img: string;
+  title: string;
+  onClick: string;
+ }
 @Component({
   selector: 'app-hrdashboard',
   templateUrl: './hrdashboard.component.html',
@@ -7,9 +18,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HrdashboardComponent implements OnInit {
 
-  constructor() { }
+  tiles: Tile[] = [
+    {text: 'Tile 1', cols: 2, rows: 1 , border: '3px double purple', img: '/assets/images/jobs2.png', title: 'Jobs', onClick: 'jobsRoute()'},
+    {text: 'Tile 2', cols: 2, rows: 1 , border: '3px double maroon', img: '/assets/images/number-of-employees-icon.png', title: 'Employees',onClick: 'employeesRoute()'},
+    {text: 'Tile 3', cols: 2, rows: 1 , border: '3px double maroon', img: '/assets/images/talent pool.png', title: 'Talent Pool',onClick: 'talentPoolRoute()'},
+    {text: 'Tile 4', cols: 2, rows: 1 , border: '3px double purple', img: '/assets/images/report-2.png', title: 'Reports', onClick: 'reportsRoute()'},
+    ];
+
+  constructor(private router: Router,) { }
 
   ngOnInit() {
   }
-
+  employeesRoute() {
+    this.router.navigate(['agency-jobs']);
+  }
+  talentPoolRoute() {
+    this.router.navigate(['agency-jobs']);
+  }
+  jobsRoute() {
+    this.router.navigate(['agency-jobs']);
+  }
+  reportsRoute() {
+    this.router.navigate(['agency-jobs']);
+  }
 }

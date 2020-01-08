@@ -431,6 +431,15 @@
 
     <!--Professional Qualification-->
     <div *ngIf="showTab == 4">
+    <mat-form-field class="full-width">
+        <textarea matInput placeholder="Profession" matTooltip="Enter your Profession" formControlName="profession"
+          required></textarea>
+        <mat-error *ngFor="let validation of account_validation_messages.profession">
+          <mat-error class="error-message"
+            *ngIf="accountDetailsForm.get('profession').hasError(validation.type) && (accountDetailsForm.get('profession').dirty || accountDetailsForm.get('profession').touched)">
+            {{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
       <mat-form-field class="full-width">
         <textarea matInput placeholder="Professional Qualification"
           matTooltip="Enter your Professional Qualifications separating each with a comma"

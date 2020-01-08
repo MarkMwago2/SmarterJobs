@@ -62,30 +62,30 @@ export class CreateCompanyProfileComponent implements OnInit {
   error: any;
   isLoading: boolean;
   accountDetailsForm: FormGroup;
-  
+
   account_validation_messages = {
-    'companyname': [{
+    companyname: [{
         type: 'required',
-        message: 'Companyname is required'
+        message: 'Company name is required'
       },
       {
         type: 'minlength',
-        message: 'Companyname must be at least 5 characters long'
+        message: 'Company name must be at least 5 characters long'
       },
       {
         type: 'maxlength',
-        message: 'Companyname cannot be more than 25 characters long'
+        message: 'Company name cannot be more than 25 characters long'
       },
       {
         type: 'pattern',
-        message: 'Your Companyname must contain only letters'
+        message: 'Your Company name must contain only letters'
       },
       {
         type: 'validCompanyname',
-        message: 'Your Companyname has already been taken'
+        message: 'Your Company name has already been taken'
       }
     ],
-    'email': [{
+    email: [{
         type: 'required',
         message: 'Email is required'
       },
@@ -94,43 +94,47 @@ export class CreateCompanyProfileComponent implements OnInit {
         message: 'Enter a valid email'
       }
     ],
-    'physicaladdress':[{
+    physicaladdress: [{
       type: 'required',
       message: 'Physical Address is required'
     }],
-    'postaladdress': [{
+    postaladdress: [{
       type: 'required',
       message: 'Postal Address is required'
     }],
-    'website': [{
+    website: [{
       type: 'required',
       message: 'Website is required'
     }],
-    'phonenumber': [{
+    phonenumber: [{
       type: 'required',
       message: 'Phone Number is required'
     }],
-    'contactPersonName': [{
+    contactPersonName: [{
       type: 'required',
       message: 'Contact Person Name is required'
     }],
-    'contactPersonTitle': [{
+    contactPersonTitle: [{
       type: 'required',
       message: 'Contact Person Title is required'
     }],
-    'contactPersonEmail': [{
+    contactPersonEmail: [{
       type: 'required',
       message: 'Contact Person Email is required'
+    },
+    {
+      type: 'pattern',
+      message: 'Enter a valid email'
     }],
-    'contactPersonPhoneNumber': [{
+    contactPersonPhoneNumber: [{
       type: 'required',
       message: 'Contact Person Phone Number is required'
     }],
-    'employees': [{
+    employees: [{
       type: 'required',
       message: 'Number of Employees is required'
     }],
-    'industriy': [{
+    industriy: [{
       type: 'required',
       message: 'Industry is required'
     }]
@@ -164,9 +168,33 @@ export class CreateCompanyProfileComponent implements OnInit {
   ];
 
   inds: Industry[] = [
+    {value: 'Advertising and Marketing', viewValue: 'Advertising and Marketing'},
     {value: 'Agriculture and Farming', viewValue: 'Agriculture and Farming'},
+    {value: 'Automotive and Aviation', viewValue: 'Automotive and Aviation'},
+    {value: 'Banking, Finance & Insurance', viewValue: 'Banking, Finance & Insurance'},
     {value: 'Building and Construction', viewValue: 'Building and Construction'},
+    {value: 'Digital, Media & Communications', viewValue: 'Digital, Media & Communications'},
+    {value: 'Education & Training', viewValue: 'Education & Training'},
+    {value: 'Energy and Utilities', viewValue: 'Energy and Utilities'},
+    {value: 'Entertainment and Events', viewValue: 'Entertainment and Events'},
+    {value: 'Government', viewValue: 'Government'},
+    {value: 'Health', viewValue: 'Health'},
+    {value: 'Hospitality and Hotel', viewValue: 'Hospitality and Hotel'},
+    {value: 'Internet and Telecommunications', viewValue: 'Internet and Telecommunications'},
+    {value: 'Law ', viewValue: 'Law '},
+    {value: 'Law Enforcement and Security', viewValue: 'Law Enforcement and Security'},
+    {value: 'Logistics anbd Transportation', viewValue: 'Logistics anbd Transportation'},
+    {value: 'Manufacturing', viewValue: 'Manufacturing'},
+    {value: 'NGO', viewValue: 'NGO'},
+    {value: 'Real Estate', viewValue: 'Real Estate'},
+    {value: 'Recruitment', viewValue: 'Recruitment'},
+    {value: 'Retail & Fashion', viewValue: 'Retail & Fashion'},
+    {value: 'Technology', viewValue: 'Technology'},
+    {value: 'Tourism, Travel & Leisure', viewValue: 'Tourism, Travel & Leisure'}
   ];
+
+  emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
 
   constructor(
     private authService: AuthService,
@@ -182,11 +210,11 @@ export class CreateCompanyProfileComponent implements OnInit {
 
   ngOnInit() {
     this.createForms();
+    this.showCreate();
     // this.types$ = this.getIndustries();
   }
 
   createForms() {
-    // matching passwords validation
 
     // user links form validations
     this.accountDetailsForm = this.fb.group({
@@ -199,30 +227,59 @@ export class CreateCompanyProfileComponent implements OnInit {
       ])),
       email: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
+        Validators.pattern(this.emailPattern)
       ])),
       physicaladdress: new FormControl('', Validators.required),
       postaladdress: new FormControl('', Validators.required),
       phonenumber: new FormControl('', Validators.required),
       website: new FormControl('', Validators.required),
-      industriy: new FormControl('', Validators.required),
+      industry: new FormControl('', Validators.required),
       employees: new FormControl('', Validators.required),
       contactPersonName: new FormControl('', Validators.required),
       contactPersonTitle: new FormControl('', Validators.required),
       contactPersonEmail: new FormControl('', Validators.required),
       contactPersonPhoneNumber: new FormControl('', Validators.required),
-
     });
 
   }
   onSubmitAccountDetails(value) {
-    console.log(value);
+    value.user = '';
+    this.isLoading = true;
+    this.prof.createcompanyprofile(value).subscribe(
+      res => {
+        console.log(value);
+        this.showSuccess(value.companyname);
+        this.router.navigate(['home']);
+      }, err => {
+        this.showFailure();
+      }
+    );
   }
 
   showSuccess(username) {
-    this.toastr.success('Account for ' + username + ' created', 'Registration Successful!', {
+    this.toastr.success('Account for ' + username + ' created' + 'Someone from our team will contact you for the next steps' + 'Thank You!', 'Registration Successful!', {
       progressAnimation: 'increasing',
-      timeOut: 2000,
+      timeOut: 5000,
+      tapToDismiss: true,
+      easing: 'ease-in'
+    });
+    this.isLoading = false;
+  }
+
+  showCreate() {
+    this.toastr.info('Fill in the form below with details about your company', 'Create Company Profile', {
+      progressAnimation: 'increasing',
+      timeOut: 5000,
+      tapToDismiss: true,
+      easing: 'ease-in'
+    });
+    this.isLoading = false;
+  }
+
+  showFailure() {
+    this.toastr.error('Company profile has been not created' + 'Check the details and try again', 'Create Unsuccessful!', {
+      progressAnimation: 'increasing',
+      timeOut: 4000,
       tapToDismiss: true,
       easing: 'ease-in'
     });

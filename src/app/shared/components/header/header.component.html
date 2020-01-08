@@ -47,7 +47,7 @@
       <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-facebook"></i></a></li>
       <li class="nav-item"><a href="#" class="nav-link"><i class="fab fa-linkedin-in"></i></a></li>
       <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-twitter"></i></a></li>
-      <li class="nav-item" *ngIf="loggedOut " ><a [routerLink]="['sign-in']" class="nav-link"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a></li>
+      <li class="nav-item" *ngIf="loggedOut " ><a [routerLink]="['/sign-in']" class="nav-link"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a></li>
       <li class="nav-item" *ngIf="loggedIn "><a href="#" class="nav-link" data-toggle="modal" data-target=".bs-example-modal-sm"><i
             class="fas fa-sign-out-alt"></i>Logout</a>
       </li>

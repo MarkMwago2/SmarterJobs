@@ -1,0 +1,32 @@
+<app-header></app-header>
+<!-- Title group  -->
+<div class="container bootstrap snippet">
+  <div class="row">
+    <div class="col-sm-10">
+      <h3>List of all the jobs</h3>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center form_container mb-2 mat-elevation-z8"
+    *ngFor="let job of jobsList; let i = index;">
+    <mat-card class="example-card full-width">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{job.job_title}}</mat-card-title>
+        <mat-card-subtitle>{{job.industry}}</mat-card-subtitle>
+        <mat-card-subtitle>{{job.location}}</mat-card-subtitle>
+        <mat-card-subtitle>{{job.jobType}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="ml-5 mr-5">
+      <h3>Job Description</h3>
+        <p>
+          {{(job.job_description.length)? (job.job_description | slice:0:1000)+'...':(str)}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions class="ml-5">
+        <p class="font-weight-bold d-inline">Application Deadline: </p><p class="d-inline"> {{job.application_deadline | date}}
+      </p>
+        <button mat-raised-button type="button" class="push-right" color="primary" [routerLink]="['/view-job/', job.id]">View Job</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
