@@ -69,4 +69,32 @@ export class JobsService {
   deleteApplicationByID(ApplicationID): Observable < any > {
     return this.http.delete(this.apiRoot.concat('application/') + ApplicationID + '/');
   }
+
+  createshortlist(shortlists): Observable < any > {
+    return this.http.post(this.apiRoot.concat('shortlisteds/'), shortlists);
+  }
+
+  getAllshortlists(): Observable < any > {
+    return this.http.get(this.apiRoot.concat('shortlisteds/'));
+  }
+
+  getAllshortlistsByApplicationByID(applicationID): Observable < any > {
+    return this.http.get(this.apiRoot.concat('ashortlisted/') + applicationID + '/');
+  }
+
+  getAllshortlistsByjobID(jobID): Observable < any > {
+    return this.http.get(this.apiRoot.concat('jshortlisted/') + jobID + '/');
+  }
+
+  getshortlistsByID(shortlistID): Observable < any > {
+    return this.http.get(this.apiRoot.concat('shortlisted/') + shortlistID + '/');
+  }
+
+  editshortlistByID(shortlistID, shortlist): Observable < any > {
+    return this.http.patch(this.apiRoot.concat('shortlisted/') + shortlistID + '/', shortlist);
+  }
+
+  deleteshortlistByID(shortlistID): Observable < any > {
+    return this.http.delete(this.apiRoot.concat('shortlisted/') + shortlistID + '/');
+  }
 }

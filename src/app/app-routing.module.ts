@@ -14,6 +14,7 @@ import { ViewAllJobsComponent } from './smartjobs/components/jobs/view-all-jobs/
 import { ViewJobComponent } from './smartjobs/components/jobs/view-job/view-job.component';
 import { ViewJobsByuserComponent } from './smartjobs/components/jobs/view-jobs-byuser/view-jobs-byuser.component';
 import {  ViewApplicationsComponent } from './smartjobs/components/jobs/view-applications/view-applications.component';
+import { ViewShortlistComponent } from './smartjobs/components/jobs/view-shortlist/view-shortlist.component';
 
 import { ProfileComponent } from './smartjobs/components/user/profile/profile.component';
 import { CreateProfileComponent } from './smartjobs/components/user/create-profile/create-profile.component';
@@ -45,6 +46,7 @@ const routes: Routes = [
 {path: 'view-job/:id', component: ViewJobComponent },
 {path: 'view-jobs', component: ViewJobsByuserComponent },
 {path: 'view-applications/:id', component: ViewApplicationsComponent },
+{path: 'view-shortlist/:id', component: ViewShortlistComponent}
 ];
 
 
