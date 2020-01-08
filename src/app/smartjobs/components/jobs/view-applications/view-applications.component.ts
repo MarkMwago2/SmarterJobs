@@ -34,8 +34,11 @@ export class ViewApplicationsComponent implements OnInit {
   companyId: any;
   userId: any;
   jobId: any;
+  applicationId: any;
   jobApplicationData = {};
   ELEMENT_DATA = [];
+  isLoading: boolean;
+  shortlisted = false;
 
   // dataSource: any;
   displayedColumns: string[] = ['id', 'firstname', 'lastname', 'profession', 'time_applied', 'action'];
@@ -107,11 +110,52 @@ export class ViewApplicationsComponent implements OnInit {
     }
 
   ngOnInit() {
-    
   }
+
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
+  }
+
+  addShortlist(applicationId, firstname, lastname) {
+    this.isLoading = true;
+    const value = { 'application': applicationId};
+    this.jobs.createshortlist(value).subscribe( res => {
+      this.showSuccess(firstname, lastname);
+      this.shortlisted = true;
+    },
+    error => {
+      this.showFailure();
+    });
+  }
+  showSuccess(firstname, lastname) {
+    this.toastr.success( firstname + lastname + 'has been shortlisted' , 'Add Successful!', {
+      progressAnimation: 'increasing',
+      timeOut: 5000,
+      tapToDismiss: true,
+      easing: 'ease-in'
+    });
+    this.isLoading = false;
+  }
+
+  showCreate() {
+    this.toastr.info('Fill in the form below with details about the job', 'Add job', {
+      progressAnimation: 'increasing',
+      timeOut: 5000,
+      tapToDismiss: true,
+      easing: 'ease-in'
+    });
+    this.isLoading = false;
+  }
+
+  showFailure() {
+    this.toastr.error('User had already been shortlisted', 'Add Unsuccessful!', {
+      progressAnimation: 'increasing',
+      timeOut: 4000,
+      tapToDismiss: true,
+      easing: 'ease-in'
+    });
+    this.isLoading = false;
   }
 }

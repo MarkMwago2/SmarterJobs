@@ -102,6 +102,7 @@ import { DialogModalComponent } from './shared/components/dialog-modal/dialog-mo
 import { ViewApplicationsComponent } from './smartjobs/components/jobs/view-applications/view-applications.component';
 import { ViewSingleApplicationComponent } from './smartjobs/components/jobs/view-single-application/view-single-application.component';
 import { ViewApplicationsUserComponent } from './smartjobs/components/jobs/view-applications-user/view-applications-user.component';
+import { ViewShortlistComponent } from './smartjobs/components/jobs/view-shortlist/view-shortlist.component';
 
 @NgModule({
   declarations: [
@@ -132,7 +133,8 @@ import { ViewApplicationsUserComponent } from './smartjobs/components/jobs/view-
     DialogModalComponent,
     ViewApplicationsComponent,
     ViewSingleApplicationComponent,
-    ViewApplicationsUserComponent
+    ViewApplicationsUserComponent,
+    ViewShortlistComponent
 
   ],
   imports: [
