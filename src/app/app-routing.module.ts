@@ -15,6 +15,10 @@ import { ViewJobComponent } from './smartjobs/components/jobs/view-job/view-job.
 import { ViewJobsByuserComponent } from './smartjobs/components/jobs/view-jobs-byuser/view-jobs-byuser.component';
 import {  ViewApplicationsComponent } from './smartjobs/components/jobs/view-applications/view-applications.component';
 import { ViewShortlistComponent } from './smartjobs/components/jobs/view-shortlist/view-shortlist.component';
+import { ViewInterviewedComponent } from './smartjobs/components/jobs/view-interviewed/view-interviewed.component';
+import { AddContractComponent } from './smartjobs/components/employees/add-contract/add-contract.component';
+import { EditContractComponent } from './smartjobs/components/employees/edit-contract/edit-contract.component';
+
 
 import { ProfileComponent } from './smartjobs/components/user/profile/profile.component';
 import { CreateProfileComponent } from './smartjobs/components/user/create-profile/create-profile.component';
@@ -46,7 +50,10 @@ const routes: Routes = [
 {path: 'view-job/:id', component: ViewJobComponent },
 {path: 'view-jobs', component: ViewJobsByuserComponent },
 {path: 'view-applications/:id', component: ViewApplicationsComponent },
-{path: 'view-shortlist/:id', component: ViewShortlistComponent}
+{path: 'view-shortlist/:id', component: ViewShortlistComponent},
+{path: 'view-interviewed/:id', component: ViewInterviewedComponent},
+{path: 'add-contract/:id', component: AddContractComponent},
+{path: 'edit-contract/:id', component: EditContractComponent}
 ];
 
 

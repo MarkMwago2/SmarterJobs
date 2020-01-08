@@ -3,7 +3,7 @@
 <div class="container bootstrap snippet" [loader]="isLoading ">
   <div class="row">
     <div class="col-sm-10">
-      <h3>List of all the Applications </h3>
+      <h3>List of all the Interviewed Shortlisted Candidates </h3>
     </div>
   </div>
   <div class="full-width">
@@ -44,8 +44,8 @@
     <ng-container matColumnDef="action">
       <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
       <mat-cell *matCellDef="let element; let i = index;">
-        <button mat-raised-button color="primary" class="push-right" (click)="addShortlist(element.id, element.firstname,element.lastname);" [disabled]="element.interviewed">
-          <mat-icon>add</mat-icon>Shortlist
+        <button mat-raised-button color="primary" class="push-right" [routerLink]="['/add-contract/', element.userId]">
+          <mat-icon>add</mat-icon>Add Contract
         </button>
       </mat-cell>
     </ng-container>
@@ -251,14 +251,10 @@
               <p class="d-inline"> {{element.referees.refereePhonenumber2}}</p><br>
             </div>
           </div>
-
-
           <div>
-
           </div>
           <mat-divider></mat-divider>
           <div>
-
           </div>
         </mat-card>
       </mat-card>

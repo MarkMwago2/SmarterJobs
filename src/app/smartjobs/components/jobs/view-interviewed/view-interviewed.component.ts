@@ -17,11 +17,10 @@ import {
 import {
   ToastrService
 } from 'ngx-toastr';
-
 @Component({
-  selector: 'app-view-shortlist',
-  templateUrl: './view-shortlist.component.html',
-  styleUrls: ['./view-shortlist.component.css'],
+  selector: 'app-view-interviewed',
+  templateUrl: './view-interviewed.component.html',
+  styleUrls: ['./view-interviewed.component.css'],
   animations: [
     trigger('detailExpand', [
       state('void', style({ height: '0px', minHeight: '0', visibility: 'hidden' })),
@@ -30,7 +29,7 @@ import {
     ]),
   ],
 })
-export class ViewShortlistComponent implements OnInit {
+export class ViewInterviewedComponent implements OnInit {
 
   companyId: any;
   userId: any;
@@ -48,33 +47,30 @@ export class ViewShortlistComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   isExpansionDetailRow = (index, row) => row.hasOwnProperty('detailRow');
-  constructor(
-    private router: Router,
-    private prof: ProfileService,
-    private toastr: ToastrService,
-    private jobs: JobsService,
-    private actRoute: ActivatedRoute,
-    private auth: AuthService
-  ) {
+  constructor(private router: Router,
+              private prof: ProfileService,
+              private toastr: ToastrService,
+              private jobs: JobsService,
+              private actRoute: ActivatedRoute,
+              private auth: AuthService) { }
 
-  }
-
-ngOnInit() {
-  this.jobId = this.actRoute.snapshot.paramMap.get('id');
-  this.jobs.getAllshortlistsByjobID(this.jobId).subscribe(
+  ngOnInit() {
+    this.jobId = this.actRoute.snapshot.paramMap.get('id');
+    this.jobs.getAllInterviewedshortlistsByjobID(this.jobId).subscribe(
       res => {
-        // console.log(res)
+        console.log(res);
         if (res.length > 0) {
           res.forEach((element) => {
             this.applicationId = element.application;
             // this.shortlisted = element.interviewed;
-            console.log(element.interviewed)
+            // console.log(element.interviewed)
             this.jobs.getApplicationByID(this.applicationId).subscribe( res => {
               this.jobApplicationData = res;
               // console.log(res);
               // if (res.length > 0) {
               // res.forEach((element) => {
               this.userId = res.applicant;
+              element.userId = this.userId;
               // console.log(this.userId);
               this.prof.getUser(this.userId).subscribe(
                     success => {
@@ -111,7 +107,7 @@ ngOnInit() {
             });
       });
           this.ELEMENT_DATA = res;
-          console.log(this.ELEMENT_DATA);
+          // console.log(this.ELEMENT_DATA);
           this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
         /* Sort */
           this.dataSource.sort = this.sort;
@@ -125,52 +121,53 @@ ngOnInit() {
       console.error(error);
     });
   }
+
   applyFilter(filterValue: string) {
-  filterValue = filterValue.trim(); // Remove whitespace
-  filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-  this.dataSource.filter = filterValue;
-  }
-
-  addInterviewed(applicationId, firstname, lastname) {
-    this.isLoading = true;
-    const value = { "interviewed": true};
-    this.jobs.editshortlistByID(applicationId, value).subscribe( res => {
-    this.showSuccess(firstname, lastname);
-    // this.shortlisted = true;
-    // console.log(res);
-  },
-  error => {
-    this.showFailure();
-  });
-  }
-  showSuccess(firstname, lastname) {
-  this.toastr.success( firstname + ' ' +  lastname + ' has been interviewed' , 'Add Successful!', {
-  progressAnimation: 'increasing',
-  timeOut: 5000,
-  tapToDismiss: true,
-  easing: 'ease-in'
-  });
-  this.isLoading = false;
-  }
-
-  showCreate() {
-  this.toastr.info('Fill in the form below with details about the job', 'Add job', {
-  progressAnimation: 'increasing',
-  timeOut: 5000,
-  tapToDismiss: true,
-  easing: 'ease-in'
-  });
-  this.isLoading = false;
-  }
-
-  showFailure() {
-  this.toastr.error('User had already been interviewed', 'Add Unsuccessful!', {
-  progressAnimation: 'increasing',
-  timeOut: 4000,
-  tapToDismiss: true,
-  easing: 'ease-in'
-  });
-  this.isLoading = false;
-  }
-
+      filterValue = filterValue.trim(); // Remove whitespace
+      filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+      this.dataSource.filter = filterValue;
+    }
+  
+    addInterviewed(applicationId, firstname, lastname) {
+      this.isLoading = true;
+      const value = { "interviewed": true};
+      this.jobs.editshortlistByID(applicationId, value).subscribe( res => {
+      this.showSuccess(firstname, lastname);
+      // this.shortlisted = true;
+      // console.log(res);
+    },
+    error => {
+      this.showFailure();
+    });
+    }
+    showSuccess(firstname, lastname) {
+    this.toastr.success( firstname + ' ' +  lastname + ' has been interviewed' , 'Add Successful!', {
+    progressAnimation: 'increasing',
+    timeOut: 5000,
+    tapToDismiss: true,
+    easing: 'ease-in'
+    });
+    this.isLoading = false;
+    }
+  
+    showCreate() {
+    this.toastr.info('Fill in the form below with details about the job', 'Add job', {
+    progressAnimation: 'increasing',
+    timeOut: 5000,
+    tapToDismiss: true,
+    easing: 'ease-in'
+    });
+    this.isLoading = false;
+    }
+  
+    showFailure() {
+    this.toastr.error('User had already been interviewed', 'Add Unsuccessful!', {
+    progressAnimation: 'increasing',
+    timeOut: 4000,
+    tapToDismiss: true,
+    easing: 'ease-in'
+    });
+    this.isLoading = false;
+    }
 }
+

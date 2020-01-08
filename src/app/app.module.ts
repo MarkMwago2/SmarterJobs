@@ -103,6 +103,10 @@ import { ViewApplicationsComponent } from './smartjobs/components/jobs/view-appl
 import { ViewSingleApplicationComponent } from './smartjobs/components/jobs/view-single-application/view-single-application.component';
 import { ViewApplicationsUserComponent } from './smartjobs/components/jobs/view-applications-user/view-applications-user.component';
 import { ViewShortlistComponent } from './smartjobs/components/jobs/view-shortlist/view-shortlist.component';
+import { ViewInterviewedComponent } from './smartjobs/components/jobs/view-interviewed/view-interviewed.component';
+import { AddContractComponent } from './smartjobs/components/employees/add-contract/add-contract.component';
+import { ViewContractComponent } from './smartjobs/components/employees/view-contract/view-contract.component';
+import { EditContractComponent } from './smartjobs/components/employees/edit-contract/edit-contract.component';
 
 @NgModule({
   declarations: [
@@ -134,7 +138,11 @@ import { ViewShortlistComponent } from './smartjobs/components/jobs/view-shortli
     ViewApplicationsComponent,
     ViewSingleApplicationComponent,
     ViewApplicationsUserComponent,
-    ViewShortlistComponent
+    ViewShortlistComponent,
+    ViewInterviewedComponent,
+    AddContractComponent,
+    ViewContractComponent,
+    EditContractComponent
 
   ],
   imports: [

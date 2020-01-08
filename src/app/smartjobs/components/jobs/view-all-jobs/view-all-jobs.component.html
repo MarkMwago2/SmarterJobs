@@ -7,13 +7,13 @@
     </div>
   </div>
   <div class="example-header">
-  <button mat-raised-button color="primary" mb-2 class="push-right" [routerLink]="['/add-job']">
+    <button mat-raised-button color="primary" mb-2 class="push-right" [routerLink]="['/add-job']">
       <mat-icon>add</mat-icon>Add Job
     </button>
     <mat-form-field mt-2>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter by Job Title">
     </mat-form-field>
-    
+
   </div>
 
   <mat-table #table [dataSource]="dataSource" matSort>
@@ -66,11 +66,17 @@
 
   <ng-template #tpl let-element>
     <div class="mat-row detail-row" [@detailExpand] style="overflow: hidden">
-    <button mat-raised-button color="primary" class="push-right" [routerLink]="['/view-applications/', element.id]">
-          <mat-icon>library_books</mat-icon>View Applications
-        </button><button mat-raised-button color="primary" class="push-right" [routerLink]="['/view-shortlist/', element.id]">
-          <mat-icon>playlist_add_check</mat-icon>View ShortList
-        </button>
+      <button mat-raised-button color="primary" class="push-right" [routerLink]="['/view-applications/', element.id]">
+        <mat-icon>library_books</mat-icon>View Applications
+      </button>
+      <button mat-raised-button color="primary" class="push-right"
+        [routerLink]="['/view-shortlist/', element.id]">
+        <mat-icon>playlist_add_check</mat-icon>View ShortList
+      </button>
+      <button mat-raised-button color="primary" class="push-right"
+        [routerLink]="['/view-interviewed/', element.id]">
+        <mat-icon>how_to_reg</mat-icon>View Interviewed
+      </button>
       <mat-card class="example-card ">
         <mat-card class="example-card">
           <h3> Job Type</h3>
