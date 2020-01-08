@@ -1,5 +1,8 @@
-import { Component, OnInit, ViewEncapsulation, Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Inject, ViewChild, ElementRef } from '@angular/core';
 import { VERSION, MatDialogRef, MatDialog, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
+import {
+  AuthService
+} from '../../../services/auth.service';
 import {
   JobsService
 } from '../../../services/jobs.service';
@@ -62,7 +65,7 @@ export class ViewJobComponent implements OnInit {
   ];
   availabilities: Availability[] = [
     {value: 'Immediately', viewValue: 'Immediately'},
-    {value: 'After 1 Day', viewValue: 'Afte 1 Day'},
+    {value: 'After 1 Day', viewValue: 'After 1 Day'},
     {value: 'After 2 Days', viewValue: 'After 2 Days'},
     {value: 'After 3 Days', viewValue: 'After 3 Days'},
     {value: 'After 1 week', viewValue: 'After 1 week'},
@@ -83,6 +86,7 @@ export class ViewJobComponent implements OnInit {
               private fb: FormBuilder,
               private toastr: ToastrService,
               private jobs: JobsService,
+              private auth: AuthService,
               private actRoute: ActivatedRoute,
               private location: Location,
               public dialog: MatDialog,
@@ -90,6 +94,7 @@ export class ViewJobComponent implements OnInit {
 
   ngOnInit() {
     this.jobId = this.actRoute.snapshot.paramMap.get('id');
+    this.userId = this.prof.loggedInUserId();
     this.getJobById(this.jobId);
     this.createForms();
   }
@@ -105,14 +110,18 @@ export class ViewJobComponent implements OnInit {
     );
   }
   onConfirmClick(value) {
-    console.log(value)
-    // this.applyJobById(value, this.jobId);
+    value.applicant = this.userId;
+    console.log(JSON.parse(this.jobId));
+    value.job = JSON.parse(this.jobId);
+    delete value.terms;
+    console.log(value);
+    this.applyJobById(value);
   }
 
   createForms() {
     // user links form validations
     this.applicationForm = this.fb.group({
-      availability: new FormControl('', Validators.required),
+      availability_status: new FormControl('', Validators.required),
       expected_salary: new FormControl('', Validators.required),
       terms: new FormControl(false, Validators.pattern('true'))
     });
@@ -136,11 +145,12 @@ export class ViewJobComponent implements OnInit {
     });
     this.isLoading = false;
   }
-  applyJobById(value, jobID) {
-    this.userId = this.prof.loggedInUserId();
-    this.jobs.getJobByID(jobID).subscribe(
+  applyJobById(value) {
+    this.isLoading = true;
+    this.jobs.createApplication(value).subscribe(
       res => {
         this.showSuccess();
+        this.router.navigate(['view-jobs']);
       },
       error => {
         this.showFailure();

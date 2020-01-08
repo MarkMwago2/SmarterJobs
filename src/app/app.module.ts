@@ -99,6 +99,9 @@ import { EditJobComponent } from './smartjobs/components/jobs/edit-job/edit-job.
 import { ViewAllJobsComponent } from './smartjobs/components/jobs/view-all-jobs/view-all-jobs.component';
 import { ViewJobsByuserComponent } from './smartjobs/components/jobs/view-jobs-byuser/view-jobs-byuser.component';
 import { DialogModalComponent } from './shared/components/dialog-modal/dialog-modal.component';
+import { ViewApplicationsComponent } from './smartjobs/components/jobs/view-applications/view-applications.component';
+import { ViewSingleApplicationComponent } from './smartjobs/components/jobs/view-single-application/view-single-application.component';
+import { ViewApplicationsUserComponent } from './smartjobs/components/jobs/view-applications-user/view-applications-user.component';
 
 @NgModule({
   declarations: [
@@ -126,7 +129,10 @@ import { DialogModalComponent } from './shared/components/dialog-modal/dialog-mo
     EditJobComponent,
     ViewAllJobsComponent,
     ViewJobsByuserComponent,
-    DialogModalComponent
+    DialogModalComponent,
+    ViewApplicationsComponent,
+    ViewSingleApplicationComponent,
+    ViewApplicationsUserComponent
 
   ],
   imports: [

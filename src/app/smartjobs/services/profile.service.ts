@@ -36,9 +36,15 @@ export class ProfileService {
   user(): Observable < any > {
     return this.http.get(this.apiRoot.concat('user/') + this.loggedInUserId() + '/');
   }
-
+  getUser(userId): Observable < any > {
+    return this.http.get(this.apiRoot.concat('user/') + userId + '/');
+  }
   userprofile(): Observable < any > {
     return this.http.get(this.apiRoot.concat('profile/') + this.loggedInUserId() + '/');
+  }
+
+  getUserprofile(userId): Observable < any > {
+    return this.http.get(this.apiRoot.concat('profile/') + userId + '/');
   }
 
   updateProfile(profile): Observable < any > {

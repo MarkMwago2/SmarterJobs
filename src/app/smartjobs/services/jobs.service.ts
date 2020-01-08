@@ -45,4 +45,28 @@ export class JobsService {
   deleteJobByID(jobID): Observable < any > {
     return this.http.delete(this.apiRoot.concat('job/') + jobID + '/');
   }
+
+  createApplication(applications): Observable < any > {
+    return this.http.post(this.apiRoot.concat('applications/'), applications);
+  }
+
+  getAllApplications(): Observable < any > {
+    return this.http.get(this.apiRoot.concat('applications/'));
+  }
+
+  getAllApplicationsByJobID(jobID): Observable < any > {
+    return this.http.get(this.apiRoot.concat('japplication/') + jobID + '/');
+  }
+
+  getApplicationByID(ApplicationID): Observable < any > {
+    return this.http.get(this.apiRoot.concat('application/') + ApplicationID + '/');
+  }
+
+  editApplicationByID(ApplicationID, application): Observable < any > {
+    return this.http.patch(this.apiRoot.concat('application/') + ApplicationID + '/', application);
+  }
+
+  deleteApplicationByID(ApplicationID): Observable < any > {
+    return this.http.delete(this.apiRoot.concat('application/') + ApplicationID + '/');
+  }
 }

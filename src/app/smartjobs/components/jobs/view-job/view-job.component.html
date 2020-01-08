@@ -64,14 +64,14 @@
                   [loader]="isLoading ">
                   <mat-form-field class="full-width">
                     <mat-label>Availability</mat-label>
-                    <mat-select formControlName="availability" name="availability" matInput
+                    <mat-select formControlName="availability_status" name="availability_status" matInput
                       placeholder="How soon are you available?" required>
-                      <mat-option *ngFor="let availability of availabilities" [value]="availability.value">
-                        {{availability.viewValue}}
+                      <mat-option *ngFor="let availability_status of availabilities" [value]="availability_status.value">
+                        {{availability_status.viewValue}}
                       </mat-option>
                     </mat-select>
                     <mat-error class="error-message"
-                      *ngIf="applicationForm.controls['availability'].hasError('required')">
+                      *ngIf="applicationForm.controls['availability_status'].hasError('required')">
                       Availability is required</mat-error>
                   </mat-form-field>
                   <mat-form-field class="full-width">
@@ -92,10 +92,10 @@
                   </mat-checkbox>
                     <mat-error class="error-message"
                       *ngIf="applicationForm.controls['terms'].hasError('required')">
-                      {{validation.message}}</mat-error>
-                  <button mat-raised-button color="primary" type="submit" [disabled]="!applicationForm.valid"
+                      {{validation.message}}</mat-error><br>
+                  <button mat-raised-button color="primary" onclick="$('.modal').modal('hide')" type="submit" [disabled]="!applicationForm.valid"
                     >Confirm</button>
-                    <button type="button" class="btn btn-secondary" (click)="resetForm()" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" (click)= "resetForm()" data-dismiss="modal">Cancel</button>
                 </form>
               </div>
               <div class="modal-footer">

@@ -13,6 +13,7 @@ import { EditJobComponent } from './smartjobs/components/jobs/edit-job/edit-job.
 import { ViewAllJobsComponent } from './smartjobs/components/jobs/view-all-jobs/view-all-jobs.component';
 import { ViewJobComponent } from './smartjobs/components/jobs/view-job/view-job.component';
 import { ViewJobsByuserComponent } from './smartjobs/components/jobs/view-jobs-byuser/view-jobs-byuser.component';
+import {  ViewApplicationsComponent } from './smartjobs/components/jobs/view-applications/view-applications.component';
 
 import { ProfileComponent } from './smartjobs/components/user/profile/profile.component';
 import { CreateProfileComponent } from './smartjobs/components/user/create-profile/create-profile.component';
@@ -43,6 +44,7 @@ const routes: Routes = [
 { path: 'agency-jobs', component: ViewAllJobsComponent },
 {path: 'view-job/:id', component: ViewJobComponent },
 {path: 'view-jobs', component: ViewJobsByuserComponent },
+{path: 'view-applications/:id', component: ViewApplicationsComponent },
 ];
 
 
