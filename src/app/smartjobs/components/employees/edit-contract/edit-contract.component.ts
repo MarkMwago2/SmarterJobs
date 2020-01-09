@@ -69,7 +69,7 @@ export class EditContractComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getContract()
+    this.getContract();
   }
   createForms() {
     // user links form validations
@@ -92,6 +92,53 @@ export class EditContractComponent implements OnInit {
     },
     error => {
       console.error(error);
+    });
+  }
+  onSubmitAddContract(value) {
+    this.isLoading = true;
+    const contractId = JSON.parse(this.actRoute.snapshot.paramMap.get('id'));
+    this.jobs.editContractByID(contractId, value).subscribe(res => {
+      this.showSuccess();
+      this.router.navigate(['view-contracts']);
+    },
+    error => {
+      this.showFailure();
+    }
+    );
+  }
+  showSuccess() {
+    this.toastr.success('Contract has been edited' , 'Edit Successful!', {
+      progressAnimation: 'increasing',
+      timeOut: 5000,
+      tapToDismiss: true,
+      easing: 'ease-in'
+    });
+    this.isLoading = false;
+  }
+
+  showCreate() {
+    this.toastr.info('Fill in the form below with details about the contract', 'Edit contract', {
+      progressAnimation: 'increasing',
+      timeOut: 5000,
+      tapToDismiss: true,
+      easing: 'ease-in'
+    });
+    this.isLoading = false;
+  }
+
+  showFailure() {
+    this.toastr.error('Contract has not been edoted' + 'Check the details and try again', 'Edit Unsuccessful!', {
+      progressAnimation: 'increasing',
+      timeOut: 4000,
+      tapToDismiss: true,
+      easing: 'ease-in'
+    });
+    this.isLoading = false;
+  }
+  resetForm() {
+    this.AddContractForm.reset();
+    Object.keys(this.AddContractForm.controls).forEach(key => {
+      this.AddContractForm.controls[key].setErrors(null);
     });
   }
 }

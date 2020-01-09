@@ -18,6 +18,8 @@ import { ViewShortlistComponent } from './smartjobs/components/jobs/view-shortli
 import { ViewInterviewedComponent } from './smartjobs/components/jobs/view-interviewed/view-interviewed.component';
 import { AddContractComponent } from './smartjobs/components/employees/add-contract/add-contract.component';
 import { EditContractComponent } from './smartjobs/components/employees/edit-contract/edit-contract.component';
+import { ViewContractComponent } from './smartjobs/components/employees/view-contract/view-contract.component';
+
 
 
 import { ProfileComponent } from './smartjobs/components/user/profile/profile.component';
@@ -53,7 +55,8 @@ const routes: Routes = [
 {path: 'view-shortlist/:id', component: ViewShortlistComponent},
 {path: 'view-interviewed/:id', component: ViewInterviewedComponent},
 {path: 'add-contract/:id', component: AddContractComponent},
-{path: 'edit-contract/:id', component: EditContractComponent}
+{path: 'edit-contract/:id', component: EditContractComponent},
+{path: 'view-contract', component: ViewContractComponent}
 ];
 
 

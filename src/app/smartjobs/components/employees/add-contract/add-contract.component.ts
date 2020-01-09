@@ -78,12 +78,20 @@ export class AddContractComponent implements OnInit {
 
   onSubmitAddContract(value) {
     value.userId = JSON.parse(this.actRoute.snapshot.paramMap.get('id'));
+    this.userId = this.prof.loggedInUserId();
+    this.prof.getcompanyprofileByUserId(this.userId).subscribe(res => {
+      this.companyId = res.id;
+    },
+    error => {
+      console.error(error);
+    });
     this.isLoading = true;
     console.log(value);
+    value.company = this.companyId;
     this.jobs.createContract(value).subscribe(
       res => {
         console.log(value);
-        this.showSuccess(value.job_title);
+        this.showSuccess();
         // this.router.navigate(['agency-jobs']);
       }, err => {
         this.showFailure();
@@ -91,7 +99,7 @@ export class AddContractComponent implements OnInit {
     );
   }
 
-  showSuccess(title) {
+  showSuccess() {
     this.toastr.success('Contract has been created' , 'Add Successful!', {
       progressAnimation: 'increasing',
       timeOut: 5000,

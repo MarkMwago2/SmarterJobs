@@ -114,6 +114,10 @@ export class JobsService {
     return this.http.get(this.apiRoot.concat('ucontract/') + userID + '/');
   }
 
+  getAllContractByCompanyID(companyID): Observable < any > {
+    return this.http.get(this.apiRoot.concat('ccontract/') + companyID + '/');
+  }
+
   getContractByID(contractID): Observable < any > {
     return this.http.get(this.apiRoot.concat('contract/') + contractID + '/');
   }
