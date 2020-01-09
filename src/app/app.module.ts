@@ -44,7 +44,7 @@ import { NotifierModule } from 'angular-notifier';
 
 import { ToastrModule } from 'ngx-toastr';
 import {NgxLoaderIndicatorModule} from 'ngx-loader-indicator';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { MatButtonModule, MatCardModule, MatDatepickerModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatSelectModule, MatToolbarModule, MatSidenavModule, MatChipsModule, MatRadioModule,MatBadgeModule,MatListModule,
 MatGridListModule, MatFormFieldModule, MatSortModule, MatStepperModule, MatTableModule,  MatDialogModule,
@@ -154,6 +154,7 @@ import { EditContractComponent } from './smartjobs/components/employees/edit-con
     FormsModule,
     MatPaginatorModule,
     MatSelectCountryModule,
+    NgbModule,
     SatDatepickerModule,
     CloudinaryModule.forRoot(cloudinaryLib, { cloud_name: environment.cloudName, secure: true }),
     ...MatModules,
