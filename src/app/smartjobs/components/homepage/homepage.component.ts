@@ -37,6 +37,8 @@ export class HomepageComponent implements OnInit {
   jobId: any;
   jobsList = [];
   
+  defaultElevation = 2;
+  raisedElevation = 8;
   // current = 0;
   // img_list = [
   //   'https://picsum.photos/600/400/?image=0',

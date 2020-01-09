@@ -26,3 +26,14 @@ mat-grid-tile img {
   padding-bottom: 10px;
   margin-top: 20px;
 }
+
+.step1s {
+  display: none;
+}
+mat-card:hover + .step1p {
+  display: none;
+}
+
+mat-card:hover + .step1S {
+  display: block;
+}

@@ -2,19 +2,55 @@
 <!-- Title group  -->
 <div class="container bootstrap snippet" [loader]="isLoading ">
   <div class="row">
-    <div class="col-sm-10 d-flex justify-content center">
-      <h3>List of all the Applications </h3>
+    <div class="col-sm-10 d-flex justify-content-center">
+      <h3>TalentPool </h3>
     </div>
   </div>
-  <div class="full-width">
-    <mat-form-field mt-2>
-      <input matInput  (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  <div class="d-inline">
+    <mat-form-field class="example-chip-list">
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let item of searchItems" [selectable]="selectable" [removable]="removable"
+          (removed)="remove(item)">
+          {{item.name}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input placeholder="Name filter" matInput [matChipInputFor]="chipList" [formControl]="nameFilter"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list><mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+  <div class="d-inline">
+    <mat-form-field appearance="standard">
+      <input matInput class="form-field" [formControl]="professionFilter" placeholder="Profession">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+  <div class="d-inline">
+    <mat-form-field appearance="standard">
+      <mat-label>Gender</mat-label>
+      <mat-select formControlName="genderFilter" name="genderFilter" matInput placeholder="Gender">
+        <mat-option *ngFor="let gender of genders" [value]="gender.value">
+          {{gender.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="d-inline">
+  <mat-form-field appearance="standard">
+      <mat-label>Rating</mat-label>
+      <mat-select formControlName="ratingFilter" name="ratingFilter" matInput placeholder="Rating">
+        <mat-option *ngFor="let rating of ratings" [value]="rating.value">
+          {{rating.viewValue}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
   </div>
 
-  <mat-table #table [dataSource]="dataSource" matSort >
+  <mat-table #table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
+
       <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
     </ng-container>
 
@@ -37,16 +73,15 @@
     </ng-container>
 
     <!-- Application Time Column -->
-    <ng-container matColumnDef="time_applied">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Application Time </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.time_applied | date}} </mat-cell>
+    <ng-container matColumnDef="gender">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Gender </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.gender }} </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="action">
-      <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
+    <ng-container matColumnDef="rating">
+      <mat-header-cell *matHeaderCellDef> Rating</mat-header-cell>
       <mat-cell *matCellDef="let element; let i = index;">
-        <button mat-raised-button color="primary" class="push-right" (click)="addShortlist(element.id, element.firstname,element.lastname);" [disabled]="element.interviewed">
-          <mat-icon>add</mat-icon>Shortlist
-        </button>
+        <star-rating value="{{element.rating}}" totalstars="5" checkedcolor="gold" uncheckedcolor="gray" size="24px"
+          readonly="true"></star-rating>
       </mat-cell>
     </ng-container>
 
@@ -61,22 +96,12 @@
     <div class="mat-row detail-row" [@detailExpand] style="overflow: hidden">
       <mat-card class="example-card ">
         <mat-card class="example-card">
-          <p class="font-weight-bold d-inline">National Identification: </p>
-          <p class=" d-inline"> {{element.IDnumber}}</p><br>
           <p class="font-weight-bold d-inline">Email: </p>
           <p class=" d-inline"> {{element.email}}</p><br>
           <p class="font-weight-bold d-inline">Phone Number: </p>
           <p class=" d-inline"> {{element.phonenumber}}</p><br>
           <p class="font-weight-bold d-inline">Address: </p>
           <p class=" d-inline"> {{element.address}}</p><br>
-          <p class="font-weight-bold d-inline">Date Of Birth: </p>
-          <p class=" d-inline"> {{element.dateofbirth | date}}</p><br>
-          <p class="font-weight-bold d-inline">Gender: </p>
-          <p class=" d-inline"> {{element.gender}}</p><br>
-          <p class="font-weight-bold d-inline">Availability: </p>
-          <p class=" d-inline"> {{element.availability_status}}</p><br>
-          <p class="font-weight-bold d-inline">Expected Salary: </p>
-          <p class=" d-inline">Kshs. {{element.expected_salary}}</p><br>
         </mat-card>
         <mat-card class="example-card">
           <h5> Academic Qualification</h5>
@@ -251,14 +276,10 @@
               <p class="d-inline"> {{element.referees.refereePhonenumber2}}</p><br>
             </div>
           </div>
-
-
           <div>
-
           </div>
           <mat-divider></mat-divider>
           <div>
-
           </div>
         </mat-card>
       </mat-card>

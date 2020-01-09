@@ -60,7 +60,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from 'src/app/shared/helpers/format-datepicker';
 
-
+import { RatingModule } from 'ng-starrating';
 
 
 const MatModules = [
@@ -108,6 +108,10 @@ import { AddContractComponent } from './smartjobs/components/employees/add-contr
 import { ViewContractComponent } from './smartjobs/components/employees/view-contract/view-contract.component';
 import { EditContractComponent } from './smartjobs/components/employees/edit-contract/edit-contract.component';
 
+import { MaterialElevationDirective } from './material-elevation.directive';
+import { TalentpoolComponent } from './smartjobs/components/talentpool/talentpool.component';
+import { StarRatingComponent } from './shared/components/starrating/starrating.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -127,6 +131,7 @@ import { EditContractComponent } from './smartjobs/components/employees/edit-con
     CreateProfileComponent,
     CreateCompanyProfileComponent,
     LoaderComponent,
+    MaterialElevationDirective,
     HomepageComponent,
     IntropageComponent,
     AddJobComponent,
@@ -142,7 +147,9 @@ import { EditContractComponent } from './smartjobs/components/employees/edit-con
     ViewInterviewedComponent,
     AddContractComponent,
     ViewContractComponent,
-    EditContractComponent
+    EditContractComponent,
+    TalentpoolComponent,
+    StarRatingComponent
 
   ],
   imports: [
@@ -156,6 +163,7 @@ import { EditContractComponent } from './smartjobs/components/employees/edit-con
     MatSelectCountryModule,
     NgbModule,
     SatDatepickerModule,
+    RatingModule,
     CloudinaryModule.forRoot(cloudinaryLib, { cloud_name: environment.cloudName, secure: true }),
     ...MatModules,
     ReactiveFormsModule,
