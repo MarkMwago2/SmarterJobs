@@ -1,38 +1,115 @@
 <app-header></app-header>
-<ngb-carousel [showNavigationArrows]="true"  [showNavigationIndicators]="true" interval="3000" [keyboard]="true" [pauseOnHover]="true" [wrap]="true"
-[activeId]="'firstSlide'">
+<ngb-carousel [showNavigationArrows]="true" [showNavigationIndicators]="true" interval="3000" [keyboard]="true"
+  [pauseOnHover]="true" [wrap]="true" [activeId]="'firstSlide'">
   <ng-template ngbSlide id="firstSlide">
     <div class="picsum-img-wrapper">
-      <img src="assets/Carousel/woman-standing-on-the-center-table-with-four-people-on-the-1367271.jpg" alt="Angular Carousel 1" class="mh-100" style="width: 100%; height: 70vh">
+      <img src="assets/Carousel/woman-standing-on-the-center-table-with-four-people-on-the-1367271.jpg"
+        alt="Angular Carousel 1" class="mh-100" style="width: 100%; height: 70vh">
     </div>
     <div class="carousel-caption">
-    <p></p>
+      <p></p>
       <h5>We Can Be Your Guide</h5>
       <h3>In The World Of Recruitment</h3>
       <div class="d-flex justify-content-around links">
-              <button class="submit-btn" color="primary" mat-raised-button type="submit">
-                Find Job
-              </button><button class="submit-btn" color="primary" mat-raised-button type="submit">
-                Post Job
-              </button> </div>
+        <button class="submit-btn" color="primary" mat-raised-button type="submit">
+          Find A Job
+        </button><button class="submit-btn" color="primary" mat-raised-button type="submit">
+          Post A Job
+        </button> </div>
     </div>
   </ng-template>
   <ng-template ngbSlide id="secondSlide">
     <div class="picsum-img-wrapper">
-      <img src="assets/Carousel/woman-sitting-in-front-on-brown-wooden-table-1181401.jpg" alt="Angular Carousel 2" class="mh-100" style="width: 100%; height: 70vh">
+      <img src="assets/Carousel/woman-sitting-in-front-on-brown-wooden-table-1181401.jpg" alt="Angular Carousel 2"
+        class="mh-100" style="width: 100%; height: 70vh">
     </div>
     <div class="carousel-caption">
-      <h3>Title Goes Here</h3>
-      <p>Consectetur tortor volutpat pretium.</p>
+      <p></p>
+      <h5>We Know What It Takes</h5>
+      <h3>To Find the Right Employees</h3>
+      <div class="d-flex justify-content-around links">
+        <button class="submit-btn" color="primary" mat-raised-button type="submit">
+          Find A Job
+        </button><button class="submit-btn" color="primary" mat-raised-button type="submit">
+          Post A Job
+        </button> </div>
     </div>
   </ng-template>
   <ng-template ngbSlide id="thirdSlide">
     <div class="picsum-img-wrapper">
-      <img src="assets/Carousel/woman-standing-on-the-center-table-with-four-people-on-the-1367271.jpg" alt="Angular Carousel 2" class="mh-100" style="width: 100%; height: 70vh">
+      <img src="assets/Carousel/woman-standing-on-the-center-table-with-four-people-on-the-1367271.jpg"
+        alt="Angular Carousel 2" class="mh-100" style="width: 100%; height: 70vh">
     </div>
     <div class="carousel-caption">
-      <h3>Title Goes Here</h3>
-      <p>Consectetur tortor volutpat pretium.</p>
+      <p></p>
+      <h5>Need An Employee?</h5>
+      <h3>Find Your Perfect Candidates</h3>
+      <div class="d-flex justify-content-around links">
+        <button class="submit-btn" color="primary" mat-raised-button type="submit">
+          Find A Job
+        </button><button class="submit-btn" color="primary" mat-raised-button type="submit">
+          Post A Job
+        </button> </div>
     </div>
   </ng-template>
 </ngb-carousel>
+
+<div class="container">
+  <section>
+    <div class="d-flex justify-content-center">
+      <h3>WELCOME TO SMARTERJOBS</h3>
+    </div>
+    <div class="row">
+
+      <div class="col-md-3 align-self-center mr-2">
+        <img src="assets/logos/briefcase-512.png" class="mr-2" alt="Angular Carousel 2">
+        <h5>Job analysis</h5>
+        <p>In situations where multiple new jobs are created and recruited for the first time, or the nature of a job
+          has substantially changed, a job...</p>
+      </div>
+      <div class="col-md-3 align-self-center ">
+        <img src="assets/logos/calendar-icon-black_318-9776.jpg" class="" alt="Angular Carousel 2">
+        <h5>Temporary Staffing</h5>
+        <p>The use of temporary HR employees on an interim basis has increased dramatically in recent years. By filling temporary needs of corporations and...</p>
+      </div>
+      <div class="col-md-3 align-self-center ">
+        <img src="assets/logos/finding-people.jpg" class="" alt="Angular Carousel 2">
+        <h5>Sourcing</h5>
+        <p>Sourcing is the use of one or more strategies to attract or identify candidates to fill job vacancies. It may involve internal and/or external...</p>
+      </div>
+      <div class="col-md-3 align-self-center ">
+        <img src="assets/logos/people.png" class="" alt="Angular Carousel 2">
+        <h5>Internal recruitment</h5>
+        <p>Internal recruitment refers to the process of a candidate being selected from the existing workforce to take up a new job in the same...</p>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="d-flex justify-content-center">
+      <h3>Latest Jobs</h3>
+    </div>
+    <div class="d-flex justify-content-center form_container mb-2 mat-elevation-z8"
+    *ngFor="let job of jobsList; let i = index;">
+    <mat-card class="example-card full-width">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{job.job_title}}</mat-card-title>
+        <mat-card-subtitle>{{job.industry}}</mat-card-subtitle>
+        <mat-card-subtitle>{{job.location}}</mat-card-subtitle>
+        <mat-card-subtitle>{{job.jobType}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="ml-5 mr-5">
+      <h3>Job Description</h3>
+        <p>
+          {{(job.job_description.length)? (job.job_description | slice:0:1000)+'...':(str)}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions class="ml-5">
+        <p class="font-weight-bold d-inline">Application Deadline: </p><p class="d-inline"> {{job.application_deadline | date}}
+      </p>
+        <button mat-raised-button type="button" class="push-right" color="primary" [routerLink]="['/view-job/', job.id]">View Job</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  </section>
+</div>

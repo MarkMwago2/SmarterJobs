@@ -5,3 +5,11 @@ h3,h5 {
 img {
   width: 100vh;
  }
+.col-md-3 img {
+  /* border-radius: 50%; */
+  height: 50px;
+  width: 50px;
+}
+.col-md-3{
+  margin-right: 20px;
+}
