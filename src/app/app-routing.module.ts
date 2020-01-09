@@ -5,6 +5,8 @@ import { LoginComponent } from './smartjobs/components/authentication/login/logi
 import { RegistrationComponent } from './smartjobs/components/authentication/registration/registration.component';
 import { PasswordResetComponent } from './smartjobs/components/authentication/password-reset/password-reset.component';
 
+
+
 import { DashboardComponent } from './smartjobs/components/dashboard/dashboard.component';
 import { HomepageComponent } from './smartjobs/components/homepage/homepage.component';
 import { HrdashboardComponent } from './smartjobs/components/hrdashboard/hrdashboard.component';
@@ -35,7 +37,7 @@ import { AuthGuard } from './smartjobs/services/auth.service';
 
 const routes: Routes = [
 
-{ path: 'home', component: IntropageComponent },
+{ path: 'home', component: HomepageComponent },
 { path: 'sign-in', component: LoginComponent },
 { path: 'sign-up', component: RegistrationComponent },
 { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
