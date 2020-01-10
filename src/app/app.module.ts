@@ -111,6 +111,9 @@ import { EditContractComponent } from './smartjobs/components/employees/edit-con
 import { MaterialElevationDirective } from './material-elevation.directive';
 import { TalentpoolComponent } from './smartjobs/components/talentpool/talentpool.component';
 import { StarRatingComponent } from './shared/components/starrating/starrating.component';
+import { AddEmployeeComponent } from './smartjobs/components/employees/add-employee/add-employee.component';
+import { EditEmployeeComponent } from './smartjobs/components/employees/edit-employee/edit-employee.component';
+import { ViewAllEmployeesComponent } from './smartjobs/components/employees/view-all-employees/view-all-employees.component';
 
 @NgModule({
   declarations: [
@@ -149,7 +152,10 @@ import { StarRatingComponent } from './shared/components/starrating/starrating.c
     ViewContractComponent,
     EditContractComponent,
     TalentpoolComponent,
-    StarRatingComponent
+    StarRatingComponent,
+    AddEmployeeComponent,
+    EditEmployeeComponent,
+    ViewAllEmployeesComponent
 
   ],
   imports: [

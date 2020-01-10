@@ -23,40 +23,56 @@ import {MatSelect} from '@angular/material/select';
 import {
   ToastrService
 } from 'ngx-toastr';
-export interface Contracttype {
-  value: string;
-  viewValue: string;
-}
+
 
 @Component({
-  selector: 'app-add-contract',
-  templateUrl: './add-contract.component.html',
-  styleUrls: ['./add-contract.component.css'],
+  selector: 'app-add-employee',
+  templateUrl: './add-employee.component.html',
+  styleUrls: ['./add-employee.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class AddContractComponent implements OnInit {
+export class AddEmployeeComponent implements OnInit {
 
-  @ViewChild('resetAddEmployeeForm', {static: false}) myNgForm;
+  @ViewChild('resetAddContractForm', {static: false}) myNgForm;
   error: any;
   isLoading: boolean;
-  AddContractForm: FormGroup;
+  AddEmployeeForm: FormGroup;
   companyId: any;
   userId: any;
+  contractId: any;
 
-  addContractMessages = {
-    contractType: [{
+  addEmployeeMessages = {
+    staff_id_number: [{
         type: 'required',
-        message: 'Job title is required'
-      },
+        message: 'Staff Number is required'
+      }
+    ],
+    kra_pin: [{
+      type: 'required',
+      message: 'Staff Number is required'
+      }
+    ],
+    next_of_kin: [{
+      type: 'required',
+      message: 'Next of Kin is required'
+      }
+    ],
+    dependants: [{
+      type: 'required',
+      message: 'Dependants is required'
+      }
+    ],
+    next_of_kinAddress: [{
+      type: 'required',
+      message: 'Next Of Kin\'s Address is required'
+      }
+    ],
+    next_of_kinPhoneNumber: [{
+      type: 'required',
+      message: 'Next Of Kin\'s Phone Number is required'
+      }
     ],
   };
-  contracts: Contracttype[] = [
-    {value: 'Fixed Term', viewValue: 'Fixed Term'},
-    {value: 'Internship', viewValue: 'Internship'},
-    {value: 'Casual', viewValue: 'Casual'},
-    {value: 'Permanent & Pensionable', viewValue: 'Permanent & Pensionable'},
-  ];
-
   constructor(
     private router: Router,
     private prof: ProfileService,
@@ -72,28 +88,37 @@ export class AddContractComponent implements OnInit {
   }
   createForms() {
     // user links form validations
-    this.AddContractForm = this.fb.group({
-      contractType: new FormControl('', Validators.compose([
+    this.AddEmployeeForm = this.fb.group({
+      staff_id_number: new FormControl('', Validators.compose([
         Validators.required
       ])),
-      startdate: new FormControl('', Validators.required),
-      enddate: new FormControl('', Validators.required),
+      kra_pin: new FormControl('', Validators.required),
+      next_of_kin: new FormControl('', Validators.required),
+      dependants: new FormControl('', Validators.required),
+      next_of_kinAddress: new FormControl('', Validators.required),
+      next_of_kinPhoneNumber: new FormControl('', Validators.required)
     });
   }
-
-  onSubmitAddContract(value) {
-    value.userId = JSON.parse(this.actRoute.snapshot.paramMap.get('id'));
+  onSubmitAddEmployee(value) {
+    value.contract = JSON.parse(this.actRoute.snapshot.paramMap.get('id'));
+    this.contractId = JSON.parse(this.actRoute.snapshot.paramMap.get('id'));
     this.userId = this.prof.loggedInUserId();
     this.prof.getcompanyprofileByUserId(this.userId).subscribe(res => {
       this.companyId = res.id;
+      value.company = this.companyId;
     },
     error => {
       console.error(error);
     });
+    this.jobs.getContractByID(this.contractId).subscribe(
+      success => {
+        value.user = success.userId;
+      }
+    )
     this.isLoading = true;
     console.log(value);
     value.company = this.companyId;
-    this.jobs.createContract(value).subscribe(
+    this.jobs.createEmployee(value).subscribe(
       res => {
         console.log(value);
         this.showSuccess();
@@ -103,9 +128,8 @@ export class AddContractComponent implements OnInit {
       }
     );
   }
-
   showSuccess() {
-    this.toastr.success('Contract has been created' , 'Add Successful!', {
+    this.toastr.success('Employee has been added' , 'Add Successful!', {
       progressAnimation: 'increasing',
       timeOut: 5000,
       tapToDismiss: true,
@@ -115,7 +139,7 @@ export class AddContractComponent implements OnInit {
   }
 
   showCreate() {
-    this.toastr.info('Fill in the form below with details about the contract', 'Add contract', {
+    this.toastr.info('Fill in the form below with details about the employee', 'Add employee', {
       progressAnimation: 'increasing',
       timeOut: 5000,
       tapToDismiss: true,
@@ -125,7 +149,7 @@ export class AddContractComponent implements OnInit {
   }
 
   showFailure() {
-    this.toastr.error('Contract has not been created' + 'Check the details and try again', 'Add Unsuccessful!', {
+    this.toastr.error('Employee has not been added' + 'Check the details and try again', 'Add Unsuccessful!', {
       progressAnimation: 'increasing',
       timeOut: 4000,
       tapToDismiss: true,
@@ -135,9 +159,9 @@ export class AddContractComponent implements OnInit {
   }
    /* Reset form */
    resetForm() {
-    this.AddContractForm.reset();
-    Object.keys(this.AddContractForm.controls).forEach(key => {
-      this.AddContractForm.controls[key].setErrors(null);
+    this.AddEmployeeForm.reset();
+    Object.keys(this.AddEmployeeForm.controls).forEach(key => {
+      this.AddEmployeeForm.controls[key].setErrors(null);
     });
   }
 

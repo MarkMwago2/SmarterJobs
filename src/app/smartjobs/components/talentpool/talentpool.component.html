@@ -96,6 +96,9 @@
     <div class="mat-row detail-row" [@detailExpand] style="overflow: hidden">
       <mat-card class="example-card ">
         <mat-card class="example-card">
+          <p class="font-weight-bold d-inline">Blacklisted: </p>
+          <p class=" d-inline" *ngIf="element.blacklisted" style="color:warn;"> Yes</p><br>
+           <p class=" d-inline" *ngIf="!element.blacklisted" style="color:primary;"> No</p><br>
           <p class="font-weight-bold d-inline">Email: </p>
           <p class=" d-inline"> {{element.email}}</p><br>
           <p class="font-weight-bold d-inline">Phone Number: </p>

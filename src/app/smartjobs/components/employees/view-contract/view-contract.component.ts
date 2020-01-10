@@ -60,55 +60,59 @@ export class ViewContractComponent implements OnInit {
     this.userId = this.prof.loggedInUserId();
     this.prof.getcompanyprofileByUserId(this.userId).subscribe(res => {
       this.companyId = res.id;
+      // console.log(this.companyId);
+      this.jobs.getAllContractByCompanyID(this.companyId).subscribe(res => {
+        if (res.length > 0) {
+          res.forEach((element) => {
+            this.prof.getUser(element.userId).subscribe(
+                    success => {
+                      // console.log(success);
+                      element.email = success.email;
+                      this.prof.getUserprofile(element.userId).subscribe(
+                        profile => {
+                          element.firstname = profile.firstname;
+                          element.lastname = profile.lastname;
+                          element.dateofbirth = profile.dateofbirth;
+                          element.profession = profile.profession;
+                          element.phonenumber = profile.phonenumber;
+                          element.IDnumber = profile.IDnumber;
+                          element.pqualification = profile.pqualification;
+                          element.address = profile.address;
+                          element.gender = profile.gender;
+                          element.skills = profile.skills;
+                          element.membership = profile.membership;
+                          element.workexperience = JSON.parse(JSON.parse(profile.workexperience));
+                          element.academicQualification = JSON.parse(JSON.parse(profile.academicQualification));
+                          element.referees = JSON.parse(JSON.parse(profile.referees));
+                        },
+                        error => {
+                          console.error(error);
+                        });
+                    },
+                    error => {
+                      console.error(error);
+                    }
+                  );
+            
+              console.log(res);
+      });
+          this.ELEMENT_DATA = res;
+          console.log(this.ELEMENT_DATA);
+          this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+        /* Sort */
+          this.dataSource.sort = this.sort;
+      /* Pagination */
+          setTimeout(() => {
+        this.dataSource.paginator = this.paginator;
+      }, 0);
+    }
+      });
     },
     error => {
       console.error(error);
     });
-    this.jobs.getAllContractByCompanyID(this.companyId).subscribe(res => {
-      if (res.length > 0) {
-        res.forEach((element) => {
-          this.prof.getUser(element.userId).subscribe(
-                  success => {
-                    // console.log(success);
-                    element.email = success.email;
-                  },
-                  error => {
-                    console.error(error);
-                  }
-                );
-          this.prof.getUserprofile(this.userId).subscribe(
-                  profile => {
-                    element.firstname = profile.firstname;
-                    element.lastname = profile.lastname;
-                    element.dateofbirth = profile.dateofbirth;
-                    element.profession = profile.profession;
-                    element.phonenumber = profile.phonenumber;
-                    element.IDnumber = profile.IDnumber;
-                    element.pqualification = profile.pqualification;
-                    element.address = profile.address;
-                    element.gender = profile.gender;
-                    element.skills = profile.skills;
-                    element.membership = profile.membership;
-                    element.workexperience = JSON.parse(JSON.parse(profile.workexperience));
-                    element.academicQualification = JSON.parse(JSON.parse(profile.academicQualification));
-                    element.referees = JSON.parse(JSON.parse(profile.referees));
-                  },
-                  error => {
-                    console.error(error);
-                  });
-            // console.log(res);
-    });
-        this.ELEMENT_DATA = res;
-        // console.log(this.ELEMENT_DATA);
-        this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-      /* Sort */
-        this.dataSource.sort = this.sort;
-    /* Pagination */
-        setTimeout(() => {
-      this.dataSource.paginator = this.paginator;
-    }, 0);
-  }
-    });
+    // console.log(this.companyId);
+    
   }
 
   ngOnInit() {

@@ -23,6 +23,7 @@ import { EditContractComponent } from './smartjobs/components/employees/edit-con
 import { ViewContractComponent } from './smartjobs/components/employees/view-contract/view-contract.component';
 
 import { TalentpoolComponent } from './smartjobs/components/talentpool/talentpool.component';
+import { AddEmployeeComponent } from './smartjobs/components/employees/add-employee/add-employee.component';
 
 import { ProfileComponent } from './smartjobs/components/user/profile/profile.component';
 import { CreateProfileComponent } from './smartjobs/components/user/create-profile/create-profile.component';
@@ -60,6 +61,7 @@ const routes: Routes = [
 {path: 'edit-contract/:id', component: EditContractComponent},
 {path: 'view-contract', component: ViewContractComponent},
 {path: 'talentpool', component: TalentpoolComponent},
+{path: 'add-employee/:id', component: AddEmployeeComponent},
 
 ];
 

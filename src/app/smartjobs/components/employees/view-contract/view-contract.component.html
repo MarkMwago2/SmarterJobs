@@ -59,9 +59,12 @@
 
   <ng-template #tpl let-element>
     <div class="mat-row detail-row" [@detailExpand] style="overflow: hidden">
+    <button mat-raised-button color="primary" class="push-right" [routerLink]="['/add-employee/', element.id]">
+        <mat-icon>add</mat-icon>Add Employee
+      </button>
       <mat-card class="example-card ">
         <mat-card class="example-card ">
-          <p class="font-weight-bold d-inline">Contract Status: </p>
+          <p class="font-weight-bold d-inline">Contract Status(isActive): </p>
           <p class=" d-inline"> {{element.active}}</p><br>
           <p class="font-weight-bold d-inline">Contract Type: </p>
           <p class=" d-inline"> {{element.contractType}}</p><br>

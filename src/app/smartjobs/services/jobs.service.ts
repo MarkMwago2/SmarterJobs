@@ -129,4 +129,32 @@ export class JobsService {
   deleteContractByID(contractID): Observable < any > {
     return this.http.delete(this.apiRoot.concat('application/') + contractID + '/');
   }
+
+  createEmployee(employee): Observable < any > {
+    return this.http.post(this.apiRoot.concat('employees/'), employee);
+  }
+
+  getAllEmployees(): Observable < any > {
+    return this.http.get(this.apiRoot.concat('employees/'));
+  }
+
+  // getAllEmployeesByUserID(userID): Observable < any > {
+  //   return this.http.get(this.apiRoot.concat('ucontract/') + userID + '/');
+  // }
+
+  getAllEmployeeByCompanyID(companyID): Observable < any > {
+    return this.http.get(this.apiRoot.concat('cemployee/') + companyID + '/');
+  }
+
+  getEmployeeByID(employeeID): Observable < any > {
+    return this.http.get(this.apiRoot.concat('employee/') + employeeID + '/');
+  }
+
+  editEmployeeByID(employeeID, employee): Observable < any > {
+    return this.http.patch(this.apiRoot.concat('employee/') + employeeID + '/', employee);
+  }
+
+  deleteEmployeeByID(employeeID): Observable < any > {
+    return this.http.delete(this.apiRoot.concat('application/') + employeeID + '/');
+  }
 }
