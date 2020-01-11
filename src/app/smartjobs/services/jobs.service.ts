@@ -138,9 +138,9 @@ export class JobsService {
     return this.http.get(this.apiRoot.concat('employees/'));
   }
 
-  // getAllEmployeesByUserID(userID): Observable < any > {
-  //   return this.http.get(this.apiRoot.concat('ucontract/') + userID + '/');
-  // }
+  getAllEmployeesByContractID(contractID): Observable < any > {
+    return this.http.get(this.apiRoot.concat('demployee/') + contractID + '/');
+  }
 
   getAllEmployeeByCompanyID(companyID): Observable < any > {
     return this.http.get(this.apiRoot.concat('cemployee/') + companyID + '/');

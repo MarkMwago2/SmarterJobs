@@ -19,10 +19,10 @@ export interface Tile {
 export class HrdashboardComponent implements OnInit {
 
   tiles: Tile[] = [
-    {text: 'Tile 1', cols: 2, rows: 1 , border: '3px double purple', img: '/assets/images/jobs2.png', title: 'Jobs', onClick: 'jobsRoute()'},
-    {text: 'Tile 2', cols: 2, rows: 1 , border: '3px double maroon', img: '/assets/images/number-of-employees-icon.png', title: 'Employees',onClick: 'employeesRoute()'},
-    {text: 'Tile 3', cols: 2, rows: 1 , border: '3px double maroon', img: '/assets/images/talent pool.png', title: 'Talent Pool',onClick: 'talentPoolRoute()'},
-    {text: 'Tile 4', cols: 2, rows: 1 , border: '3px double purple', img: '/assets/images/report-2.png', title: 'Reports', onClick: 'reportsRoute()'},
+    {text: 'agency-jobs', cols: 2, rows: 1 , border: '3px double purple', img: '/assets/images/jobs2.png', title: 'Jobs', onClick: 'jobsRoute()'},
+    {text: 'view-employee', cols: 2, rows: 1 , border: '3px double maroon', img: '/assets/images/number-of-employees-icon.png', title: 'Employees',onClick: 'employeesRoute()'},
+    {text: 'talentpool', cols: 2, rows: 1 , border: '3px double maroon', img: '/assets/images/talent pool.png', title: 'Talent Pool',onClick: 'talentPoolRoute()'},
+    {text: 'view-reports', cols: 2, rows: 1 , border: '3px double purple', img: '/assets/images/report-2.png', title: 'Reports', onClick: 'reportsRoute()'},
     ];
 
   constructor(private router: Router,) { }

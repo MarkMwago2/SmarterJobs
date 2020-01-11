@@ -45,11 +45,10 @@
       <h5>Need An Employee?</h5>
       <h3>Find Your Perfect Candidates</h3>
       <div class="d-flex justify-content-around links">
-        <button class="submit-btn" color="primary" mat-raised-button type="submit">
-          Find A Job
-        </button><button class="submit-btn" color="primary" mat-raised-button type="submit">
-          Post A Job
-        </button> </div>
+        
+          <a [routerLink]="['/view-jobs']" class="nav-link"><button class="submit-btn" color="primary" mat-raised-button type="button" (click)="navigateJobs()">Find A Job</button></a>
+        <button class="submit-btn" color="primary" mat-raised-button type="submit" (click)="navigateCreateCompany()">Post A Job</button>
+         </div>
     </div>
   </ng-template>
 </ngb-carousel>
@@ -67,7 +66,7 @@
           </div>
         </div>
         <div class="d-flex justify-content-center">
-          <h5>Job analysis</h5>
+          <h5>Talent Pool</h5>
         </div>
         <p>In situations where multiple new jobs are created and recruited for the first time, or the nature of a job
           has substantially changed, a job...</p>
@@ -113,7 +112,7 @@
           </div>
         </div>
         <div class="d-flex justify-content-center">
-          <h5>Internal recruitment</h5>
+          <h5>Core HR</h5>
         </div>
         <p>Internal recruitment refers to the process of a candidate being selected from the existing workforce to take
           up

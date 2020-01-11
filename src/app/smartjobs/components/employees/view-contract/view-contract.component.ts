@@ -18,6 +18,7 @@ import {
   ToastrService
 } from 'ngx-toastr';
 
+
 @Component({
   selector: 'app-view-contract',
   templateUrl: './view-contract.component.html',

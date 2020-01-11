@@ -218,7 +218,7 @@ export class TalentpoolComponent implements OnInit {
         });
         return found;
       };
-      return ratingSearch || nameSearch() || professionSearch() || genderSearch();
+      return professionSearch();
     };
     return filterFunction;
   }

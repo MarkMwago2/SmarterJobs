@@ -114,6 +114,7 @@ import { StarRatingComponent } from './shared/components/starrating/starrating.c
 import { AddEmployeeComponent } from './smartjobs/components/employees/add-employee/add-employee.component';
 import { EditEmployeeComponent } from './smartjobs/components/employees/edit-employee/edit-employee.component';
 import { ViewAllEmployeesComponent } from './smartjobs/components/employees/view-all-employees/view-all-employees.component';
+import { ReportsComponent } from './smartjobs/components/reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -155,7 +156,8 @@ import { ViewAllEmployeesComponent } from './smartjobs/components/employees/view
     StarRatingComponent,
     AddEmployeeComponent,
     EditEmployeeComponent,
-    ViewAllEmployeesComponent
+    ViewAllEmployeesComponent,
+    ReportsComponent
 
   ],
   imports: [

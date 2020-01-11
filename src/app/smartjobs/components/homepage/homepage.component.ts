@@ -73,5 +73,11 @@ export class HomepageComponent implements OnInit {
       }
     );
   }
+  navigateJobs() {
+    this.router.navigate(['view-jobs']);
+  }
+  navigateCreateCompany() {
+    this.router.navigate(['create-companyprofile']);
+  }
 
 }
