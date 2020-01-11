@@ -40,7 +40,7 @@ import { IntropageComponent } from './smartjobs/components/intropage/intropage.c
 import { AuthGuard } from './smartjobs/services/auth.service';
 
 const routes: Routes = [
-
+{ path: '', redirectTo: 'home' , pathMatch: 'full'},
 { path: 'home', component: HomepageComponent },
 { path: 'sign-in', component: LoginComponent },
 { path: 'sign-up', component: RegistrationComponent },

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, Output, HostListener, ElementRef } from '@angular/core';
 import {
   JobsService
 } from '../../services/jobs.service';
@@ -21,7 +21,8 @@ import {MatSelect} from '@angular/material/select';
 import {
   ToastrService
 } from 'ngx-toastr';
-
+import { MnFullpageOptions } from 'ngx-fullpage';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-homepage',
@@ -30,6 +31,7 @@ import {
   encapsulation: ViewEncapsulation.None
 })
 export class HomepageComponent implements OnInit {
+
   error: any;
   isLoading: boolean;
   companyId: any;
@@ -39,12 +41,7 @@ export class HomepageComponent implements OnInit {
   
   defaultElevation = 2;
   raisedElevation = 8;
-  // current = 0;
-  // img_list = [
-  //   'https://picsum.photos/600/400/?image=0',
-  //   'https://picsum.photos/600/400/?image=1',
-  //   'https://picsum.photos/600/400/?image=2',
-  // ];
+
   constructor(
     private router: Router,
     private prof: ProfileService,
@@ -56,28 +53,28 @@ export class HomepageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getJobs();
+    // this.getJobs();
   }
 
-  getJobs() {
-    this.jobs.getAllJobs().subscribe(
-      res => {
-        this.jobsList[0] = res[0];
-        this.jobsList[1] = res[1];
-        this.jobsList[2] = res[2];
-        this.jobsList[3] = res[3];
-        console.log(this.jobsList);
-      },
-      error => {
-        console.error(error);
-      }
-    );
-  }
-  navigateJobs() {
-    this.router.navigate(['view-jobs']);
-  }
-  navigateCreateCompany() {
-    this.router.navigate(['create-companyprofile']);
-  }
+  // getJobs() {
+  //   this.jobs.getAllJobs().subscribe(
+  //     res => {
+  //       this.jobsList[0] = res[0];
+  //       this.jobsList[1] = res[1];
+  //       this.jobsList[2] = res[2];
+  //       this.jobsList[3] = res[3];
+  //       console.log(this.jobsList);
+  //     },
+  //     error => {
+  //       console.error(error);
+  //     }
+  //   );
+  // }
+  // navigateJobs() {
+  //   this.router.navigate(['view-jobs']);
+  // }
+  // navigateCreateCompany() {
+  //   this.router.navigate(['create-companyprofile']);
+  // }
 
 }

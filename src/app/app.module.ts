@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
+import { MnFullpageModule } from 'ngx-fullpage';
+import { AngularFullpageModule } from '@fullpage/angular-fullpage';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -162,6 +165,7 @@ import { ReportsComponent } from './smartjobs/components/reports/reports.compone
   ],
   imports: [
     BrowserModule,
+    AngularFullpageModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularFontAwesomeModule,
@@ -169,6 +173,7 @@ import { ReportsComponent } from './smartjobs/components/reports/reports.compone
     FormsModule,
     MatPaginatorModule,
     MatSelectCountryModule,
+    MnFullpageModule.forRoot(),
     NgbModule,
     SatDatepickerModule,
     RatingModule,
