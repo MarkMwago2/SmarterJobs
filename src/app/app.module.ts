@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { MnFullpageModule } from 'ngx-fullpage';
 import { AngularFullpageModule } from '@fullpage/angular-fullpage';
+import { OwlModule } from 'ngx-owl-carousel';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -175,6 +176,7 @@ import { ReportsComponent } from './smartjobs/components/reports/reports.compone
     MatSelectCountryModule,
     MnFullpageModule.forRoot(),
     NgbModule,
+    OwlModule,
     SatDatepickerModule,
     RatingModule,
     CloudinaryModule.forRoot(cloudinaryLib, { cloud_name: environment.cloudName, secure: true }),

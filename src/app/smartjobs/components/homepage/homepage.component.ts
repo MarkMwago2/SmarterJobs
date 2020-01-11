@@ -32,16 +32,6 @@ import * as $ from 'jquery';
 })
 export class HomepageComponent implements OnInit {
 
-  error: any;
-  isLoading: boolean;
-  companyId: any;
-  userId: any;
-  jobId: any;
-  jobsList = [];
-  
-  defaultElevation = 2;
-  raisedElevation = 8;
-
   constructor(
     private router: Router,
     private prof: ProfileService,
@@ -51,6 +41,24 @@ export class HomepageComponent implements OnInit {
     private actRoute: ActivatedRoute,
     private location: Location,
   ) { }
+
+  error: any;
+  isLoading: boolean;
+  companyId: any;
+  userId: any;
+  jobId: any;
+  jobsList = [];
+  defaultElevation = 2;
+  raisedElevation = 8;
+
+  mySlideImages = [ 
+    {image: 'assets/Carousel/woman-standing-on-the-center-table-with-four-people-on-the-1367271.jpg', header: 'We Can Be Your Guide', text: 'In The World Of Recruitment',top: '70', left: '50', }, 
+    {image: 'assets/Carousel/woman-sitting-in-front-on-brown-wooden-table-1181401.jpg', header: 'We Know What It Takes' , text: 'To Find the Right Employees', top: '70', left: '50',},
+    {image: 'assets/Carousel/woman-standing-on-the-center-table-with-four-people-on-the-1367271.jpg', header: 'Need An Employee?' , text: 'Find Your Perfect Candidates', top: '70', left: '50', }
+  ];
+  myCarouselImages = [1, 2, 3, 4, 5, 6].map((i) => `https://picsum.photos/640/480?image=${i}`);
+  mySlideOptions = {items: 1, dots: true, nav: false, autoplay: true, loop: true};
+  myCarouselOptions = {items: 3, dots: true, nav: true};
 
   ngOnInit() {
     // this.getJobs();

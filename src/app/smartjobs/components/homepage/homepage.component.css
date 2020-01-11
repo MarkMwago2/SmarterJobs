@@ -1,20 +1,102 @@
-h3,
+@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+.owl-carousel-holder{
+  width:100%;
+  float: left;
+}
+.img-wrapper {
+  position: relative;
+  text-align: center;
+  color: #415AB5;
+}
+.centered {
+  position: absolute;
+  top: 73%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family:'Roboto';
+}
+.centered {
+  display:inline-block;
+  overflow:hidden;
+  white-space:nowrap;
+}
+
+.centered:first-of-type {    /* For increasing performance 
+                       ID/Class should've been used. 
+                       For a small demo 
+                       it's okaish for now */
+  animation: showup 7s infinite;
+}
+
+.centered:last-of-type {
+  width:0px;
+  animation: reveal 7s infinite;
+}
+
+.centered:last-of-type span {
+  margin-left:-355px;
+  animation: slidein 7s infinite;
+}
+
+@keyframes showup {
+    0% {opacity:0;}
+    20% {opacity:1;}
+    80% {opacity:1;}
+    100% {opacity:0;}
+}
+
+@keyframes slidein {
+    0% { margin-left:-800px; }
+    20% { margin-left:-800px; }
+    35% { margin-left:0px; }
+    100% { margin-left:0px; }
+}
+
+@keyframes reveal {
+    0% {opacity:0;width:0px;}
+    20% {opacity:1;width:0px;}
+    30% {width:355px;}
+    80% {opacity:1;}
+    100% {opacity:0;width:355px;}
+}
+.links {
+  position: absolute;
+  left: 39%;
+  top: 80%;
+}
+
+
+
+/* .carousel-section{
+  width: 100%;
+  height: 30px;
+  float: left;
+  margin-top: 60px;
+} */
+
+/* .slider-image-section{
+  width: 100%;
+  height:30px;
+  float: left;
+} */
+/* h3,
 h5, h4, mat-card-title, .appdate {
   color: #4159B5;
   margin-bottom: 5px;
-}
+} */
 
 img {
-  width: 100vh;
+  /* width: 110%; */
+  /* height: 95vh; */
 }
-
+/* 
 mat-grid-tile img {
-  /* border-radius: 50%; */
+  border-radius: 50%;
   height: 50px;
   width: 50px;
-}
+} */
 
-.col-md-3 {
+/* .col-md-3 {
   margin-right: 20px;
 }
 .full-width {
@@ -25,9 +107,9 @@ mat-grid-tile img {
 .form_container {
   padding-bottom: 10px;
   margin-top: 20px;
-}
+} */
 
-.step1s {
+/* .step1s {
   display: none;
 }
 mat-card:hover + .step1p {
@@ -36,4 +118,4 @@ mat-card:hover + .step1p {
 
 mat-card:hover + .step1S {
   display: block;
-}
+} */

@@ -1,22 +1,36 @@
 <app-header></app-header>
-<div mnFullpage
-    [mnFullpageNavigation]="true"
-    [mnFullpageKeyboardScrolling]="true"
-    [mnFullpageSlidesNavigation]="true"
-    [mnFullpageControlArrows]="false"
-    mnFullpageSlidesNavPosition="bottom">
+<div mnFullpage>
+  <div class="section welcome-section fp-section fp-table">
+    <div class="fp-tableCell">
+      <owl-carousel [options]="mySlideOptions" [items]="images" [carouselClasses]="['owl-theme', 'sliding']">
+        <div class="item" *ngFor="let image of mySlideImages;let i = index">
+          <div style="max-width: 200vh; max-height: 100vh" class="img-wrapper">
+            <img src={{image.image}} />
+            <div class="links">
+              <button class="submit-btn" color="primary"
+                  mat-raised-button type="button" (click)="navigateJobs()">Find A Job</button>
+              <button class="submit-btn" color="primary" style="margin-left:140px;" mat-raised-button type="submit"
+                (click)="navigateCreateCompany()">Post A Job</button>
+            </div>
+            <div class="centered">
+              <h5>{{image.header}}</h5><br>
+              <h3>{{image.text}}</h3>
+            </div>
+            
+          </div>
+        </div>
+      </owl-carousel>
+    </div>
+  </div>
+  <div class="section welcome-section fp-section fp-table">
+    <div class="fp-tableCell">
+      2
+    </div>
+  </div>
+  <div class="section welcome-section fp-section fp-table">
+    <div class="fp-tableCell">
+      3
 
-    <div id="section1" class="section fp-section fp-table">
-        <div class="fp-tableCell">
-            Section 1
-        </div>
     </div>
-    <div id="section2" class="section fp-section fp-table">
-        <div class="fp-tableCell">
-            <div class="slide">Slide 1</div>
-            <div class="slide">Slide 2</div>
-            <div class="slide">Slide 3</div>
-            <div class="slide">Slide 4</div>
-        </div>
-    </div>
+  </div>
 </div>
