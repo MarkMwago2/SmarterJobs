@@ -17,6 +17,7 @@ import {
 import {
   ToastrService
 } from 'ngx-toastr';
+
 @Component({
   selector: 'app-view-applications',
   templateUrl: './view-applications.component.html',

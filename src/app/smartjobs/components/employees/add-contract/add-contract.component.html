@@ -1,0 +1,70 @@
+<app-header></app-header>
+<!-- Title group  -->
+<div class="row">
+  <div class="col-sm-10">
+    <h3>Fill in the details of the Contract</h3>
+  </div>
+</div>
+
+<!-- Jobs form -->
+
+<mat-card>
+  <form [formGroup]="AddContractForm" (ngSubmit)="onSubmitAddContract(AddContractForm.value)"
+    #resetAddContractForm="ngForm" novalidate [loader]="isLoading ">
+    <!-- Contract Starting Date-->
+    <mat-form-field class="full-width">
+      <input matInput [matDatepicker]="picker" formControlName="startdate" matTooltip="Select the starting date"
+        name="startdate" matInput placeholder="Select the Starting Date" required>
+      <mat-datepicker-toggle matSuffix [for]="picker">
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="AddContractForm.controls['startdate'].hasError('required')">
+        Please choose a date.</mat-error>
+    </mat-form-field><br>
+    <!-- Contract Ending Date -->
+    <mat-form-field class="full-width">
+      <input matInput [matDatepicker]="picker2" formControlName="enddate" matTooltip="Select the ending date"
+        name="enddate" matInput placeholder="Select the Ending Date" required>
+      <mat-datepicker-toggle matSuffix [for]="picker2">
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+      <mat-error *ngIf="AddContractForm.controls['enddate'].hasError('required')">
+        Please choose a date.</mat-error>
+    </mat-form-field><br>
+    <!--Contract Type-->
+    <mat-form-field appearance="standard" class="full-width">
+      <mat-label>Contract Type</mat-label>
+      <mat-select formControlName="contractType" name="contractType" matInput placeholder="Contract Type"
+        matTooltip="Enter the Contract Type" required>
+        <mat-option *ngFor="let contract of contracts" [value]="contract.value">
+          {{contract.viewValue}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngFor="let validation of addContractMessages.contractType">
+        <mat-error class="error-message"
+          *ngIf="AddContractForm.get('contractType').hasError(validation.type) && (AddContractForm.get('contractType').dirty || AddContractForm.get('contractType').touched)">
+          {{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field>
+
+
+    <!-- Submit & Reset -->
+    <div class="mt-2">
+      <div class="d-flex justify-content-around links">
+        <div matTooltip="Fill in all the *required details before submitting"
+          [matTooltipDisabled]="AddContractForm.valid">
+          <button class="submit-btn" color="primary" mat-raised-button type="submit"
+            [disabled]="!AddContractForm.valid">
+            <mat-icon>add</mat-icon>
+            Add
+          </button>
+        </div>
+        <div matTooltip="By clicking clear the all the forms will be cleared">
+          <button mat-flat-button color="warn" type="button" (click)="resetForm()">
+            <mat-icon>clear</mat-icon>Clear
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-card>

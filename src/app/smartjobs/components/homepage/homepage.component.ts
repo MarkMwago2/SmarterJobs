@@ -1,33 +1,83 @@
-import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import {
+  JobsService
+} from '../../services/jobs.service';
+import {
+  ProfileService
+} from '../../services/profile.service';
+import {
+  Router, ActivatedRoute
+} from '@angular/router';
+import { Location } from '@angular/common';
+import {
+  FormControl,
+  FormGroup,
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
+import { MatPaginator, MatToolbarModule } from '@angular/material';
+import {MatTooltipModule, MatTooltip} from '@angular/material/tooltip';
+import {MatSelect} from '@angular/material/select';
+import {
+  ToastrService
+} from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.css']
+  styleUrls: ['./homepage.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HomepageComponent implements OnInit {
-
-  constructor() { }
+  error: any;
+  isLoading: boolean;
+  companyId: any;
+  userId: any;
+  jobId: any;
+  jobsList = [];
+  
+  defaultElevation = 2;
+  raisedElevation = 8;
+  // current = 0;
+  // img_list = [
+  //   'https://picsum.photos/600/400/?image=0',
+  //   'https://picsum.photos/600/400/?image=1',
+  //   'https://picsum.photos/600/400/?image=2',
+  // ];
+  constructor(
+    private router: Router,
+    private prof: ProfileService,
+    private fb: FormBuilder,
+    private toastr: ToastrService,
+    private jobs: JobsService,
+    private actRoute: ActivatedRoute,
+    private location: Location,
+  ) { }
 
   ngOnInit() {
-    $(document).ready(() => {
-      // Highlight bottom nav links
-      let clickEvent = false;
-      $('#myCarousel').on('click', '.nav li', () => {
-        clickEvent = true;
-        $(this).parent().siblings().removeClass('active');
-        $(this).parent().addClass('active');
-      }).on('slid.bs.carousel', (e ) => {
-        if (!clickEvent) {
-          const itemIndex = $(e.relatedTarget).index();
-          const targetNavItem = $('.nav li[data-slide-to=\'' + itemIndex + '\']');
-          $('.nav li').not(targetNavItem).removeClass('active');
-          targetNavItem.addClass('active');
-        }
-        clickEvent = false;
-      });
-    });
+    this.getJobs();
+  }
+
+  getJobs() {
+    this.jobs.getAllJobs().subscribe(
+      res => {
+        this.jobsList[0] = res[0];
+        this.jobsList[1] = res[1];
+        this.jobsList[2] = res[2];
+        this.jobsList[3] = res[3];
+        console.log(this.jobsList);
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  }
+  navigateJobs() {
+    this.router.navigate(['view-jobs']);
+  }
+  navigateCreateCompany() {
+    this.router.navigate(['create-companyprofile']);
   }
 
 }

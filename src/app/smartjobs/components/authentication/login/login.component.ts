@@ -104,7 +104,7 @@ export class LoginComponent implements OnInit {
                     completeEntries++;
                     this.profileComplete = Math.round(100 * completeEntries / total);
                     if (this.profileComplete >= 35) {
-                      this.router.navigate(['home']);
+                      this.router.navigate(['view-jobs']);
                     } else {
                       this.router.navigate(['create-profile']);
                     }

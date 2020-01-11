@@ -136,7 +136,7 @@ ngOnInit() {
     const value = { "interviewed": true};
     this.jobs.editshortlistByID(applicationId, value).subscribe( res => {
     this.showSuccess(firstname, lastname);
-    this.shortlisted = true;
+    // this.shortlisted = true;
     // console.log(res);
   },
   error => {

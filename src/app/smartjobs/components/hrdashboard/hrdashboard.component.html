@@ -5,7 +5,7 @@
     <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.border]="tile.border">
       <div>
         <mat-grid-tile-header>
-          <h3 id="HiddenText">{{tile.title}}</h3>
+          <h3 id="HiddenText" style="color:white;"><a routerLink="/{{tile.text}}" style="color:white;" class="nav-link">{{tile.title}}</a></h3>
         </mat-grid-tile-header>
         <img src={{tile.img}}>
       </div>
@@ -13,3 +13,4 @@
   </mat-grid-list>
 
 </div>
+

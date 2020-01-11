@@ -22,7 +22,6 @@ export class ProfileComponent implements OnInit {
     role: '',
     county: '',
     staff_id_number: '',
-    dependence: '',
     next_of_kin: '',
     cumulative_experience: '',
     photo: '',

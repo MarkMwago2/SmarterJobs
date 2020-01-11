@@ -1,0 +1,91 @@
+<app-header></app-header>
+<!-- Title group  -->
+<div class="row">
+  <div class="col-sm-10">
+    <h3>Fill in the details of the Employee</h3>
+  </div>
+</div>
+
+<!-- Jobs form -->
+
+<mat-card>
+  <form [formGroup]="AddEmployeeForm" (ngSubmit)="onSubmitAddEmployee(AddEmployeeForm.value)"
+    #resetAddEmployeeForm="ngForm" novalidate [loader]="isLoading ">
+    <!-- Contract Starting Date-->
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Staff Number" formControlName="staff_id_number"
+        [errorStateMatcher]="parentErrorStateMatcher" required>
+      <mat-error *ngFor="let validation of addEmployeeMessages.staff_id_number">
+        <mat-error class="error-message"
+          *ngIf="(AddEmployeeForm.get('staff_id_number').hasError(validation.type)|| AddEmployeeForm.get('staff_id_number').hasError(validation.type)) && (AddEmployeeForm.get('staff_id_number').dirty || AddEmployeeForm.get('staff_id_number').touched)">
+          {{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field><br>
+    <!-- Contract Ending Date -->
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Kra Pin" formControlName="kra_pin"
+        [errorStateMatcher]="parentErrorStateMatcher" required>
+      <mat-error *ngFor="let validation of addEmployeeMessages.kra_pin">
+        <mat-error class="error-message"
+          *ngIf="(AddEmployeeForm.get('kra_pin').hasError(validation.type)|| AddEmployeeForm.hasError(validation.type)) && (AddEmployeeForm.get('kra_pin').dirty || AddEmployeeForm.get('kra_pin').touched)">
+          {{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field><br>
+    <!--Contract Type-->
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Next Of Kin's Name" formControlName="next_of_kin"
+        [errorStateMatcher]="parentErrorStateMatcher" required>
+      <mat-error *ngFor="let validation of addEmployeeMessages.next_of_kin">
+        <mat-error class="error-message"
+          *ngIf="(AddEmployeeForm.get('next_of_kin').hasError(validation.type)|| AddEmployeeForm.hasError(validation.type)) && (AddEmployeeForm.get('next_of_kin').dirty || AddEmployeeForm.get('next_of_kin').touched)">
+          {{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field><br>
+    <mat-form-field class="full-width">
+      <input matInput type="number" placeholder="Next Of Kin's Phone Number" formControlName="next_of_kinPhoneNumber"
+        [errorStateMatcher]="parentErrorStateMatcher" required>
+      <mat-error *ngFor="let validation of addEmployeeMessages.next_of_kinPhoneNumber">
+        <mat-error class="error-message"
+          *ngIf="(AddEmployeeForm.get('next_of_kinPhoneNumber').hasError(validation.type)|| AddEmployeeForm.hasError(validation.type)) && (AddEmployeeForm.get('next_of_kinPhoneNumber').dirty || AddEmployeeForm.get('next_of_kinPhoneNumber').touched)">
+          {{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field><br>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Next Of Kin's Address" formControlName="next_of_kinAddress"
+        [errorStateMatcher]="parentErrorStateMatcher" required>
+      <mat-error *ngFor="let validation of addEmployeeMessages.next_of_kinAddress">
+        <mat-error class="error-message"
+          *ngIf="(AddEmployeeForm.get('next_of_kinAddress').hasError(validation.type)|| AddEmployeeForm.hasError(validation.type)) && (AddEmployeeForm.get('next_of_kinAddress').dirty || AddEmployeeForm.get('next_of_kinAddress').touched)">
+          {{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field><br>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Dependants" formControlName="dependants"
+        [errorStateMatcher]="parentErrorStateMatcher"
+        matTooltip="Enter the employee's dependants separating each with a comma" required>
+      <mat-error *ngFor="let validation of addEmployeeMessages.dependants">
+        <mat-error class="error-message"
+          *ngIf="(AddEmployeeForm.get('dependants').hasError(validation.type)|| AddEmployeeForm.hasError(validation.type)) && (AddEmployeeForm.get('dependants').dirty || AddEmployeeForm.get('dependants').touched)">
+          {{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field><br>
+    <!-- Submit & Reset -->
+    <div class="mt-2">
+      <div class="d-flex justify-content-around links">
+        <div matTooltip="Fill in all the *required details before submitting"
+          [matTooltipDisabled]="AddEmployeeForm.valid">
+          <button class="submit-btn" color="primary" mat-raised-button type="submit"
+            [disabled]="!AddEmployeeForm.valid">
+            <mat-icon>add</mat-icon>
+            Add
+          </button>
+        </div>
+        <div matTooltip="By clicking clear the all the forms will be cleared">
+          <button mat-flat-button color="warn" type="button" (click)="resetForm()">
+            <mat-icon>clear</mat-icon>Clear
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-card>

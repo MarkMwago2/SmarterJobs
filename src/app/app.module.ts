@@ -44,7 +44,7 @@ import { NotifierModule } from 'angular-notifier';
 
 import { ToastrModule } from 'ngx-toastr';
 import {NgxLoaderIndicatorModule} from 'ngx-loader-indicator';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { MatButtonModule, MatCardModule, MatDatepickerModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatSelectModule, MatToolbarModule, MatSidenavModule, MatChipsModule, MatRadioModule,MatBadgeModule,MatListModule,
 MatGridListModule, MatFormFieldModule, MatSortModule, MatStepperModule, MatTableModule,  MatDialogModule,
@@ -60,7 +60,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from 'src/app/shared/helpers/format-datepicker';
 
-
+import { RatingModule } from 'ng-starrating';
 
 
 const MatModules = [
@@ -103,6 +103,18 @@ import { ViewApplicationsComponent } from './smartjobs/components/jobs/view-appl
 import { ViewSingleApplicationComponent } from './smartjobs/components/jobs/view-single-application/view-single-application.component';
 import { ViewApplicationsUserComponent } from './smartjobs/components/jobs/view-applications-user/view-applications-user.component';
 import { ViewShortlistComponent } from './smartjobs/components/jobs/view-shortlist/view-shortlist.component';
+import { ViewInterviewedComponent } from './smartjobs/components/jobs/view-interviewed/view-interviewed.component';
+import { AddContractComponent } from './smartjobs/components/employees/add-contract/add-contract.component';
+import { ViewContractComponent } from './smartjobs/components/employees/view-contract/view-contract.component';
+import { EditContractComponent } from './smartjobs/components/employees/edit-contract/edit-contract.component';
+
+import { MaterialElevationDirective } from './material-elevation.directive';
+import { TalentpoolComponent } from './smartjobs/components/talentpool/talentpool.component';
+import { StarRatingComponent } from './shared/components/starrating/starrating.component';
+import { AddEmployeeComponent } from './smartjobs/components/employees/add-employee/add-employee.component';
+import { EditEmployeeComponent } from './smartjobs/components/employees/edit-employee/edit-employee.component';
+import { ViewAllEmployeesComponent } from './smartjobs/components/employees/view-all-employees/view-all-employees.component';
+import { ReportsComponent } from './smartjobs/components/reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -123,6 +135,7 @@ import { ViewShortlistComponent } from './smartjobs/components/jobs/view-shortli
     CreateProfileComponent,
     CreateCompanyProfileComponent,
     LoaderComponent,
+    MaterialElevationDirective,
     HomepageComponent,
     IntropageComponent,
     AddJobComponent,
@@ -134,7 +147,17 @@ import { ViewShortlistComponent } from './smartjobs/components/jobs/view-shortli
     ViewApplicationsComponent,
     ViewSingleApplicationComponent,
     ViewApplicationsUserComponent,
-    ViewShortlistComponent
+    ViewShortlistComponent,
+    ViewInterviewedComponent,
+    AddContractComponent,
+    ViewContractComponent,
+    EditContractComponent,
+    TalentpoolComponent,
+    StarRatingComponent,
+    AddEmployeeComponent,
+    EditEmployeeComponent,
+    ViewAllEmployeesComponent,
+    ReportsComponent
 
   ],
   imports: [
@@ -146,7 +169,9 @@ import { ViewShortlistComponent } from './smartjobs/components/jobs/view-shortli
     FormsModule,
     MatPaginatorModule,
     MatSelectCountryModule,
+    NgbModule,
     SatDatepickerModule,
+    RatingModule,
     CloudinaryModule.forRoot(cloudinaryLib, { cloud_name: environment.cloudName, secure: true }),
     ...MatModules,
     ReactiveFormsModule,

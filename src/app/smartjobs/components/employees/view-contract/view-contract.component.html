@@ -1,0 +1,272 @@
+<app-header></app-header>
+<!-- Title group  -->
+<div class="container bootstrap snippet" [loader]="isLoading ">
+  <div class="row">
+    <div class="col-sm-10">
+      <h3>List of all the Contracts </h3>
+    </div>
+  </div>
+  <div class="full-width">
+    <mat-form-field mt-2>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    <!-- First Name Column -->
+    <ng-container matColumnDef="firstname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>First Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.firstname}} </mat-cell>
+    </ng-container>
+
+    <!-- Last Name Column -->
+    <ng-container matColumnDef="lastname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.lastname}} </mat-cell>
+    </ng-container>
+
+    <!-- Profession Column -->
+    <ng-container matColumnDef="startdate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Starting Date </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.startdate | date}} </mat-cell>
+    </ng-container>
+
+    <!-- Application Time Column -->
+    <ng-container matColumnDef="enddate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Ending Date </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.enddate | date}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
+      <mat-cell *matCellDef="let element; let i = index;">
+        <button mat-raised-button color="primary" class="push-right" [routerLink]="['/edit-contract/', element.id]">
+          <mat-icon>edit</mat-icon>Edit Contract
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [cdkDetailRow]="row"
+      [cdkDetailRowTpl]="tpl">
+    </mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+  <ng-template #tpl let-element>
+    <div class="mat-row detail-row" [@detailExpand] style="overflow: hidden">
+    <button mat-raised-button color="primary" class="push-right" [routerLink]="['/add-employee/', element.id]">
+        <mat-icon>add</mat-icon>Add Employee
+      </button>
+      <mat-card class="example-card ">
+        <mat-card class="example-card ">
+          <p class="font-weight-bold d-inline">Contract Status(isActive): </p>
+          <p class=" d-inline"> {{element.active}}</p><br>
+          <p class="font-weight-bold d-inline">Contract Type: </p>
+          <p class=" d-inline"> {{element.contractType}}</p><br>
+        </mat-card>
+        <mat-card class="example-card">
+          <p class="font-weight-bold d-inline">National Identification: </p>
+          <p class=" d-inline"> {{element.IDnumber}}</p><br>
+          <p class="font-weight-bold d-inline">Email: </p>
+          <p class=" d-inline"> {{element.email}}</p><br>
+          <p class="font-weight-bold d-inline">Phone Number: </p>
+          <p class=" d-inline"> {{element.phonenumber}}</p><br>
+          <p class="font-weight-bold d-inline">Address: </p>
+          <p class=" d-inline"> {{element.address}}</p><br>
+          <p class="font-weight-bold d-inline">Date Of Birth: </p>
+          <p class=" d-inline"> {{element.dateofbirth | date}}</p><br>
+          <p class="font-weight-bold d-inline">Gender: </p>
+          <p class=" d-inline"> {{element.gender}}</p><br>
+          <p class="font-weight-bold d-inline">Availability: </p>
+          <p class=" d-inline"> {{element.availability_status}}</p><br>
+          <p class="font-weight-bold d-inline">Expected Salary: </p>
+          <p class=" d-inline">Kshs. {{element.expected_salary}}</p><br>
+        </mat-card>
+        <mat-card class="example-card">
+          <h5> Academic Qualification</h5>
+          <div class="row">
+            <div class="col-md-4">
+              <p class="font-weight-bold d-inline">Institution Name: </p>
+              <p class=" d-inline"> {{element.academicQualification.institutionname}}</p><br>
+              <div>
+                <p class="font-weight-bold d-inline">Start Date: </p>
+                <p class=" d-inline"> {{element.academicQualification.Astartdate | date}}</p><br>
+                <p class="font-weight-bold d-inline">End Date: </p>
+                <p class="d-inline"> {{element.academicQualification.Aenddate | date}}</p><br>
+              </div>
+              <div>
+                <p class="font-weight-bold d-inline">Merit: </p>
+                <p class="d-inline"> {{element.academicQualification.merit}}</p><br>
+              </div>
+            </div>
+            <div class="col-md-4" *ngIf="element.academicQualification.institutionname1">
+              <div>
+                <p class="font-weight-bold d-inline">Institution Name: </p>
+                <p class="d-inline"> {{element.academicQualification.institutionname1}}</p><br>
+              </div>
+              <div>
+                <p class="font-weight-bold d-inline">Start Date: </p>
+                <p class="d-inline"> {{element.academicQualification.Astartdate1 | date}}</p><br>
+                <p class="font-weight-bold d-inline">End Date: </p>
+                <p class="d-inline"> {{element.academicQualification.Aenddate1 | date}}</p><br>
+              </div>
+              <div>
+                <p class="font-weight-bold d-inline">Merit: </p>
+                <p class="d-inline"> {{element.academicQualification.merit1}}</p><br>
+              </div>
+            </div>
+            <div class="col-md-4" *ngIf="element.academicQualification.institutionname2">
+              <div>
+                <p class="font-weight-bold d-inline">Institution Name: </p>
+                <p class="d-inline"> {{element.academicQualification.institutionname2}}</p><br>
+              </div>
+              <div>
+                <p class="font-weight-bold d-inline">Start Date: </p>
+                <p class="d-inline"> {{element.academicQualification.Astartdate2 | date}}</p><br>
+                <p class="font-weight-bold d-inline">End Date: </p>
+                <p class="d-inline"> {{element.academicQualification.Aenddate2 | date}}</p><br>
+              </div>
+              <div>
+                <p class="font-weight-bold d-inline">Merit: </p>
+                <p class="d-inline"> {{element.academicQualification.merit2}}</p><br>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+        <mat-divider></mat-divider>
+        <mat-card class="example-card">
+          <h5> Work Experience</h5>
+          <div class="row">
+            <div class="col-md-4">
+              <p class="font-weight-bold d-inline">Company Name: </p>
+              <p class="d-inline"> {{element.workexperience.wCompanyname}}</p><br>
+              <div>
+                <p class="font-weight-bold d-inline">Start Date: </p>
+                <p class="d-inline"> {{element.workexperience.Pstartdate | date}}</p><br>
+                <p class="font-weight-bold d-inline">End Date: </p>
+                <p class="d-inline"> {{element.workexperience.Penddate | date}}</p><br>
+              </div>
+              <div>
+                <p class="font-weight-bold d-inline">Duties And Responsibilities: </p>
+                <p class="d-inline"> {{element.workexperience.duties}}</p><br>
+              </div>
+            </div>
+            <div class="col-md-4" *ngIf="element.workexperience.wCompanyname1">
+              <div>
+                <p class="font-weight-bold d-inline">Company Name: </p>
+                <p class="d-inline"> {{element.workexperience.wCompanyname1}}</p><br>
+              </div>
+              <div>
+                <p class="font-weight-bold d-inline">Start Date: </p>
+                <p class="d-inline"> {{element.workexperience.Pstartdate1 | date}}</p><br>
+                <p class="font-weight-bold d-inline">End Date: </p>
+                <p class="d-inline"> {{element.workexperience.Penddate1 | date}}</p><br>
+              </div>
+              <div>
+                <p class="font-weight-bold d-inline">Duties And Responsibilities: </p>
+                <p class="d-inline"> {{element.workexperience.duties1}}</p><br>
+              </div>
+            </div>
+            <div class="col-md-4" *ngIf="element.workexperience.wCompanyname2">
+              <div>
+                <p class="font-weight-bold d-inline">Company Name: </p>
+                <p class="d-inline"> {{element.workexperience.wCompanyname2}}</p><br>
+              </div>
+              <div>
+                <p class="font-weight-bold d-inline">Start Date: </p>
+                <p class="d-inline"> {{element.workexperience.Pstartdate2 | date}}</p><br>
+                <p class="font-weight-bold d-inline">End Date: </p>
+                <p class="d-inline"> {{element.workexperience.Penddate2 | date}}</p><br>
+              </div>
+              <div>
+                <p class="font-weight-bold d-inline">Duties And Responsibilities: </p>
+                <p class="d-inline"> {{element.workexperience.duties2}}</p><br>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+        <mat-divider></mat-divider>
+        <mat-card class="example-card">
+          <div class="row">
+            <div class="col-md-4">
+              <h5> Professional Qualification</h5>
+              <p class="d-inline"> {{element.pqualification}}</p><br>
+            </div>
+            <div class="col-md-4">
+              <h5> Special Skills And Talents </h5>
+              <p class="d-inline"> {{element.skills}}</p><br>
+            </div>
+            <div class="col-md-4">
+              <h5> Membership</h5>
+              <p class="d-inline"> {{element.membership}}</p><br>
+            </div>
+          </div>
+        </mat-card>
+        <mat-divider></mat-divider>
+        <mat-card class="example-card">
+          <h5> Referees</h5>
+          <div class="row">
+            <div class="col-md-4">
+              <p class="font-weight-bold d-inline">Referee Title: </p>
+              <p class=" d-inline"> {{element.referees.refereetitle}}</p><br>
+              <p class="font-weight-bold d-inline">Referee First Name: </p>
+              <p class="d-inline"> {{element.referees.refereefname}}</p><br>
+              <p class="font-weight-bold d-inline">Referee Last Name: </p>
+              <p class="d-inline"> {{element.referees.refereelname}}</p><br>
+              <p class="font-weight-bold d-inline">Company: </p>
+              <p class="d-inline"> {{element.referees.refereeComp}}</p><br>
+              <p class="font-weight-bold d-inline">Referee Address: </p>
+              <p class="d-inline"> {{element.referees.refereeAddress}}</p><br>
+              <p class="font-weight-bold d-inline">Referee Email: </p>
+              <p class="d-inline"> {{element.referees.refereeEmail}}</p><br>
+              <p class="font-weight-bold d-inline">Referee Phone Number: </p>
+              <p class="d-inline"> {{element.referees.refereePhonenumber}}</p><br>
+            </div>
+            <div class="col-md-4" *ngIf="element.referees.refereetitle1">
+              <p class="font-weight-bold d-inline">Referee Title: </p>
+              <p class=" d-inline"> {{element.referees.refereetitle1}}</p><br>
+              <p class="font-weight-bold d-inline">Referee First Name: </p>
+              <p class="d-inline"> {{element.referees.refereefname1}}</p><br>
+              <p class="font-weight-bold d-inline">Referee Last Name: </p>
+              <p class="d-inline"> {{element.referees.refereelname1}}</p><br>
+              <p class="font-weight-bold d-inline">Company: </p>
+              <p class="d-inline"> {{element.referees.refereeComp1}}</p><br>
+              <p class="font-weight-bold d-inline">Referee Address: </p>
+              <p class="d-inline"> {{element.referees.refereeAddress1}}</p><br>
+              <p class="font-weight-bold d-inline">Referee Email: </p>
+              <p class="d-inline"> {{element.referees.refereeEmail1}}</p><br>
+              <p class="font-weight-bold d-inline">Referee Phone Number: </p>
+              <p class="d-inline"> {{element.referees.refereePhonenumber1}}</p><br>
+            </div>
+            <div class="col-md-4" *ngIf="element.referees.refereetitle2">
+              <p class="font-weight-bold d-inline">Referee Title: </p>
+              <p class="d-inline"> {{element.referees.refereetitle2}}</p><br>
+              <p class="font-weight-bold d-inline">Referee First Name: </p>
+              <p class="d-inline"> {{element.referees.refereefname2}}</p><br>
+              <p class="font-weight-bold d-inline">Referee Last Name: </p>
+              <p class="d-inline"> {{element.referees.refereelname2}}</p><br>
+              <p class="font-weight-bold d-inline">Company: </p>
+              <p class="d-inline"> {{element.referees.refereeComp2}}</p><br>
+              <p class="font-weight-bold d-inline">Referee Address: </p>
+              <p class="d-inline"> {{element.referees.refereeAddress2}}</p><br>
+              <p class="font-weight-bold d-inline">Referee Email: </p>
+              <p class="d-inline"> {{element.referees.refereeEmail2}}</p><br>
+              <p class="font-weight-bold d-inline">Referee Phone Number: </p>
+              <p class="d-inline"> {{element.referees.refereePhonenumber2}}</p><br>
+            </div>
+          </div>
+          <div>
+          </div>
+          <mat-divider></mat-divider>
+          <div>
+          </div>
+        </mat-card>
+      </mat-card>
+    </div>
+  </ng-template>
+</div>

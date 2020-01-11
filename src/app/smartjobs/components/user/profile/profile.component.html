@@ -23,7 +23,7 @@
               {{profileComplete}}%
             </div>
           </div>
-          <p class="proile-rating">RANKINGS : <span>{{usr.Overall_Rating}}</span></p>
+          <p class="proile-rating">RANKINGS : <span>{{usr.rating}}</span></p>
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
               <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
@@ -58,7 +58,7 @@
                 <label>National Id</label>
               </div>
               <div class="col-md-6">
-                <p>{{usr.national_id}}</p>
+                <p>{{usr.IDnumber}}</p>
               </div>
             </div>
             <div class="row">
@@ -74,7 +74,7 @@
                 <label>Name</label>
               </div>
               <div class="col-md-6">
-                <p>{{usr.name}}</p>
+                <p>{{usr.username}}</p>
               </div>
             </div>
             <div class="row">
@@ -90,7 +90,7 @@
                 <label>Phone</label>
               </div>
               <div class="col-md-6">
-                <p>+254{{usr.telephone}}</p>
+                <p>+254{{usr.phonenumber}}</p>
               </div>
             </div>
             <div class="row">
@@ -168,25 +168,10 @@
                 <label>Professional Qualification</label>
               </div>
               <div class="col-md-6">
-                <p>{{usr.professional_qualification}}</p>
+                <p>{{usr.pqualification}}</p>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Availability</label>
-              </div>
-              <div class="col-md-6">
-                <p>{{usr.Availability_status}}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Academic Qualifications</label>
-              </div>
-              <div class="col-md-6">
-                <p> {{usr.academic_qualifications}}</p>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>
