@@ -23,7 +23,7 @@
               {{profileComplete}}%
             </div>
           </div>
-          <p class="proile-rating">RANKINGS : <span>{{usr.rating}}</span></p>
+          <p class="proile-rating">RATING : <span>{{usr.rating}}</span></p>
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
               <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
@@ -33,11 +33,19 @@
               <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
                 aria-selected="false">Timeline</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" id="expqa-tab" data-toggle="tab" href="#expqa" role="tab"
+                aria-controls="Experience And Qualifications" aria-selected="false">Experience And Qualifications</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="referee-tab" data-toggle="tab" href="#referee" role="tab"
+                aria-controls="Referees" aria-selected="false">Referees</a>
+            </li>
           </ul>
         </div>
       </div>
       <div class="col-md-2">
-        <button class="btn btn-lg profile-edit-btn" [routerLink]="['/edit-profile']" >
+        <button class="btn btn-lg profile-edit-btn" [routerLink]="['/edit-profile']">
           <i class="fa fa-pencil"></i> Edit Profile
         </button>
       </div>
@@ -101,6 +109,42 @@
                 <p>{{usr.profession}}</p>
               </div>
             </div>
+
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="row">
+              <div class="col-md-6">
+                <label>Cumulative Experience</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{usr.cumulative_experience}} Years</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <label>Professional Qualification</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{usr.pqualification}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Membership</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{usr.membership}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Blacklisted</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{usr.blacklisted}}</p>
+              </div>
+            </div>
             <div class="row">
               <div class="col-md-6">
                 <label>Work History</label>
@@ -124,22 +168,22 @@
                         <table class="table table-striped">
                           <thead>
                             <tr>
-                              <th scope="col">#</th>
+                              <th scope="col">No.</th>
                               <th scope="col">Company</th>
-                              <th scope="col">contract type</th>
-                              <th scope="col"> contract length</th>
-                              <th scope="col"> rating</th>
+                              <th scope="col">Contract Type</th>
+                              <th scope="col">Contract Length</th>
+                              <th scope="col">Rating</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
                               <th scope="row">1</th>
                               <td>
-                                Unilever
+                                {{usr.companyname}}
                               </td>
-                              <td>Seasonal</td>
-                              <td>6 months</td>
-                              <td>7</td>
+                              <td>{{usr.contractType}}</td>
+                              <td>{{usr.contractLength }} Years</td>
+                              <td>{{usr.rating}}</td>
                             </tr>
                           </tbody>
                         </table>
@@ -153,25 +197,166 @@
               </div>
             </div>
           </div>
-          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <div class="row">
-              <div class="col-md-6">
-                <label>Cumulative Experience</label>
+          <div class="tab-pane fade show active" id="expqa" role="tabpanel" aria-labelledby="expqa-tab">
+            <mat-card class="example-card">
+              <h5> Academic Qualification</h5>
+              <div class="row">
+                <div class="col-md-4">
+                  <p class="font-weight-bold d-inline">Institution Name: </p>
+                  <p class=" d-inline"> {{usr.academicQualification.institutionname}}</p><br>
+                  <div>
+                    <p class="font-weight-bold d-inline">Start Date: </p>
+                    <p class=" d-inline"> {{usr.academicQualification.Astartdate | date}}</p><br>
+                    <p class="font-weight-bold d-inline">End Date: </p>
+                    <p class="d-inline"> {{usr.academicQualification.Aenddate | date}}</p><br>
+                  </div>
+                  <div>
+                    <p class="font-weight-bold d-inline">Merit: </p>
+                    <p class="d-inline"> {{usr.academicQualification.merit}}</p><br>
+                  </div>
+                </div>
+                <div class="col-md-4" *ngIf="usr.academicQualification.institutionname1">
+                  <div>
+                    <p class="font-weight-bold d-inline">Institution Name: </p>
+                    <p class="d-inline"> {{usr.academicQualification.institutionname1}}</p><br>
+                  </div>
+                  <div>
+                    <p class="font-weight-bold d-inline">Start Date: </p>
+                    <p class="d-inline"> {{usr.academicQualification.Astartdate1 | date}}</p><br>
+                    <p class="font-weight-bold d-inline">End Date: </p>
+                    <p class="d-inline"> {{usr.academicQualification.Aenddate1 | date}}</p><br>
+                  </div>
+                  <div>
+                    <p class="font-weight-bold d-inline">Merit: </p>
+                    <p class="d-inline"> {{usr.academicQualification.merit1}}</p><br>
+                  </div>
+                </div>
+                <div class="col-md-4" *ngIf="usr.academicQualification.institutionname2">
+                  <div>
+                    <p class="font-weight-bold d-inline">Institution Name: </p>
+                    <p class="d-inline"> {{usr.academicQualification.institutionname2}}</p><br>
+                  </div>
+                  <div>
+                    <p class="font-weight-bold d-inline">Start Date: </p>
+                    <p class="d-inline"> {{usr.academicQualification.Astartdate2 | date}}</p><br>
+                    <p class="font-weight-bold d-inline">End Date: </p>
+                    <p class="d-inline"> {{usr.academicQualification.Aenddate2 | date}}</p><br>
+                  </div>
+                  <div>
+                    <p class="font-weight-bold d-inline">Merit: </p>
+                    <p class="d-inline"> {{usr.academicQualification.merit2}}</p><br>
+                  </div>
+                </div>
               </div>
-              <div class="col-md-6">
-                <p>{{usr.cumulative_experience}} Years</p>
+            </mat-card>
+            <mat-divider></mat-divider>
+            <mat-card class="example-card">
+              <h5> Work Experience</h5>
+              <div class="row">
+                <div class="col-md-4">
+                  <p class="font-weight-bold d-inline">Company Name: </p>
+                  <p class="d-inline"> {{usr.workexperience.wCompanyname}}</p><br>
+                  <div>
+                    <p class="font-weight-bold d-inline">Start Date: </p>
+                    <p class="d-inline"> {{usr.workexperience.Pstartdate | date}}</p><br>
+                    <p class="font-weight-bold d-inline">End Date: </p>
+                    <p class="d-inline"> {{usr.workexperience.Penddate | date}}</p><br>
+                  </div>
+                  <div>
+                    <p class="font-weight-bold d-inline">Duties And Responsibilities: </p>
+                    <p class="d-inline"> {{usr.workexperience.duties}}</p><br>
+                  </div>
+                </div>
+                <div class="col-md-4" *ngIf="usr.workexperience.wCompanyname1">
+                  <div>
+                    <p class="font-weight-bold d-inline">Company Name: </p>
+                    <p class="d-inline"> {{usr.workexperience.wCompanyname1}}</p><br>
+                  </div>
+                  <div>
+                    <p class="font-weight-bold d-inline">Start Date: </p>
+                    <p class="d-inline"> {{usr.workexperience.Pstartdate1 | date}}</p><br>
+                    <p class="font-weight-bold d-inline">End Date: </p>
+                    <p class="d-inline"> {{usr.workexperience.Penddate1 | date}}</p><br>
+                  </div>
+                  <div>
+                    <p class="font-weight-bold d-inline">Duties And Responsibilities: </p>
+                    <p class="d-inline"> {{usr.workexperience.duties1}}</p><br>
+                  </div>
+                </div>
+                <div class="col-md-4" *ngIf="usr.workexperience.wCompanyname2">
+                  <div>
+                    <p class="font-weight-bold d-inline">Company Name: </p>
+                    <p class="d-inline"> {{usr.workexperience.wCompanyname2}}</p><br>
+                  </div>
+                  <div>
+                    <p class="font-weight-bold d-inline">Start Date: </p>
+                    <p class="d-inline"> {{usr.workexperience.Pstartdate2 | date}}</p><br>
+                    <p class="font-weight-bold d-inline">End Date: </p>
+                    <p class="d-inline"> {{usr.workexperience.Penddate2 | date}}</p><br>
+                  </div>
+                  <div>
+                    <p class="font-weight-bold d-inline">Duties And Responsibilities: </p>
+                    <p class="d-inline"> {{usr.workexperience.duties2}}</p><br>
+                  </div>
+                </div>
               </div>
-            </div>
-            
-            <div class="row">
-              <div class="col-md-6">
-                <label>Professional Qualification</label>
+            </mat-card>
+          </div>
+          <div class="tab-pane fade show active" id="referee" role="tabpanel" aria-labelledby="referee-tab">
+            <mat-card class="example-card">
+              <h5> Referees</h5>
+              <div class="row">
+                <div class="col-md-4">
+                  <p class="font-weight-bold d-inline">Referee Title: </p>
+                  <p class=" d-inline"> {{usr.referees.refereetitle}}</p><br>
+                  <p class="font-weight-bold d-inline">Referee First Name: </p>
+                  <p class="d-inline"> {{usr.referees.refereefname}}</p><br>
+                  <p class="font-weight-bold d-inline">Referee Last Name: </p>
+                  <p class="d-inline"> {{usr.referees.refereelname}}</p><br>
+                  <p class="font-weight-bold d-inline">Company: </p>
+                  <p class="d-inline"> {{usr.referees.refereeComp}}</p><br>
+                  <p class="font-weight-bold d-inline">Referee Address: </p>
+                  <p class="d-inline"> {{usr.referees.refereeAddress}}</p><br>
+                  <p class="font-weight-bold d-inline">Referee Email: </p>
+                  <p class="d-inline"> {{usr.referees.refereeEmail}}</p><br>
+                  <p class="font-weight-bold d-inline">Referee Phone Number: </p>
+                  <p class="d-inline"> {{usr.referees.refereePhonenumber}}</p><br>
+                </div>
+                <div class="col-md-4" *ngIf="usr.referees.refereetitle1">
+                  <p class="font-weight-bold d-inline">Referee Title: </p>
+                  <p class=" d-inline"> {{usr.referees.refereetitle1}}</p><br>
+                  <p class="font-weight-bold d-inline">Referee First Name: </p>
+                  <p class="d-inline"> {{usr.referees.refereefname1}}</p><br>
+                  <p class="font-weight-bold d-inline">Referee Last Name: </p>
+                  <p class="d-inline"> {{usr.referees.refereelname1}}</p><br>
+                  <p class="font-weight-bold d-inline">Company: </p>
+                  <p class="d-inline"> {{usr.referees.refereeComp1}}</p><br>
+                  <p class="font-weight-bold d-inline">Referee Address: </p>
+                  <p class="d-inline"> {{usr.referees.refereeAddress1}}</p><br>
+                  <p class="font-weight-bold d-inline">Referee Email: </p>
+                  <p class="d-inline"> {{usr.referees.refereeEmail1}}</p><br>
+                  <p class="font-weight-bold d-inline">Referee Phone Number: </p>
+                  <p class="d-inline"> {{usr.referees.refereePhonenumber1}}</p><br>
+                </div>
+                <div class="col-md-4" *ngIf="usr.referees.refereetitle2">
+                  <p class="font-weight-bold d-inline">Referee Title: </p>
+                  <p class="d-inline"> {{usr.referees.refereetitle2}}</p><br>
+                  <p class="font-weight-bold d-inline">Referee First Name: </p>
+                  <p class="d-inline"> {{usr.referees.refereefname2}}</p><br>
+                  <p class="font-weight-bold d-inline">Referee Last Name: </p>
+                  <p class="d-inline"> {{usr.referees.refereelname2}}</p><br>
+                  <p class="font-weight-bold d-inline">Company: </p>
+                  <p class="d-inline"> {{usr.referees.refereeComp2}}</p><br>
+                  <p class="font-weight-bold d-inline">Referee Address: </p>
+                  <p class="d-inline"> {{usr.referees.refereeAddress2}}</p><br>
+                  <p class="font-weight-bold d-inline">Referee Email: </p>
+                  <p class="d-inline"> {{usr.referees.refereeEmail2}}</p><br>
+                  <p class="font-weight-bold d-inline">Referee Phone Number: </p>
+                  <p class="d-inline"> {{usr.referees.refereePhonenumber2}}</p><br>
+                </div>
               </div>
-              <div class="col-md-6">
-                <p>{{usr.pqualification}}</p>
-              </div>
-            </div>
-            
+            </mat-card>
+
           </div>
         </div>
       </div>

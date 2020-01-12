@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300');
+h3,h4,h5 {
+  color: #155DA3 ;
+}
 .owl-carousel-holder{
   width:100%;
   float: left;
@@ -85,16 +88,16 @@ h5, h4, mat-card-title, .appdate {
   margin-bottom: 5px;
 } */
 
-img {
-  /* width: 110%; */
-  /* height: 95vh; */
-}
-/* 
+/* .grid-image img {
+  width: 50%;
+  height: 95vh;
+} */
+
 mat-grid-tile img {
   border-radius: 50%;
   height: 50px;
   width: 50px;
-} */
+}
 
 /* .col-md-3 {
   margin-right: 20px;
