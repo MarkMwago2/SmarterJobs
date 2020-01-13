@@ -66,7 +66,7 @@ const routes: Routes = [
 {path: 'talentpool', component: TalentpoolComponent, canActivate: [AuthGuard]},
 {path: 'add-employee/:id', component: AddEmployeeComponent, canActivate: [AuthGuard]},
 {path: 'view-employee', component: ViewAllEmployeesComponent, canActivate: [AuthGuard]},
-{path: 'view-reports', component: ReportsComponent, canActivate: [AuthGuard]},
+{path: 'view-reports', component: ReportsComponent},
 // {path: 'edit-em'}
 ];
 
