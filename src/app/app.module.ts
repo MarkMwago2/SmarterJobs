@@ -3,6 +3,9 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { MnFullpageModule } from 'ngx-fullpage';
 import { AngularFullpageModule } from '@fullpage/angular-fullpage';
 import { OwlModule } from 'ngx-owl-carousel';
+import { WebDataRocksPivot } from './webdatarocks/webdatarocks.angular4';
+import { GoogleChartsModule } from 'angular-google-charts';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -123,6 +126,7 @@ import { ReportsComponent } from './smartjobs/components/reports/reports.compone
 @NgModule({
   declarations: [
     AppComponent,
+    WebDataRocksPivot,
     CdkDetailRowDirective,
     FooterComponent,
     HeaderComponent,
@@ -167,6 +171,7 @@ import { ReportsComponent } from './smartjobs/components/reports/reports.compone
   imports: [
     BrowserModule,
     AngularFullpageModule,
+    GoogleChartsModule.forRoot(),
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularFontAwesomeModule,
