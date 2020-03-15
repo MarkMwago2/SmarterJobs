@@ -1,5 +1,10 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
-
+import { ContractInfo } from '../../../../shared/models/contractInfo';
+import Docxtemplater from 'docxtemplater';
+import * as JSZip from 'jszip';
+import PizZip from 'pizzip';
+import JSZipUtils from 'jszip-utils';
+import { saveAs } from 'file-saver';
 import {
   ProfileService
 } from '../../../services/profile.service';
@@ -9,6 +14,7 @@ import {
 import {
   Router, ActivatedRoute
 } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 import {
   FormControl,
@@ -27,6 +33,10 @@ export interface Contracttype {
   value: string;
   viewValue: string;
 }
+export interface Salary {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-add-contract',
@@ -42,6 +52,13 @@ export class AddContractComponent implements OnInit {
   AddContractForm: FormGroup;
   companyId: any;
   userId: any;
+  userProfile: any;
+
+  @ViewChild('fileInput', {static: false}) fileInput: File;
+  fileUrl: any;
+  info: ContractInfo;
+  fileInputEvent: any;
+  contractSelect: any;
 
   addContractMessages = {
     contractType: [{
@@ -56,6 +73,13 @@ export class AddContractComponent implements OnInit {
     {value: 'Casual', viewValue: 'Casual'},
     {value: 'Permanent & Pensionable', viewValue: 'Permanent & Pensionable'},
   ];
+  salary: Salary[] = [
+    {value: 'quarterly', viewValue: 'quarterly'},
+    {value: 'bi-yearly', viewValue: 'bi-yearly'},
+    {value: 'annual', viewValue: 'annual'}
+  ];
+  base64File: string = null;
+  filename: string = null;
 
   constructor(
     private router: Router,
@@ -64,11 +88,13 @@ export class AddContractComponent implements OnInit {
     private toastr: ToastrService,
     private jobs: JobsService,
     private actRoute: ActivatedRoute,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit() {
     this.createForms();
     this.showCreate();
+    this.info = new ContractInfo();
   }
   createForms() {
     // user links form validations
@@ -80,6 +106,7 @@ export class AddContractComponent implements OnInit {
       enddate: new FormControl('', Validators.required),
     });
   }
+
 
   onSubmitAddContract(value) {
     value.userId = JSON.parse(this.actRoute.snapshot.paramMap.get('id'));
@@ -139,6 +166,124 @@ export class AddContractComponent implements OnInit {
     Object.keys(this.AddContractForm.controls).forEach(key => {
       this.AddContractForm.controls[key].setErrors(null);
     });
+  }
+
+  setContractA() {
+    this.contractSelect = false;
+  }
+
+  setContractB() {
+    this.contractSelect = true;
+  }
+
+  onFileSelect(e: any): void {
+    try {
+      const file = e.target.files[0];
+      const fReader = new FileReader();
+      fReader.readAsDataURL(file);
+      fReader.onloadend = (event: any) => {
+        this.filename = file.name;
+        this.base64File = event.target.result;
+      };
+    } catch (error) {
+      this.filename = null;
+      this.base64File = null;
+      console.log('no file was selected...');
+    }
+  }
+
+
+  // Contract generator
+  selectTemplate(value) {
+    this.fileUrl = value;
+  }
+
+  selectCustomUrl() {
+    // Call fileChange so that it retrieves the file already uploaded
+    // Only relevant if if the user uses the file input AFTER selecting the radio button
+    if (this.fileInputEvent !== undefined) {
+      this.fileChange(this.fileInputEvent);
+    }
+  }
+
+  fileChange(event) {
+    this.fileInputEvent = event;
+
+    // Ensure file was given
+    if (event.target.files.length === 0) { return; }
+
+    // Ensure correct type
+    const mimeType = event.target.files[0].type;
+    if (mimeType.match(/application\/vnd.openxmlformats-officedocument.wordprocessingml.document\/*/) == null) {
+      throw new TypeError('File must be *.docx');
+    }
+
+    // Retrieve file URL
+    const reader = new FileReader();
+    this.fileUrl = event.target.files;
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = e => this.fileUrl = reader.result;
+  }
+
+  loadFile(url, callback) {
+    JSZipUtils.getBinaryContent(url, callback);
+  }
+
+  onSubmit() {
+    this.isLoading = true;
+    this.userId = JSON.parse(this.actRoute.snapshot.paramMap.get('id'));
+    this.prof.getUser(this.userId).subscribe( res => {
+      this.prof.getUserprofile(this.userId).subscribe(profile => {
+        const userid = this.prof.loggedInUserId();
+        this.prof.getcompanyprofileByUserId(userid).subscribe(company => {
+          this.userProfile = {...res, ...profile, ...company};
+          // console.log(this.userProfile);
+          const d = Date();
+          const a = d.toString();
+          this.info.dateNow = this.datePipe.transform(a, 'yyyy-MM-dd');
+          this.info.companyName = this.userProfile.companyname;
+          this.info.companyLocation =  this.userProfile.physicaladdress;
+          this.info.postalAddress = this.userProfile.address;
+          this.info.userContractFname = this.userProfile.firstname;
+          this.info.userContractLname = this.userProfile.lastname;
+          this.info.startingDate = this.datePipe.transform(this.info.startingDate, 'yyyy-MM-dd');
+          // console.log(this.userProfile);
+
+          this.loadFile(this.fileUrl, (error, content) => {
+            if (error) { throw error; }
+            const zip = new PizZip(content);
+            // zip.file(content);
+            const doc = new Docxtemplater().loadZip(zip);
+            doc.setData(this.info);
+            try {
+              // Replace placeholders with info values
+              doc.render();
+            } catch (error) {
+              const e = {
+                message: error.message,
+                name: error.name,
+                stack: error.stack,
+                properties: error.properties,
+              };
+              console.log(JSON.stringify({ error: e }));
+              throw error;
+            }
+
+            const out = doc.getZip().generate({
+              type: 'blob',
+              mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+            });
+
+            // Save the generated document
+            saveAs(out, `${this.info.userContractFname} Contract - ${this.info.companyName}.docx`);
+            this.showSuccess();
+          });
+        });
+      });
+    });
+
+
+
   }
 
 }

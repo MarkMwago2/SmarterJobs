@@ -1,70 +1,201 @@
 <app-header></app-header>
 <!-- Title group  -->
-<div class="row">
-  <div class="col-sm-10">
-    <h3>Fill in the details of the Contract</h3>
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 d-flex justify-content-center">
+      <h3>Fill in the details of the Contract</h3>
+    </div>
+    <div class="col-md-3"></div>
   </div>
-</div>
 
-<!-- Jobs form -->
+  <!-- Jobs form -->
 
-<mat-card>
-  <form [formGroup]="AddContractForm" (ngSubmit)="onSubmitAddContract(AddContractForm.value)"
-    #resetAddContractForm="ngForm" novalidate [loader]="isLoading ">
-    <!-- Contract Starting Date-->
-    <mat-form-field class="full-width">
-      <input matInput [matDatepicker]="picker" formControlName="startdate" matTooltip="Select the starting date"
-        name="startdate" matInput placeholder="Select the Starting Date" required>
-      <mat-datepicker-toggle matSuffix [for]="picker">
-      </mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-      <mat-error *ngIf="AddContractForm.controls['startdate'].hasError('required')">
-        Please choose a date.</mat-error>
-    </mat-form-field><br>
-    <!-- Contract Ending Date -->
-    <mat-form-field class="full-width">
-      <input matInput [matDatepicker]="picker2" formControlName="enddate" matTooltip="Select the ending date"
-        name="enddate" matInput placeholder="Select the Ending Date" required>
-      <mat-datepicker-toggle matSuffix [for]="picker2">
-      </mat-datepicker-toggle>
-      <mat-datepicker #picker2></mat-datepicker>
-      <mat-error *ngIf="AddContractForm.controls['enddate'].hasError('required')">
-        Please choose a date.</mat-error>
-    </mat-form-field><br>
-    <!--Contract Type-->
-    <mat-form-field appearance="standard" class="full-width">
-      <mat-label>Contract Type</mat-label>
-      <mat-select formControlName="contractType" name="contractType" matInput placeholder="Contract Type"
-        matTooltip="Enter the Contract Type" required>
-        <mat-option *ngFor="let contract of contracts" [value]="contract.value">
-          {{contract.viewValue}}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngFor="let validation of addContractMessages.contractType">
-        <mat-error class="error-message"
-          *ngIf="AddContractForm.get('contractType').hasError(validation.type) && (AddContractForm.get('contractType').dirty || AddContractForm.get('contractType').touched)">
-          {{validation.message}}</mat-error>
-      </mat-error>
-    </mat-form-field>
-
-
-    <!-- Submit & Reset -->
-    <div class="mt-2">
-      <div class="d-flex justify-content-around links">
-        <div matTooltip="Fill in all the *required details before submitting"
-          [matTooltipDisabled]="AddContractForm.valid">
-          <button class="submit-btn" color="primary" mat-raised-button type="submit"
-            [disabled]="!AddContractForm.valid">
-            <mat-icon>add</mat-icon>
-            Add
-          </button>
+  <mat-card class="mat-elevation-z4 mb-2">
+    <p class="lead">Enter the information for the contract below.</p>
+    <form #coverLetterForm="ngForm" [loader]="isLoading ">
+      <div class="card mb-3">
+        <div class="card-header">
+          <h6>Contract Generator</h6>
         </div>
-        <div matTooltip="By clicking clear the all the forms will be cleared">
-          <button mat-flat-button color="warn" type="button" (click)="resetForm()">
-            <mat-icon>clear</mat-icon>Clear
-          </button>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="coverLetterTemplate">Choose a template below, or upload your own <span
+                class="text-danger">*</span></label>
+            <div class="form-check">
+              <input type="radio" #coverLetter="ngModel" [(ngModel)]="info.coverLetter" name="coverLetterTemplate"
+                id="genericCoverLetter" class="form-check-input" (change)="selectTemplate($event.target.value)" (click)="setContractA()"
+                value="assets/contracts/Casual CONTRACT Specimen.docx">
+              <label for="genericCoverLetter">Term Contract</label><br>
+            </div>
+            <div class="form-check">
+              <input type="radio" #coverLetter="ngModel" [(ngModel)]="info.coverLetter" name="coverLetterTemplate"
+                id="genericCoverLetter" class="form-check-input" (change)="selectTemplate($event.target.value)"
+                (click)="setContractB()"
+                value="assets/contracts/Permanent Employment Contract - Net-Works.docx">
+              <label for="genericCoverLetter">Permanent Contract</label><br>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </form>
-</mat-card>
+      <div class="card mb-3">
+        <div class="card-header">
+          <h6>Contract Information</h6>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="contractSn">Contract SerailNo <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="contractSn" [(ngModel)]="info.contractSn" name="contractSn"
+              #contractSn="ngModel" required>
+            <div [hidden]="contractSn.valid || contractSn.pristine" class="alert alert-danger">Contract SerailNo is
+              Required</div>
+          </div>
+          <div class="form-group">
+            <label for="jobRole">Job Role<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="jobRole" [(ngModel)]="info.jobRole" name="jobRole"
+              #jobRole="ngModel" required>
+            <div [hidden]="jobRole.valid || jobRole.pristine" class="alert alert-danger">Job Role
+              is
+              Required</div>
+          </div>
+          <div class="form-group">
+            <label for="departmentName">Department Name<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="departmentName" [(ngModel)]="info.departmentName"
+              name="departmentName" #departmentName="ngModel" required>
+            <div [hidden]="departmentName.valid || departmentName.pristine" class="alert alert-danger">Department Name
+              is
+              Required</div>
+          </div>
+          <div class="form-group">
+            <label for="startingDate">Starting Date</label>
+            <input type="date" class="form-control" id="startingDate" [(ngModel)]="info.startingDate"
+              name="startingDate" #startingDate="ngModel">
+          </div>
+          <div class="form-group">
+            <label for="endingDate">Ending Date</label>
+            <input type="date" class="form-control" id="endingDate" [(ngModel)]="info.endingDate" name="endingDate"
+              #endingDate="ngModel">
+          </div>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-header">
+          <h6>Salary and Allowances Information</h6>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="basicSalary">Basic Salary</label>
+            <input type="text" class="form-control" id="jobTitle" [(ngModel)]="info.basicSalary" name="basicSalary"
+              #basicSalary="ngModel">
+          </div>
+          <div class="form-group">
+            <label for="salaryReview">Salary Review <span class="text-danger">*</span></label>
+            <select [(ngModel)]="info.salaryReview" class="form-control" id="salaryReview" name="salaryReview"
+              #salaryReview="ngModel" required>
+              <option *ngFor="let option of salary" [value]="option.value">
+                {{option.viewValue}}
+              </option>
+            </select>
+            <div [hidden]="salaryReview.valid || salaryReview.pristine" class="alert alert-danger">Salary Review
+              is Required</div>
+          </div>
+          <div class="form-group">
+            <label for="houseAllowance">House Allowance</label>
+            <input type="text" class="form-control" id="houseAllowance" [(ngModel)]="info.houseAllowance"
+              name="houseAllowance" #houseAllowance="ngModel">
+          </div>
+          <div class="form-group">
+            <label for="salaryScale">Salary Scale</label>
+            <input type="text" class="form-control" id="salaryScale" [(ngModel)]="info.salaryScale" name="salaryScale"
+              #salaryScale="ngModel">
+          </div>
+          <div class="form-group">
+            <label for="medicalAllowance">Medical Allowance</label>
+            <input type="text" class="form-control" id="medicalAllowance" [(ngModel)]="info.medicalAllowance"
+              name="medicalAllowance" #medicalAllowance="ngModel">
+          </div>
+          <div class="form-group">
+            <label for="medicalAllowanceOp">Medical Allowance Outpatient</label>
+            <input type="text" class="form-control" id="medicalAllowanceOp" [(ngModel)]="info.medicalAllowanceOp"
+              name="medicalAllowanceOp" #medicalAllowanceOp="ngModel">
+          </div>
+          <div class="form-group">
+            <label for="medicalAllowanceIp">Medical Allowance Inpatient</label>
+            <input type="text" class="form-control" id="medicalAllowanceIp" [(ngModel)]="info.medicalAllowanceIp"
+              name="medicalAllowanceIp" #medicalAllowanceIp="ngModel">
+          </div>
+          <div class="form-group">
+            <label for="otherBenefits">List of other Benefits</label>
+            <input type="text" class="form-control" id="otherBenefits"
+              placeholder="Separate the benefits using comma (,)" [(ngModel)]="info.otherBenefits" name="otherBenefits"
+              #otherBenefits="ngModel">
+          </div>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-header">
+          <h6>Contract Type and Leave Information </h6>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="workingHours">Working Hours <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="workingHours" [(ngModel)]="info.workingHours"
+              name="workingHours" #workingHours="ngModel" required>
+            <div [hidden]="workingHours.valid || workingHours.pristine" class="alert alert-danger">Working Hours is
+              Required</div>
+          </div>
+          <div class="form-group">
+            <label for="staffNumber">Staff Number <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="staffNumber" [(ngModel)]="info.staffNumber" name="staffNumber"
+              #staffNumber="ngModel" required>
+            <div [hidden]="staffNumber.valid || staffNumber.pristine" class="alert alert-danger">Staff Number
+              is
+              Required</div>
+          </div>
+          <div class="form-group">
+            <label for="endofContract">End of Contract Date</label>
+            <input type="date" class="form-control" id="endofContract" [(ngModel)]="info.endofContract"
+              name="endofContract" #endofContract="ngModel">
+          </div>
+          <div class="form-group">
+            <label for="leaveDays">Leave Days <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="leaveDays" [(ngModel)]="info.leaveDays" name="leaveDays"
+              #leaveDays="ngModel" required>
+            <div [hidden]="leaveDays.valid || leaveDays.pristine" class="alert alert-danger">Leave Days is
+              Required</div>
+          </div>
+          <div class="form-group">
+            <label for="contractType">Type of Contract <span class="text-danger">*</span></label>
+            <select [(ngModel)]="info.contractType" class="form-control" id="contractType" name="contractType"
+              #contractType="ngModel" required>
+              <option *ngFor="let option of contracts" [value]="option.value">
+                {{option.viewValue}}
+              </option>
+            </select>
+            <div [hidden]="contractType.valid || contractType.pristine" class="alert alert-danger">Type of Contract
+              is Required</div>
+          </div>
+          <div class="form-group">
+            <label for="typeOfLeave">Type Of Leave <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="typeOfLeave" [(ngModel)]="info.typeOfLeave" name="typeOfLeave"
+              #typeOfLeave="ngModel" required>
+            <div [hidden]="typeOfLeave.valid || typeOfLeave.pristine" class="alert alert-danger">Type Of Leave
+              is
+              Required</div>
+          </div>
+          <div class="form-group">
+            <label for="accuredLeaveDays">Accured Leave Days <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="accuredLeaveDays" [(ngModel)]="info.accuredLeaveDays"
+              name="accuredLeaveDays" #accuredLeaveDays="ngModel" required>
+            <div [hidden]="accuredLeaveDays.valid || accuredLeaveDays.pristine" class="alert alert-danger">Accured Leave
+              Days
+              is
+              Required</div>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="onSubmit()">Generate
+        Document</button>
+    </form>
+  </mat-card>
+</div>

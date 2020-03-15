@@ -8,23 +8,29 @@
           <div class="card-title mb-4">
             <div class="d-flex justify-content-start">
               <div class="image-container">
-                <img src="assets/profile/Companies-dummy-image.jpg" id="imgProfile" style="width: 150px; height: 150px"
+                <div [hidden]="comp.logo === null">
+                  <img src={{comp.logo}} alt="" />
+                </div>
+                <div [hidden]="comp.logo !== null">
+                  <img src="assets/profile/Companies-dummy-image.jpg" id="imgProfile" style="width: 150px; height: 150px"
                   class="img-thumbnail" />
+                </div>
                 <div class="middle">
-                  <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
-                  <input type="file" style="display: none;" id="profilePicture" name="file" />
+                  Change Photo
+                  <input type="file" #fileUpload id="fileUpload" name="fileUpload" multiple="multiple" accept="image/*"
+                    (change)="handleFileInput($event.target.files)" />
                 </div>
               </div>
               <div class="userData ml-3">
-                <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">{{comp.name}}</h2>
-                <h6 class="d-block"><a href="#">15</a> Employees</h6>
+                <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">{{comp.companyname}}</h2>
+                <h6 class="d-block"><a href="#">{{comp.employees}}</a> Employees</h6>
                 <h6 class="d-block"><a href="#">3</a> Departments</h6>
                 <button class="btn btn-lg profile-edit-btn" [routerLink]="['/edit-companyprofile']">
                   <i class="fa fa-pencil"></i> Edit Profile
                 </button>
               </div>
               <div class="ml-auto">
-                
+
               </div>
             </div>
           </div>
@@ -50,7 +56,7 @@
                       <label style="font-weight:bold;">Company Name</label>
                     </div>
                     <div class="col-md-8 col-6">
-                      {{comp.name}}
+                      {{comp.companyname}}
                     </div>
                   </div>
                   <hr />
@@ -60,7 +66,7 @@
                       <label style="font-weight:bold;">Location</label>
                     </div>
                     <div class="col-md-8 col-6">
-                      {{comp.location}}
+                      {{comp.physicaladdress}}
                     </div>
                   </div>
                   <hr />
@@ -70,7 +76,7 @@
                       <label style="font-weight:bold;">Industry</label>
                     </div>
                     <div class="col-md-8 col-6">
-                      {{comp.industry_name}}
+                      {{comp.industry}}
                     </div>
                   </div>
                   <hr />
@@ -80,7 +86,7 @@
                       <label style="font-weight:bold;">Contact Person Title</label>
                     </div>
                     <div class="col-md-8 col-6">
-                      {{comp.contact_person_title}}
+                      {{comp.contactPersonTitle}}
                     </div>
                   </div>
                   <hr />
@@ -90,17 +96,37 @@
                       <label style="font-weight:bold;">Contact Person</label>
                     </div>
                     <div class="col-md-8 col-6">
-                      {{comp.contact_person}}
+                      {{comp.contactPersonName}}
                     </div>
                   </div>
                   <hr />
 
                   <div class="row">
                     <div class="col-sm-3 col-md-2 col-5">
-                      <label style="font-weight:bold;">Head Office Address</label>
+                      <label style="font-weight:bold;">Contact Person Email</label>
                     </div>
                     <div class="col-md-8 col-6">
-                      {{comp.head_office_address}}
+                      {{comp.contactPersonEmail}}
+                    </div>
+                  </div>
+                  <hr />
+
+                  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">Contact Person Phone Number</label>
+                    </div>
+                    <div class="col-md-8 col-6">
+                      {{comp.contactPersonPhoneNumber}}
+                    </div>
+                  </div>
+                  <hr />
+
+                  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">Postal Address</label>
+                    </div>
+                    <div class="col-md-8 col-6">
+                      {{comp.postaladdress}}
                     </div>
                   </div>
                   <hr />
@@ -111,7 +137,7 @@
                       <label style="font-weight:bold;">Phone</label>
                     </div>
                     <div class="col-md-8 col-6">
-                      {{comp.phone_number}}
+                      {{comp.phonenumber}}
                     </div>
                   </div>
                   <hr />
@@ -120,16 +146,16 @@
                       <label style="font-weight:bold;">Email</label>
                     </div>
                     <div class="col-md-8 col-6">
-                      {{comp.contact_email}}
+                      {{comp.email}}
                     </div>
                   </div>
                   <hr />
                   <div class="row">
                     <div class="col-sm-3 col-md-2 col-5">
-                      <label style="font-weight:bold;">Website</label>
+                      <label style="font-weight:bold;">Web Address</label>
                     </div>
                     <div class="col-md-8 col-6">
-                      {{comp.website_address}}
+                      {{comp.website}}
                     </div>
                   </div>
                   <hr />
@@ -137,7 +163,7 @@
                 </div>
                 <div class="tab-pane fade" id="connectedServices" role="tabpanel"
                   aria-labelledby="ConnectedServices-tab">
-                 {{comp.services_offered}}
+                  {{comp.services_offered}}
                 </div>
               </div>
             </div>

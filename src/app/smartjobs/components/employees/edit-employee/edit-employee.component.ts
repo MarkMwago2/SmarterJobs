@@ -98,10 +98,12 @@ export class EditEmployeeComponent implements OnInit {
     private toastr: ToastrService,
     private jobs: JobsService,
     private actRoute: ActivatedRoute,
-  ) { }
+  ) { 
+    this.getEmployee();
+  }
 
   ngOnInit() {
-    this.getEmployee();
+    
   }
 
   createForms() {
@@ -128,7 +130,7 @@ export class EditEmployeeComponent implements OnInit {
         this.employee = res;
         this.createForms();
       }
-    )
+    );
   }
   onSubmitAddEmployee(value) {
     this.isLoading = true;

@@ -103,6 +103,7 @@ export class ViewAllEmployeesComponent implements OnInit {
             console.log(element.company);
             this.jobs.getAllEmployeesByContractID(element.id).subscribe(employee => {
               console.log(employee);
+              element.employee_id = employee[0].id;
               element.staff_id_number = employee[0].staff_id_number;
               element.kra_pin = employee[0].kra_pin;
               element.next_of_kinPhoneNumber = employee[0].next_of_kinPhoneNumber;
@@ -130,5 +131,7 @@ export class ViewAllEmployeesComponent implements OnInit {
       console.error(error);
     });
   }
-
+  navigateTo(id) {
+    this.router.navigate(['edit-employee/' + id]);
+  }
 }

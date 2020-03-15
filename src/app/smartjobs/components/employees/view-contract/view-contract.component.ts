@@ -94,8 +94,8 @@ export class ViewContractComponent implements OnInit {
                       console.error(error);
                     }
                   );
-            
-              console.log(res);
+
+            console.log(res);
       });
           this.ELEMENT_DATA = res;
           console.log(this.ELEMENT_DATA);
@@ -113,7 +113,7 @@ export class ViewContractComponent implements OnInit {
       console.error(error);
     });
     // console.log(this.companyId);
-    
+
   }
 
   ngOnInit() {

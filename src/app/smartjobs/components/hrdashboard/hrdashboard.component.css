@@ -12,8 +12,8 @@ mat-grid-tile {
   /* background-color: lightblue; */
 }
 mat-grid-list{ 
-    margin-top: 30px;
-    margin-bottom: 30px;
+    /* margin-top: 30px;
+    margin-bottom: 30px; */
     max-height: 100%;
 }
 .fill {
@@ -21,6 +21,7 @@ mat-grid-list{
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    height: 100%;
 }
 .fill img {
     flex-shrink: 0;
@@ -62,14 +63,3 @@ mat-grid-tile-header{
   font-size: 200%;
   /* color: #952515; */
 }
-/* .title1{
-    background-image: url(/assets/images/jobs.png);
-    background-repeat:no-repeat;
-    background-size: auto;
-  }
-  .title2{
-    background-image: url(/assets/images/employees.jpg);
-    background-repeat:no-repeat;
-    background-size: 300px 100px;
-  }
-   */

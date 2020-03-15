@@ -108,7 +108,7 @@ export class LoginComponent implements OnInit {
                     } else {
                       this.router.navigate(['create-profile']);
                     }
-                    console.log(this.profileComplete);
+                    // console.log(this.profileComplete);
                   }
                 }
               } else {
@@ -118,13 +118,27 @@ export class LoginComponent implements OnInit {
           });
         });
       },
-      error => this.error = error
+      error => {
+        this.isLoading = false;
+        this.showFailure();
+        this.error = error;
+      }
     );
   }
   showSuccess(username) {
     this.toastr.success('Welcome ' + username, 'Login Successful!', {
       progressAnimation: 'increasing',
       timeOut: 2000,
+      tapToDismiss: true,
+      easing: 'ease-in'
+    });
+    this.isLoading = false;
+  }
+
+  showFailure() {
+    this.toastr.error('Login Failed' + 'Check the details and try again', 'Login Unsuccessful!', {
+      progressAnimation: 'increasing',
+      timeOut: 4000,
       tapToDismiss: true,
       easing: 'ease-in'
     });

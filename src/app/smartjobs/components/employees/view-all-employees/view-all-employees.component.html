@@ -44,7 +44,7 @@
     <ng-container matColumnDef="action">
       <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
       <mat-cell *matCellDef="let element; let i = index;">
-        <button mat-raised-button color="primary" class="push-right" [routerLink]="['/edit-employee/', element.id]">
+        <button mat-raised-button color="primary" class="push-right" [routerLink]="['/edit-employee/', element.employee_id]" (click)="navigateTo(element.employee_id)">
           <mat-icon>edit</mat-icon>Edit Employee
         </button>
       </mat-cell>

@@ -48,13 +48,16 @@ import { IndustryService } from './smartjobs/services/industry.service';
 import { LoaderInterceptor } from './smartjobs/interceptors/loader.interceptor';
 import { MergePipe } from './shared/pipes/merge.pipe';
 import { NotifierModule } from 'angular-notifier';
+import {DatePipe} from '@angular/common';
+
 
 import { ToastrModule } from 'ngx-toastr';
 import {NgxLoaderIndicatorModule} from 'ngx-loader-indicator';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { MatButtonModule, MatCardModule, MatDatepickerModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatSelectModule, MatToolbarModule, MatSidenavModule, MatChipsModule, MatRadioModule,MatBadgeModule,MatListModule,
-MatGridListModule, MatFormFieldModule, MatSortModule, MatStepperModule, MatTableModule,  MatDialogModule,
+// tslint:disable-next-line: max-line-length
+import { MatButtonModule, MatCardModule, MatDatepickerModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatSelectModule, MatToolbarModule, MatSidenavModule, MatChipsModule, MatRadioModule, MatBadgeModule, MatListModule,
+MatGridListModule, MatFormFieldModule, MatSortModule, MatStepperModule, MatTableModule,  MatDialogModule, MatProgressBarModule,
 } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatNativeDateModule, MatIconModule} from '@angular/material';
@@ -66,6 +69,7 @@ import {MatTooltipModule, MatTooltip} from '@angular/material/tooltip';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from 'src/app/shared/helpers/format-datepicker';
+
 
 import { RatingModule } from 'ng-starrating';
 
@@ -85,6 +89,7 @@ const MatModules = [
   MatMomentDateModule,
   MatTooltipModule,
   MatToolbarModule,
+  MatProgressBarModule,
   FlexLayoutModule,
   MatSidenavModule,
   MatChipsModule, MatRadioModule, MatBadgeModule, MatListModule,
@@ -92,7 +97,6 @@ const MatModules = [
   MatStepperModule,
   MatTableModule,
 ];
-
 
 
 export const cloudinaryLib = {
@@ -210,6 +214,7 @@ import { ReportsComponent } from './smartjobs/components/reports/reports.compone
       useClass: AuthInterceptor,
       multi: true,
     },
+    DatePipe,
     IndustryService,
     LoaderService,
     ProfileService,

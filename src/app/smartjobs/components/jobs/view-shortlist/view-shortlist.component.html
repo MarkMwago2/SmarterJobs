@@ -44,7 +44,7 @@
     <ng-container matColumnDef="action">
       <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
       <mat-cell *matCellDef="let element; let i = index;">
-        <button mat-raised-button color="primary" class="push-right" (click)="addInterviewed(element.id,element.firstname,element.lastname); " [disabled]="shortlisted">
+        <button mat-raised-button color="primary" name="interviewed" class="push-right" (click)="addInterviewed(element.id,element.firstname,element.lastname);interviewed.disable='true'" [disabled]="shortlisted | async">
           <mat-icon>add</mat-icon>Interviewed
         </button>
       </mat-cell>

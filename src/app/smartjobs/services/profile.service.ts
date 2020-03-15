@@ -54,7 +54,7 @@ export class ProfileService {
   updateProfile(profile): Observable < any > {
     return this.http.patch(this.apiRoot.concat('profile/') + this.loggedInUserId() + '/', profile);
   }
-  updateProfileByUserId(userId,profile): Observable < any > {
+  updateProfileByUserId(userId, profile): Observable < any > {
     return this.http.patch(this.apiRoot.concat('profile/') + userId + '/', profile);
   }
 
@@ -76,5 +76,21 @@ export class ProfileService {
 
   updatecompanyprofile(id, profile): Observable < any > {
     return this.http.patch(this.apiRoot.concat('agency/') + id + '/', profile);
+  }
+
+  public upload(formData) {
+
+    return this.http.patch(this.apiRoot.concat('profile/') + this.loggedInUserId() + '/', formData, {
+        reportProgress: true,
+        observe: 'events'
+      });
+  }
+
+  public uploadCompany(id, formData) {
+
+    return this.http.patch(this.apiRoot.concat('company/') + id + '/', formData, {
+        reportProgress: true,
+        observe: 'events'
+      });
   }
 }

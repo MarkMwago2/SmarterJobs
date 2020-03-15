@@ -21,7 +21,7 @@ import {
 })
 export class IndustryService {
 
-  private apiRoot = 'https://smarterjobs.herokuapp.com/api/';
+  private apiRoot = 'http://127.0.0.1:8000/api/';
   constructor(private http: HttpClient, private router: Router) { }
 
   industries(): Observable < any > {

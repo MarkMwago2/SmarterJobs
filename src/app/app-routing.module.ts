@@ -26,7 +26,7 @@ import { TalentpoolComponent } from './smartjobs/components/talentpool/talentpoo
 import { AddEmployeeComponent } from './smartjobs/components/employees/add-employee/add-employee.component';
 import { ViewAllEmployeesComponent } from './smartjobs/components/employees/view-all-employees/view-all-employees.component';
 import { ReportsComponent } from './smartjobs/components/reports/reports.component';
-
+import { EditEmployeeComponent } from './smartjobs/components/employees/edit-employee/edit-employee.component'; 
 
 import { ProfileComponent } from './smartjobs/components/user/profile/profile.component';
 import { CreateProfileComponent } from './smartjobs/components/user/create-profile/create-profile.component';
@@ -65,6 +65,7 @@ const routes: Routes = [
 {path: 'view-contract', component: ViewContractComponent, canActivate: [AuthGuard]},
 {path: 'talentpool', component: TalentpoolComponent, canActivate: [AuthGuard]},
 {path: 'add-employee/:id', component: AddEmployeeComponent, canActivate: [AuthGuard]},
+{path: 'edit-employee/:id', component: EditEmployeeComponent, canActivate: [AuthGuard]},
 {path: 'view-employee', component: ViewAllEmployeesComponent, canActivate: [AuthGuard]},
 {path: 'view-reports', component: ReportsComponent},
 // {path: 'edit-em'}

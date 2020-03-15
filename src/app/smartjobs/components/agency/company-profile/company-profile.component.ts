@@ -9,6 +9,9 @@ import {
   ProfileService
 } from '../../../services/profile.service';
 import { IndustryService } from '../../../services/industry.service';
+import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
+import { of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-company-profile',
@@ -19,6 +22,9 @@ export class CompanyProfileComponent implements OnInit {
   userId = this.prof.loggedInUserId();
   types$;
   company: any = [];
+  companyId: any;
+  files  = [];
+  fileToUpload: File = null;
 
   constructor(
     private authService: AuthService,
@@ -37,21 +43,50 @@ export class CompanyProfileComponent implements OnInit {
 
   ngOnInit() {
     this.prof.getcompanyprofileByUserId(this.userId).subscribe(company => {
-      company = company;
-      let industryId = company['industry'];
-      this.indu.getindustry(industryId).subscribe(industry => {
-        industry = industry;
-        var str = JSON.stringify(industry);
-        str = str.replace(/name/g, 'industry_name');
-        let industryInfo = JSON.parse(str);
-        const companyinfo = Object.assign({}, company, industryInfo);
-        this.company.push(companyinfo);
-        // console.log(this.company);
-      })
+      console.log(company);
+      this.companyId = company.id;
+      this.company.push(company);
     }, error => {
-      console.log('Retrieve Unsuccessful')
-    })
-    // this.types$ = this.getIndustries();
+      console.log('Retrieve Unsuccessful');
+    });
+  }
+
+  uploadFile(file) {
+    const formData = new FormData();
+    formData.append('logo', file.data);
+    file.inProgress = true;
+    this.prof.uploadCompany(this.companyId, formData).pipe(
+      map(event => {
+        switch (event.type) {
+          case HttpEventType.UploadProgress:
+            file.progress = Math.round(event.loaded * 100 / event.total);
+            break;
+          case HttpEventType.Response:
+            return event;
+        }
+      }),
+      catchError((error: HttpErrorResponse) => {
+        file.inProgress = false;
+        return of(`${file.data.name} upload failed.`);
+      })).subscribe((event: any) => {
+        if (typeof (event) === 'object') {
+          console.log(event.body);
+        }
+        location.reload();
+      });
+  }
+
+  private uploadFiles() {
+    // this.fileUpload.nativeElement.value = '';
+    this.files.forEach(file => {
+      this.uploadFile(file);
+    });
+  }
+
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+    this.files.push({ data: this.fileToUpload, inProgress: false, progress: 0});
+    this.uploadFiles();
   }
 
 }
