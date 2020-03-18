@@ -3,6 +3,7 @@ import { ContractInfo } from '../../../../shared/models/contractInfo';
 import Docxtemplater from 'docxtemplater';
 import * as JSZip from 'jszip';
 import PizZip from 'pizzip';
+import * as fs from 'fs-extra/lib/fs';
 import JSZipUtils from 'jszip-utils';
 import { saveAs } from 'file-saver';
 import {
@@ -15,6 +16,7 @@ import {
   Router, ActivatedRoute
 } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import {ImageModule} from 'open-docxtemplater-image-module';
 
 import {
   FormControl,
@@ -248,12 +250,39 @@ export class AddContractComponent implements OnInit {
           this.info.userContractLname = this.userProfile.lastname;
           this.info.startingDate = this.datePipe.transform(this.info.startingDate, 'yyyy-MM-dd');
           // console.log(this.userProfile);
+          // const tagValue = this.userProfile.logo;
+
+          // DOcx templater free image
+          const opts = {
+            centered: true,
+            fileType: 'docx',
+            getImage: null ,
+            getSize: null
+          };
+
+          opts.getImage = (tagValue, tagName) => {
+            tagValue = '/home/gkarumba/Documents/Python Projects/smarterjobs/' + this.userProfile.logo;
+            tagName = 'image';
+            return fs.readFileSync(tagValue);
+          };
+
+          opts.getSize = (img, tagValue, tagName) => {
+            // img is the image returned by opts.getImage()
+            // tagValue is 'examples/image.png'
+            // tagName is 'image'
+            // tip: you can use node module 'image-size' here
+            return [150, 150];
+          };
+
+          const imageModule = new ImageModule(opts);
+
 
           this.loadFile(this.fileUrl, (error, content) => {
             if (error) { throw error; }
             const zip = new PizZip(content);
             // zip.file(content);
-            const doc = new Docxtemplater().loadZip(zip);
+            const doc = new Docxtemplater().attachModule(imageModule);
+            doc.loadZip(zip);
             doc.setData(this.info);
             try {
               // Replace placeholders with info values
@@ -281,9 +310,6 @@ export class AddContractComponent implements OnInit {
         });
       });
     });
-
-
-
   }
 
 }
